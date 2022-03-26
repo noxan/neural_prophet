@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -266,10 +262,13 @@
 <em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specific_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.BatchMetric.new" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>specific_column</strong> (<em>int</em>) – calculate metric only over target at pos</p>
+<dd class="field-odd"><p><strong>specific_column</strong> (<em>int</em>) – Calculate metric only over target at pos</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>copy of metric instance, reset</p>
+<dd class="field-even"><p>copy of metric instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#neuralprophet.metrics.BatchMetric" title="neuralprophet.metrics.BatchMetric">BatchMetric</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -277,10 +276,16 @@
 <dt class="sig sig-object py" id="neuralprophet.metrics.BatchMetric.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.BatchMetric.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the metric’s state using the passed batch output.</p>
-<p>By default, this is called once for each batch.
-:param predicted: the output from the model’s forward function.
-:param target: actual values
-:param kwargs: passed on to function that computes the metric.</p>
+<p>By default, this is called once for each batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>pd.DataFrame</em>) – Output from the model’s forward function.</p></li>
+<li><p><strong>target</strong> (<em>pd.DataFrame</em>) – actual values</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Passed on to function that computes the metric.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
@@ -289,7 +294,7 @@
 <dd><p>Calculates the average loss according to the passed loss_fn.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>loss_fn</strong> (<em>callable</em>) – a callable taking a prediction tensor, a target tensor, optionally other arguments,
+<dd class="field-odd"><p><strong>loss_fn</strong> (<em>callable</em>) – Taking a prediction tensor, a target tensor, optionally other arguments,
 and returns the average loss over all observations in the batch.</p>
 </dd>
 </dl>
@@ -298,10 +303,13 @@ and returns the average loss over all observations in the batch.</p>
 <span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specific_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.LossMetric.new" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>specific_column</strong> (<em>int</em>) – calculate metric only over target at pos</p>
+<dd class="field-odd"><p><strong>specific_column</strong> (<em>int</em>) – Calculate metric only over target at pos</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>copy of metric instance, reset</p>
+<dd class="field-even"><p>copy of metric instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#neuralprophet.metrics.BatchMetric" title="neuralprophet.metrics.BatchMetric">BatchMetric</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,12 +324,15 @@ and returns the average loss over all observations in the batch.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>specific_column</strong> (<em>int</em>) – calculate metric only over target at pos</p></li>
-<li><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p></li>
+<li><p><strong>specific_column</strong> (<em>int</em>) – Calculate metric only over target at pos</p></li>
+<li><p><strong>shift_scale</strong> (<em>float</em><em>, </em><em>tuple</em>) – Data shift and scale parameters</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>copy of metric instance, reset</p>
+<dd class="field-even"><p>Copy of metric instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#neuralprophet.metrics.MAE" title="neuralprophet.metrics.MAE">MAE</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -331,7 +342,7 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>Adds data denormalization params</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p>
+<dd class="field-odd"><p><strong>shift_scale</strong> (<em>float</em><em>, </em><em>tuple</em>) – Data shift and scale parameters</p>
 </dd>
 </dl>
 </dd></dl>
@@ -346,12 +357,15 @@ and returns the average loss over all observations in the batch.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>specific_column</strong> (<em>int</em>) – calculate metric only over target at pos</p></li>
-<li><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p></li>
+<li><p><strong>specific_column</strong> (<em>int</em>) – Calculate metric only over target at pos</p></li>
+<li><p><strong>shift_scale</strong> (<em>float</em><em>, </em><em>tuple</em>) – Data shift and scale parameters</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>copy of metric instance, reset</p>
+<dd class="field-even"><p>copy of metric instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#neuralprophet.metrics.MSE" title="neuralprophet.metrics.MSE">MSE</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -361,7 +375,7 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>Adds data denormalization params.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p>
+<dd class="field-odd"><p><strong>shift_scale</strong> (<em>float</em><em>, </em><em>tuple</em>) – Data shift and scale parameters</p>
 </dd>
 </dl>
 </dd></dl>
@@ -373,13 +387,16 @@ and returns the average loss over all observations in the batch.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.metrics.Metric.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.Metric.compute" title="Permalink to this definition">¶</a></dt>
-<dd><p>calculates the current value of the metric</p>
+<dd><p>Calculates the current value of the metric</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>save</strong> (<em>bool</em>) – whether to add the current value to stored_values</p>
+<dd class="field-odd"><p><strong>save</strong> (<em>bool</em>) – Whether to add the current value to stored_values</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>current value of the metric</p>
+<dd class="field-even"><p>Current value of the metric</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -403,9 +420,15 @@ and returns the average loss over all observations in the batch.</p>
 <dt class="sig sig-object py" id="neuralprophet.metrics.Metric.update">
 <em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.Metric.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the metric’s state using the passed batch output.</p>
-<p>By default, this is called once for each batch.
-:param predicted: the output from the model’s forward function.
-:param target: actual values</p>
+<p>By default, this is called once for each batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted</strong> (<em>pd.DataFrame</em>) – Output from the model’s forward function.</p></li>
+<li><p><strong>target</strong> (<em>pd.DataFrame</em>) – Actual values</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
@@ -418,7 +441,7 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>Duplicates BatchMetrics with their version for a specific target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>target_pos</strong> (<em>int</em><em>, </em><em>list</em>) – index of target to compute metrics over</p>
+<dd class="field-odd"><p><strong>target_pos</strong> (<em>int</em><em>, </em><em>list</em>) – Index of target to compute metrics over</p>
 </dd>
 </dl>
 </dd></dl>
@@ -428,10 +451,13 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>calculates the current value of the metric</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>save</strong> (<em>bool</em>) – whether to add the current value to stored_values</p>
+<dd class="field-odd"><p><strong>save</strong> (<em>bool</em>) – Whether to add the current value to stored_values</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>dict of current values of all metrics</p>
+<dd class="field-even"><p>Current values of all metrics</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -441,10 +467,13 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>Creates an OrderedDict from stored metric values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>loc</strong> (<em>int</em>) – if only stored value at this location to be retrieved</p>
+<dd class="field-odd"><p><strong>loc</strong> (<em>int</em>) – If only stored value at this location to be retrieved</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>OrderedDict</p>
+<dd class="field-even"><p>Current values of stored metric values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OrderedDict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -454,10 +483,13 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>Creates an Dataframe from stored metric values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>loc</strong> (<em>int</em>) – if only stored value at this location to be retrieved</p>
+<dd class="field-odd"><p><strong>loc</strong> (<em>int</em>) – If only stored value at this location to be retrieved</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.Dataframe</p>
+<dd class="field-even"><p>Current values of stored metric vlaues</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Dataframe</p>
 </dd>
 </dl>
 </dd></dl>
@@ -477,21 +509,25 @@ and returns the average loss over all observations in the batch.</p>
 <dd><p>Adds data denormalization params to applicable metrics</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p>
+<dd class="field-odd"><p><strong>shift_scale</strong> (<em>float</em><em>, </em><em>tuple</em>) – Data shift and scale parameters</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.metrics.MetricsCollection.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.MetricsCollection.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>update all metrics.</p>
+<dd><p>Update all metrics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>predicted</strong> – the output from the model’s forward function.</p></li>
-<li><p><strong>target</strong> – actual values</p></li>
-<li><p><strong>values</strong> (<em>dict</em>) – dict with matching names to defined ValueMetrics
-Note: if the correct name is not supplied, the metric is not updated.</p></li>
+<li><p><strong>predicted</strong> (<em>pd.DataFrame</em>) – Output from the model’s forward function.</p></li>
+<li><p><strong>target</strong> (<em>pd.DataFrame</em>) – actual values</p></li>
+<li><p><strong>values</strong> (<em>dict</em>) – <p>Matching names to defined ValueMetrics</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the correct name is not supplied, the metric is not updated.</p>
+</div>
+</p></li>
 </ul>
 </dd>
 </dl>
@@ -504,12 +540,11 @@ Note: if the correct name is not supplied, the metric is not updated.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.metrics.MetricsCollection.update_values">
 <span class="sig-name descname"><span class="pre">update_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.metrics.MetricsCollection.update_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>update ValueMetrics.</p>
+<dd><p>Update ValueMetrics.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>values</strong> (<em>dict</em>) – dict with matching names (to defined ValueMetrics),
-containing average values over batch/update step</p></li>
+<li><p><strong>values</strong> (<em>dict</em>) – containing matching names and average values over batch/update step</p></li>
 <li><p><strong>num</strong> (<em>int</em>) – number of samples in batch/update step</p></li>
 </ul>
 </dd>
@@ -526,12 +561,15 @@ containing average values over batch/update step</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>specific_column</strong> (<em>int</em>) – calculate metric only over target at pos</p></li>
-<li><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p></li>
+<li><p><strong>specific_column</strong> (<em>int</em>) – Calculate metric only over target at pos</p></li>
+<li><p><strong>shift_scale</strong> (<em>float</em>) – Data shift and scale parameters</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>copy of metric instance, reset</p>
+<dd class="field-even"><p>copy of metric instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#neuralprophet.metrics.RMSE" title="neuralprophet.metrics.RMSE">RMSE</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -541,7 +579,7 @@ containing average values over batch/update step</p></li>
 <dd><p>Adds data denormalization params.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>shift_scale</strong> (<em>tuple</em><em>, </em><em>float</em>) – data shift and scale parameters</p>
+<dd class="field-odd"><p><strong>shift_scale</strong> (<em>float</em><em>, </em><em>tuple</em>) – Data shift and scale parameters</p>
 </dd>
 </dl>
 </dd></dl>

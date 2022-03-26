@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -570,7 +566,7 @@ div.rendered_html tbody tr:hover {
 <h2>Additive Events<a class="headerlink" href="#Additive-Events" title="Permalink to this headline">¶</a></h2>
 <p>Once the table is created, event effects are included in the model by adding them in with the <code class="docutils literal notranslate"><span class="pre">add_events</span></code> function.</p>
 <p>By default, events are modelled as additive events. Here, we model both playoffs as additive events.</p>
-<p>Additionally we change the <code class="docutils literal notranslate"><span class="pre">loss_func</span></code> to ‘MSE’, as the events we are fitting weights fore are a few rare outliers. Usually we would not want to skew our model with a few outliers, thus the default loss function is ‘Huber’.</p>
+<p>Additionally we change the <code class="docutils literal notranslate"><span class="pre">loss_func</span></code> to ‘MSE’, as the events are a few rare outliers. Usually we would not want to skew our model with a few outliers, thus the default loss function is ‘Huber’.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -587,8 +583,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -596,20 +592,6 @@ div.rendered_html tbody tr:hover {
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">history_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6c04f453b35b4c5d977f1c4fe9fa5606", "version_major": 2, "version_minor": 0}</script></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-
-</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -670,69 +652,69 @@ div.rendered_html tbody tr:hover {
 </thead>
 <tbody>
 <tr>
-<th>2190</th>
+<th>2246</th>
 <td>2014-02-02</td>
-<td>11.760520</td>
-<td>11.739920</td>
-<td>-0.020600</td>
-<td>8.361824</td>
-<td>0.776849</td>
-<td>0.03111</td>
-<td>2.570135</td>
-<td>1.047041</td>
-<td>1.523094</td>
+<td>11.7605</td>
+<td>11.745770</td>
+<td>-0.014730</td>
+<td>8.349409</td>
+<td>0.783192</td>
+<td>0.01808</td>
+<td>2.595089</td>
+<td>1.10223</td>
+<td>1.492859</td>
 </tr>
 <tr>
-<th>2532</th>
+<th>2589</th>
 <td>2015-01-11</td>
-<td>9.886596</td>
-<td>9.889818</td>
-<td>0.003223</td>
-<td>7.923612</td>
-<td>0.888056</td>
-<td>0.03111</td>
-<td>1.047041</td>
-<td>1.047041</td>
+<td>9.8866</td>
+<td>9.930570</td>
+<td>0.043970</td>
+<td>7.919148</td>
+<td>0.891112</td>
+<td>0.01808</td>
+<td>1.102230</td>
+<td>1.10223</td>
 <td>0.000000</td>
 </tr>
 <tr>
-<th>2901</th>
+<th>2960</th>
 <td>2016-01-17</td>
-<td>9.273878</td>
-<td>9.659006</td>
-<td>0.385128</td>
-<td>7.593356</td>
-<td>0.987498</td>
-<td>0.03111</td>
-<td>1.047041</td>
-<td>1.047041</td>
+<td>9.2739</td>
+<td>9.689668</td>
+<td>0.415768</td>
+<td>7.569654</td>
+<td>0.999703</td>
+<td>0.01808</td>
+<td>1.102230</td>
+<td>1.10223</td>
 <td>0.000000</td>
 </tr>
 <tr>
-<th>2908</th>
+<th>2967</th>
 <td>2016-01-24</td>
 <td>NaN</td>
-<td>9.660078</td>
+<td>9.693732</td>
 <td>NaN</td>
-<td>7.587125</td>
-<td>0.994801</td>
-<td>0.03111</td>
-<td>1.047041</td>
-<td>1.047041</td>
+<td>7.563061</td>
+<td>1.010362</td>
+<td>0.01808</td>
+<td>1.102230</td>
+<td>1.10223</td>
 <td>0.000000</td>
 </tr>
 <tr>
-<th>2922</th>
+<th>2981</th>
 <td>2016-02-07</td>
 <td>NaN</td>
-<td>10.775986</td>
+<td>10.761930</td>
 <td>NaN</td>
-<td>7.574663</td>
-<td>0.600078</td>
-<td>0.03111</td>
-<td>2.570135</td>
-<td>1.047041</td>
-<td>1.523094</td>
+<td>7.549872</td>
+<td>0.598888</td>
+<td>0.01808</td>
+<td>2.595089</td>
+<td>1.10223</td>
+<td>1.492859</td>
 </tr>
 </tbody>
 </table></div>
@@ -795,8 +777,8 @@ div.rendered_html tbody tr:hover {
 <h2>Event Windows<a class="headerlink" href="#Event-Windows" title="Permalink to this headline">¶</a></h2>
 <p>You can also include the arguments <code class="docutils literal notranslate"><span class="pre">lower_window</span></code> and <code class="docutils literal notranslate"><span class="pre">upper_window</span></code> which extend the holiday out to <code class="docutils literal notranslate"><span class="pre">[lower_window,</span> <span class="pre">upper_window]</span></code> days around the date.</p>
 <p>For instance, if you wanted to include Christmas Eve in addition to Christmas you’d include <code class="docutils literal notranslate"><span class="pre">lower_window=-1,</span> <span class="pre">upper_window=0</span></code>. If you wanted to use Black Friday in addition to Thanksgiving, you’d include <code class="docutils literal notranslate"><span class="pre">lower_window=0,</span> <span class="pre">upper_window=1</span></code>.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -814,22 +796,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8512e1bb8c504870935d314d172d4ead", "version_major": 2, "version_minor": 0}</script></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -838,7 +806,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -865,8 +833,8 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="Multiplicative-Events">
 <h2>Multiplicative Events<a class="headerlink" href="#Multiplicative-Events" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -884,22 +852,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "425c031f62ab4bbb84e142a99a34ad96", "version_major": 2, "version_minor": 0}</script></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -908,7 +862,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -925,7 +879,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -944,8 +898,8 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="Country-Specific-Holidays">
 <h2>Country Specific Holidays<a class="headerlink" href="#Country-Specific-Holidays" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -959,22 +913,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "95ba15dca9034290a430f9b529cf5261", "version_major": 2, "version_minor": 0}</script></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -983,7 +923,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -264,17 +260,29 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>focus</strong> (<em>int</em>) – Show weights for this forecast, if provided</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing seasonal forecast component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -285,18 +293,29 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>quick</strong> (<em>bool</em>) – use quick low-evel call of model. might break in future.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component if previously changed from default ‘daily’.</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component if previously changed from default <code class="docutils literal notranslate"><span class="pre">daily</span></code></p></li>
+<li><p><strong>quick</strong> (<em>bool</em>) – Use quick low-level call of model</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing weekly forecast component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -307,18 +326,23 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>weights</strong> (<em>np.array</em>) – model weights as matrix or vector</p></li>
-<li><p><strong>comp_name</strong> (<em>str</em>) – name of lagged inputs</p></li>
-<li><p><strong>focus</strong> (<em>int</em>) – if provided, show weights for this forecast
-None (default) sum over all forecasts and plot as relative percentage</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
+<li><p><strong>weights</strong> (<em>list</em>) – tuples of (name, weights)</p></li>
+<li><p><strong>comp_name</strong> (<em>str</em>) – Name of lagged inputs</p></li>
+<li><p><strong>focus</strong> (<em>int</em>) – Show weights for this forecast, if provided</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing barplot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -329,23 +353,57 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
 <li><p><strong>forecast_in_focus</strong> (<em>int</em>) – n-th step ahead forecast AR-coefficients to plot</p></li>
-<li><p><strong>weekly_start</strong> (<em>int</em>) – specifying the start day of the weekly seasonality plot.
-0 (default) starts the week on Sunday.
-1 shifts by 1 day to Monday, and so on.</p></li>
-<li><p><strong>yearly_start</strong> (<em>int</em>) – specifying the start day of the yearly seasonality plot.
-0 (default) starts the year on Jan 1.
-1 shifts by 1 day to Jan 2, and so on.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches.
-None (default):  automatic (10, 3 * npanel)</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>weekly_start</strong> (<em>int</em>) – <p>Specifying the start day of the weekly seasonality plot</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">weekly_start</span> <span class="pre">=</span> <span class="pre">0</span></code>: starts the week on Sunday</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weekly_start</span> <span class="pre">=</span> <span class="pre">1</span></code>: shifts by 1 day to Monday, and so on</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>yearly_start</strong> (<em>int</em>) – <p>Specifying the start day of the yearly seasonality plot.</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">yearly_start</span> <span class="pre">=</span> <span class="pre">0</span></code>: starts the year on Jan 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yearly_start</span> <span class="pre">=</span> <span class="pre">1</span></code>: shifts by 1 day to Jan 2, and so on</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">None</span></code> -&gt;  automatic <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">3</span> <span class="pre">*</span> <span class="pre">npanel)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
+<dd class="field-even"><p>Figure showing the NeuralProphet parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.pyplot.figure</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Base usage of <a class="reference internal" href="#neuralprophet.plot_model_parameters.plot_parameters" title="neuralprophet.plot_model_parameters.plot_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot_parameters()</span></code></a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">neuralprophet</span> <span class="kn">import</span> <span class="n">NeuralProphet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">future</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig_param</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.plot_model_parameters.plot_scalar_weights">
@@ -354,18 +412,23 @@ None (default):  automatic (10, 3 * npanel)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>weights</strong> (<em>list</em>) – tuples (name, weights)</p></li>
-<li><p><strong>plot_name</strong> (<em>string</em>) – name of the plot</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>focus</strong> (<em>int</em>) – if provided, show weights for this forecast
-None (default) plot average</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
+<li><p><strong>weights</strong> (<em>list</em>) – tuples of (name, weights)</p></li>
+<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title</p></li>
+<li><p><strong>focus</strong> (<em>int</em>) – Show weights for this forecast, if provided</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing barplot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -376,17 +439,28 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing barplot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -397,42 +471,70 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing barplot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.plot_model_parameters.plot_weekly">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.plot_model_parameters.</span></span><span class="sig-name descname"><span class="pre">plot_weekly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weekly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weekly_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quick</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__df__'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.plot_model_parameters.plot_weekly" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the yearly component of the forecast.</p>
+<dd><p>Plot the weekly component of the forecast.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>weekly_start</strong> (<em>int</em>) – specifying the start day of the weekly seasonality plot.
-0 (default) starts the week on Sunday.
-1 shifts by 1 day to Monday, and so on.</p></li>
-<li><p><strong>quick</strong> (<em>bool</em>) – use quick low-evel call of model. might break in future.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component if previously changed from default ‘weekly’.</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component</p></li>
+<li><p><strong>weekly_start</strong> (<em>int</em>) – <p>Specifying the start day of the weekly seasonality plot</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">weekly_start</span> <span class="pre">=</span> <span class="pre">0</span></code>: starts the week on Sunday</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weekly_start</span> <span class="pre">=</span> <span class="pre">1</span></code>: shifts by 1 day to Monday, and so on</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>quick</strong> (<em>bool</em>) – Use quick low-level call of model</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing weekly forecast component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -443,21 +545,38 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.
-One will be created if this is not provided.</p></li>
-<li><p><strong>yearly_start</strong> (<em>int</em>) – specifying the start day of the yearly seasonality plot.
-0 (default) starts the year on Jan 1.
-1 shifts by 1 day to Jan 2, and so on.</p></li>
-<li><p><strong>quick</strong> (<em>bool</em>) – use quick low-evel call of model. might break in future.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component if previously changed from default ‘yearly’.</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>comp_name</strong> (<em>str</em>) – Name of seasonality component</p></li>
+<li><p><strong>yearly_start</strong> (<em>int</em>) – <p>Specifying the start day of the yearly seasonality plot</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">yearly_start</span> <span class="pre">=</span> <span class="pre">0</span></code>: starts the year on Jan 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yearly_start</span> <span class="pre">=</span> <span class="pre">1</span></code>: shifts by 1 day to Jan 2, and so on</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>quick</strong> (<em>bool</em>) – Use quick low-level call of model</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – <p>Name of dataframe to refer to data params from original keys of train dataframes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only used for local normalization in global modeling</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing yearly forecast component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>

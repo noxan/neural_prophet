@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -260,17 +256,19 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.utils.create_event_names_for_offsets">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">create_event_names_for_offsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.create_event_names_for_offsets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create names for offsets of every event
-:param event_name: Name of the event
-:type event_name: string
-:param offset: Offset of the event
-:type offset: int</p>
+<dd><p>Create names for offsets of every event</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A name created for the offset of the event</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event_name</strong> (<em>string</em>) – Name of the event</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – Offset of the event</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>offset_name (string)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Name created for the offset of the event</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -278,27 +276,28 @@
 <dt class="sig sig-object py" id="neuralprophet.utils.events_config_to_model_dims">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">events_config_to_model_dims</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country_holidays_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.events_config_to_model_dims" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>Convert the NeuralProphet user specified events configurations along with country specific</dt><dd><p>holidays to input dims for TimeNet model.</p>
+<dt>Convert user specified events configurations along with country specific</dt><dd><p>holidays to input dims for TimeNet model.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>events_config</strong> (<em>OrderedDict</em>) – Configurations (upper, lower windows, regularization) for user specified events</p></li>
-<li><p><strong>country_holidays_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Holidays" title="neuralprophet.configure.Holidays"><em>configure.Holidays</em></a>) – Configurations (holiday_names, upper, lower windows, regularization)
-for country specific holidays</p></li>
+<li><p><strong>country_holidays_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Holidays" title="neuralprophet.configure.Holidays"><em>configure.Holidays</em></a>) – Configurations (holiday_names, upper, lower windows, regularization) for country specific holidays</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A dictionary with keys corresponding to individual holidays</dt><dd><p>containing configs with properties such as the mode, list of event delims of the event corresponding to the offsets,
-and the indices in the input dataframe corresponding to each event.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>input dims for TimeNet model</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This dictionaries’ keys correspond to individual holidays and contains configs such as the mode,
+list of event delims of the event corresponding to the offsets and
+indices in the input dataframe corresponding to each event.</p>
+</div>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>events_dims (OrderedDict)</p>
+<dd class="field-odd"><p>OrderedDict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -309,12 +308,15 @@ and the indices in the input dataframe corresponding to each event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – forecast df</p></li>
-<li><p><strong>n_last</strong> (<em>int</em>) – number of last forecasts to include</p></li>
+<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – Forecast df</p></li>
+<li><p><strong>n_last</strong> (<em>int</em>) – Number of last forecasts to include</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>df where yhat1 is last forecast, yhat2 second to last etc</p>
+<dd class="field-even"><p>Dataframe where yhat1 is last forecast, yhat2 second to last etc</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -325,12 +327,15 @@ and the indices in the input dataframe corresponding to each event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>country</strong> (<em>string</em>) – country name to retrieve country specific holidays</p></li>
+<li><p><strong>country</strong> (<em>string</em>) – Country name to retrieve country specific holidays</p></li>
 <li><p><strong>df</strong> (<em>Dataframe</em>) – Dataframe from which datestamps will be retrieved from</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A set of all possible holiday names of given country</p>
+<dd class="field-even"><p>All possible holiday names of given country</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>set</p>
 </dd>
 </dl>
 </dd></dl>
@@ -340,10 +345,13 @@ and the indices in the input dataframe corresponding to each event.</p>
 <dd><p>Regularization of weights to induce sparcity</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>weights</strong> (<em>torch tensor</em>) – Model weights to be regularized towards zero</p>
+<dd class="field-odd"><p><strong>weights</strong> (<em>torch.Tensor</em>) – Model weights to be regularized towards zero</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>regularization loss, scalar</p>
+<dd class="field-even"><p>Regularization loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -361,21 +369,29 @@ for country specific holidays</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>regularization loss, scalar</p>
+<dd class="field-even"><p>Regularization loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>scalar</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.utils.reg_func_regressors">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">reg_func_regressors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regressors_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.reg_func_regressors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Regularization of regressors coefficients to induce sparcity
-:param regressors_config: Configurations for user specified regressors
-:type regressors_config: OrderedDict
-:param model: The TimeNet model object
-:type model: TimeNet</p>
+<dd><p>Regularization of regressors coefficients to induce sparsity</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>regularization loss, scalar</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regressors_config</strong> (<em>OrderedDict</em>) – Configurations for user specified regressors</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="time_net.html#neuralprophet.time_net.TimeNet" title="neuralprophet.time_net.TimeNet"><em>TimeNet</em></a>) – TimeNet model object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Regularization loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>scalar</p>
 </dd>
 </dl>
 </dd></dl>
@@ -386,31 +402,37 @@ for country specific holidays</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>weights</strong> (<em>torch tensor</em>) – Model weights to be regularized towards zero</p></li>
-<li><p><strong>threshold</strong> (<em>float</em>) – value below which not to regularize weights</p></li>
+<li><p><strong>weights</strong> (<em>torch.Tensor</em>) – Model weights to be regularized towards zero</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – Value below which not to regularize weights</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>regularization loss, scalar</p>
+<dd class="field-even"><p>regularization loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.utils.regressors_config_to_model_dims">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">regressors_config_to_model_dims</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regressors_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.regressors_config_to_model_dims" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the NeuralProphet user specified regressors configurations to input dims for TimeNet model.
-:param regressors_config: Configurations for user specified regressors
-:type regressors_config: OrderedDict</p>
+<dd><p>Convert the NeuralProphet user specified regressors configurations to input dims for TimeNet model.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><dl class="simple">
-<dt>A dictionary with keys corresponding to individual regressors</dt><dd><p>and values in a dict containing the mode, and the indices in the input dataframe corresponding to each regressor.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>regressors_config</strong> (<em>OrderedDict</em>) – Configurations for user specified regressors</p>
 </dd>
-</dl>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Input dims for TimeNet model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This dictionaries’ keys correspond to individual regressor and values in a dict containining the mode
+and the indices in the input dataframe corresponding to each regressor.</p>
+</div>
 </p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>regressors_dims (OrderedDict)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OrderedDict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -420,13 +442,13 @@ for country specific holidays</p></li>
 <dd><p>Convert the NeuralProphet seasonal model configuration to input dims for TimeNet model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>season_config</strong> (<em>AllSeasonConfig</em>) – NeuralProphet seasonal model configuration</p>
+<dd class="field-odd"><p><strong>season_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.AllSeason" title="neuralprophet.configure.AllSeason"><em>configure.AllSeason</em></a>) – NeuralProphet seasonal model configuration</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>input dims for TimeNet model</p>
+<dd class="field-even"><p>Input dims for TimeNet model</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>seasonal_dims (dict(int))</p>
+<dd class="field-odd"><p>dict(int)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -434,11 +456,14 @@ for country specific holidays</p></li>
 <dt class="sig sig-object py" id="neuralprophet.utils.set_auto_seasonalities">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">set_auto_seasonalities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.set_auto_seasonalities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set seasonalities that were left on auto or set by user.</p>
-<p>Turns on yearly seasonality if there is &gt;=2 years of history.
-Turns on weekly seasonality if there is &gt;=2 weeks of history, and the
-spacing between dates in the history is &lt;7 days.
-Turns on daily seasonality if there is &gt;=2 days of history, and the
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Turns on yearly seasonality if there is &gt;=2 years of history.</p>
+<p>Turns on weekly seasonality if there is &gt;=2 weeks of history, and the
+spacing between dates in the history is &lt;7 days.</p>
+<p>Turns on daily seasonality if there is &gt;=2 days of history, and the
 spacing between dates in the history is &lt;1 day.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -447,10 +472,10 @@ spacing between dates in the history is &lt;1 day.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>processed NeuralProphet seasonal model configuration</p>
+<dd class="field-even"><p>Processed NeuralProphet seasonal model configuration</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>season_config (<a class="reference internal" href="configure.html#neuralprophet.configure.AllSeason" title="neuralprophet.configure.AllSeason">configure.AllSeason</a>)</p>
+<dd class="field-odd"><p><a class="reference internal" href="configure.html#neuralprophet.configure.AllSeason" title="neuralprophet.configure.AllSeason">configure.AllSeason</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -462,9 +487,9 @@ spacing between dates in the history is &lt;1 day.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>log_level</strong> (<em>str</em>) – The log level of the logger objects used for printing procedure status
-updates for debugging/monitoring. Should be one of ‘NOTSET’, ‘DEBUG’, ‘INFO’, ‘WARNING’,
-‘ERROR’ or ‘CRITICAL’</p></li>
-<li><p><strong>include_handlers</strong> (<em>bool</em>) – include any specified file/stream handlers</p></li>
+updates for debugging/monitoring. Should be one of <code class="docutils literal notranslate"><span class="pre">NOTSET</span></code>, <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARNING</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ERROR</span></code> or <code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code></p></li>
+<li><p><strong>include_handlers</strong> (<em>bool</em>) – Include any specified file/stream handlers</p></li>
 </ul>
 </dd>
 </dl>
@@ -473,7 +498,15 @@ updates for debugging/monitoring. Should be one of ‘NOTSET’, ‘DEBUG’, �
 <dt class="sig sig-object py" id="neuralprophet.utils.set_random_seed">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">set_random_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.set_random_seed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the random number generator to a fixed seed.</p>
-<p>Note: needs to be set each time before fitting the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> (<em>numeric</em>) – Seed value for random number generator</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This needs to be set each time before fitting the model.</p>
+</div>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.utils.set_y_as_percent">
@@ -481,10 +514,13 @@ updates for debugging/monitoring. Should be one of ‘NOTSET’, ‘DEBUG’, �
 <dd><p>Set y axis as percentage</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ax</strong> (<em>matplotlib axis</em>) – </p>
+<dd class="field-odd"><p><strong>ax</strong> (<em>matplotlib axis</em>) – Respective y axis element</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>ax</p>
+<dd class="field-even"><p>Manipulated axis element</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib axis</p>
 </dd>
 </dl>
 </dd></dl>
@@ -495,12 +531,15 @@ updates for debugging/monitoring. Should be one of ‘NOTSET’, ‘DEBUG’, �
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>values</strong> (<em>np.array</em>) – </p></li>
-<li><p><strong>estimates</strong> (<em>np.array</em>) – </p></li>
+<li><p><strong>values</strong> (<em>np.array</em>) – Input values</p></li>
+<li><p><strong>estimates</strong> (<em>np.array</em>) – Respective estimates of input values</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>scalar (float)</p>
+<dd class="field-even"><p>Symmetric total percentage error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>

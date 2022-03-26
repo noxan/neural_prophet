@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -259,7 +255,7 @@
 <span id="core-module-documentation"></span><h1>Core Module Documentation<a class="headerlink" href="#module-neuralprophet.forecaster" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.forecaster.</span></span><span class="sig-name descname"><span class="pre">NeuralProphet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">growth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changepoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_changepoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changepoints_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trend_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trend_reg_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yearly_seasonality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weekly_seasonality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">daily_seasonality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seasonality_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'additive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seasonality_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_forecasts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_hidden_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_sparsity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Huber'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AdamW'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newer_samples_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newer_samples_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impute_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_time_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unknown_data_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.forecaster.</span></span><span class="sig-name descname"><span class="pre">NeuralProphet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">growth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changepoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_changepoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changepoints_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trend_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trend_reg_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yearly_seasonality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weekly_seasonality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">daily_seasonality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seasonality_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'additive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seasonality_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_forecasts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_hidden_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Huber'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AdamW'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newer_samples_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newer_samples_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impute_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_time_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unknown_data_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet" title="Permalink to this definition">¶</a></dt>
 <dd><p>NeuralProphet forecaster.</p>
 <p>A simple yet powerful forecaster that models:
 Trend, seasonality, events, holidays, auto-regression, lagged covariates, and future-known regressors.
@@ -267,77 +263,212 @@ Can be regualrized and configured to model nonlinear relationships.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>growth</strong> (<em>str</em>) – [‘off’, ‘linear’] to specify
-no trend or a linear trend.
-Note: ‘discontinuous’ setting is actually not a trend per se. only use if you know what you do.</p></li>
-<li><p><strong>changepoints</strong> (<em>list</em>) – Dates at which to include potential changepoints.
-If not specified, potential changepoints are selected automatically.
-data format: list of str, list of np.datetimes, np.array of np.datetimes (not np.array of np.str)</p></li>
-<li><p><strong>n_changepoints</strong> (<em>int</em>) – Number of potential changepoints to include.
-Changepoints are selected uniformly from the first <cite>changepoint_range</cite> proportion of the history.
-Not used if input <cite>changepoints</cite> is supplied. If <cite>changepoints</cite> is not supplied.</p></li>
-<li><p><strong>changepoints_range</strong> (<em>float</em>) – Proportion of history in which trend changepoints will
-be estimated. Defaults to 0.8 for the first 80%. Not used if <cite>changepoints</cite> is specified.</p></li>
-<li><p><strong>trend_reg</strong> (<em>float</em>) – Parameter modulating the flexibility of the automatic changepoint selection.
-Large values (~1-100) will limit the variability of changepoints.
-Small values (~0.001-1.0) will allow changepoints to change faster.
-default: 0 will fully fit a trend to each segment.</p></li>
-<li><p><strong>trend_reg_threshold</strong> (<em>bool</em><em>, </em><em>float</em>) – Allowance for trend to change without regularization.
-True: Automatically set to a value that leads to a smooth trend.
-False: All changes in changepoints are regularized</p></li>
-<li><p><strong>yearly_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – Fit yearly seasonality.
-Can be ‘auto’, True, False, or a number of Fourier/linear terms to generate.</p></li>
-<li><p><strong>weekly_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – Fit monthly seasonality.
-Can be ‘auto’, True, False, or a number of Fourier/linear terms to generate.</p></li>
-<li><p><strong>daily_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – Fit daily seasonality.
-Can be ‘auto’, True, False, or a number of Fourier/linear terms to generate.</p></li>
-<li><p><strong>seasonality_mode</strong> (<em>str</em>) – ‘additive’ (default) or ‘multiplicative’.</p></li>
-<li><p><strong>seasonality_reg</strong> (<em>float</em>) – Parameter modulating the strength of the seasonality model.
-Smaller values (~0.1-1) allow the model to fit larger seasonal fluctuations,
-larger values (~1-100) dampen the seasonality.
-default: None, no regularization</p></li>
-<li><p><strong>n_lags</strong> (<em>int</em>) – Previous time series steps to include in auto-regression. Aka AR-order</p></li>
-<li><p><strong>ar_sparsity</strong> (<em>float</em>) – [0-1], how much sparsity to enduce in the AR-coefficients.
-Should be around (# nonzero components) / (AR order), eg. 3/100 = 0.03</p></li>
-<li><p><strong>n_forecasts</strong> (<em>int</em>) – Number of steps ahead of prediction time step to forecast.</p></li>
-<li><p><strong>num_hidden_layers</strong> (<em>int</em>) – number of hidden layer to include in AR-Net. defaults to 0.</p></li>
-<li><p><strong>d_hidden</strong> (<em>int</em>) – dimension of hidden layers of the AR-Net. Ignored if num_hidden_layers == 0.</p></li>
-<li><p><strong>learning_rate</strong> (<em>float</em>) – Maximum learning rate setting for 1cycle policy scheduler.
-default: None: Automatically sets the learning_rate based on a learning rate range test.
-For manual values, try values ~0.001-10.</p></li>
-<li><p><strong>epochs</strong> (<em>int</em>) – Number of epochs (complete iterations over dataset) to train model.
-default: None: Automatically sets the number of epochs based on dataset size.
-For best results also leave batch_size to None.
-For manual values, try ~5-500.</p></li>
-<li><p><strong>batch_size</strong> (<em>int</em>) – Number of samples per mini-batch.
-default: None: Automatically sets the batch_size based on dataset size.
-For best results also leave epochs to None.
-For manual values, try ~1-512.</p></li>
-<li><p><strong>loss_func</strong> (<em>str</em><em>, </em><em>torch.nn.modules.loss._Loss</em><em>, </em><em>'typing.Callable'</em>) – Type of loss to use: str [‘Huber’, ‘MSE’, ‘MAE’],
-or torch loss or callable for custom loss, eg. asymmetric Huber loss</p></li>
-<li><p><strong>collect_metrics</strong> (<em>list</em><em>, </em><em>bool</em>) – the names of metrics to compute. Valid: [‘mae’, ‘rmse’, ‘mse’]
-True (default): [‘mae’, ‘rmse’]
-False: No metrics</p></li>
-<li><p><strong>impute_missing</strong> (<em>bool</em>) – whether to automatically impute missing dates/values
-imputation follows a linear method up to 10 missing values, more are filled with trend.</p></li>
-<li><p><strong>normalize</strong> (<em>str</em>) – <p>Type of normalization to apply to the time series.
-default: ‘soft’, unless the time series is binary, in which case ‘minmax’ is applied.
-options: [ ‘off’, ‘minmax, ‘standardize’, ‘soft’, ‘soft1’]</p>
-<blockquote>
-<div><ul>
-<li><p>’off’ bypasses data normalization</p></li>
-<li><p>’minmax’ scales the minimum value to 0.0 and the maximum value to 1.0</p></li>
-<li><p>’standardize’ zero-centers and divides by the standard deviation</p></li>
-<li><p>’soft’ scales the minimum value to 0.0 and the 95th quantile to 1.0</p></li>
-<li><p>’soft1’ scales the minimum value to 0.1 and the 90th quantile to 0.9</p></li>
+<li><p><strong>growth</strong> (<em>{'off'</em><em> or </em><em>'linear'}</em><em>, </em><em>default 'linear'</em>) – <p>Set use of trend growth type.</p>
+<dl>
+<dt>Options:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">off</span></code>: no trend.</p></li>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">linear</span></code>: fits a piece-wise linear trend with <code class="docutils literal notranslate"><span class="pre">n_changepoints</span> <span class="pre">+</span> <span class="pre">1</span></code> segments</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discontinuous</span></code>: For advanced users only - not a conventional trend,</p></li>
 </ul>
-</div></blockquote>
+<p>allows arbitrary jumps at each trend changepoint</p>
+</dd>
+</dl>
 </p></li>
-<li><p><strong>global_normalization</strong> (<em>bool</em>) – when set to true and dict of dataframes are used as global_time_normalization,
-input global data params are considered - default is local normalization.</p></li>
-<li><p><strong>global_time_normalization</strong> (<em>bool</em>) – set time data_params locally when set to false,
-only valid in case of global modeling local normalization (default)</p></li>
-<li><p><strong>unknown_data_normalization</strong> (<em>bool</em>) – when unknown_data_normalization is set to True, test data is normalized with global data params even if trained with local data params (global modeling with local normalization)</p></li>
+<li><p><strong>changepoints</strong> (<em>{list of str</em><em>, </em><em>list of np.datetimes</em><em> or </em><em>np.array of np.datetimes}</em><em>, </em><em>optional</em>) – <p>Manually set dates at which to include potential changepoints.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Does not accept <code class="docutils literal notranslate"><span class="pre">np.array</span></code> of <code class="docutils literal notranslate"><span class="pre">np.str</span></code>. If not specified, potential changepoints are selected automatically.</p>
+</div>
+</p></li>
+<li><p><strong>n_changepoints</strong> (<em>int</em>) – <p>Number of potential trend changepoints to include.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changepoints are selected uniformly from the first <code class="docutils literal notranslate"><span class="pre">changepoint_range</span></code> proportion of the history.
+Ignored if manual <code class="docutils literal notranslate"><span class="pre">changepoints</span></code> list is supplied.</p>
+</div>
+</p></li>
+<li><p><strong>changepoints_range</strong> (<em>float</em>) – <p>Proportion of history in which trend changepoints will be estimated.</p>
+<p>e.g. set to 0.8 to allow changepoints only in the first 80% of training data.
+Ignored if  manual <code class="docutils literal notranslate"><span class="pre">changepoints</span></code> list is supplied.</p>
+</p></li>
+<li><p><strong>trend_reg</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Parameter modulating the flexibility of the automatic changepoint selection.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Large values (~1-100) will limit the variability of changepoints.
+Small values (~0.001-1.0) will allow changepoints to change faster.
+default: 0 will fully fit a trend to each segment.</p>
+</div>
+</p></li>
+<li><p><strong>trend_reg_threshold</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Allowance for trend to change without regularization.</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: Automatically set to a value that leads to a smooth trend.</p></li>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">False</span></code>: All changes in changepoints are regularized</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>yearly_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – <p>Fit yearly seasonality.</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>: set automatically</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: number of Fourier/linear terms to generate</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>weekly_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – <p>Fit monthly seasonality.</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>: set automatically</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: number of Fourier/linear terms to generate</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>daily_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – <p>Fit daily seasonality.</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>: set automatically</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: number of Fourier/linear terms to generate</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>seasonality_mode</strong> (<em>str</em>) – <p>Specifies mode of seasonality</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">additive</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multiplicative</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>seasonality_reg</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Parameter modulating the strength of the seasonality model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Smaller values (~0.1-1) allow the model to fit larger seasonal fluctuations,
+larger values (~1-100) dampen the seasonality.
+default: None, no regularization</p>
+</div>
+</p></li>
+<li><p><strong>n_lags</strong> (<em>int</em>) – Previous time series steps to include in auto-regression. Aka AR-order</p></li>
+<li><p><strong>ar_reg</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>how much sparsity to enduce in the AR-coefficients</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Large values (~1-100) will limit the number of nonzero coefficients dramatically.
+Small values (~0.001-1.0) will allow more non-zero coefficients.
+default: 0 no regularization of coefficients.</p>
+</div>
+</p></li>
+<li><p><strong>n_forecasts</strong> (<em>int</em>) – Number of steps ahead of prediction time step to forecast.</p></li>
+<li><p><strong>num_hidden_layers</strong> (<em>int</em><em>, </em><em>optional</em>) – number of hidden layer to include in AR-Net (defaults to 0)</p></li>
+<li><p><strong>d_hidden</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of hidden layers of the AR-Net. Ignored if <code class="docutils literal notranslate"><span class="pre">num_hidden_layers</span></code> == 0.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – <p>Maximum learning rate setting for 1cycle policy scheduler.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default <code class="docutils literal notranslate"><span class="pre">None</span></code>: Automatically sets the <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> based on a learning rate range test.
+For manual user input, (try values ~0.001-10).</p>
+</div>
+</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – <p>Number of epochs (complete iterations over dataset) to train model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default <code class="docutils literal notranslate"><span class="pre">None</span></code>: Automatically sets the number of epochs based on dataset size.
+For best results also leave batch_size to None. For manual values, try ~5-500.</p>
+</div>
+</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – <p>Number of samples per mini-batch.</p>
+<p>If not provided, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> is approximated based on dataset size.
+For manual values, try ~8-1024.
+For best results also leave <code class="docutils literal notranslate"><span class="pre">epochs</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</p></li>
+<li><p><strong>newer_samples_weight</strong> (<em>float</em><em>, </em><em>default 2.0</em>) – <p>Sets factor by which the model fit is skewed towards more recent observations.</p>
+<p>Controls the factor by which final samples are weighted more compared to initial samples.
+Applies a positional weighting to each sample’s loss value.</p>
+<p>e.g. <code class="docutils literal notranslate"><span class="pre">newer_samples_weight</span> <span class="pre">=</span> <span class="pre">2</span></code>: final samples are weighted twice as much as initial samples.</p>
+</p></li>
+<li><p><strong>newer_samples_start</strong> (<em>float</em><em>, </em><em>default 0.0</em>) – <p>Sets beginning of ‘newer’ samples as fraction of training data.</p>
+<p>Throughout the range of ‘newer’ samples, the weight is increased
+from <code class="docutils literal notranslate"><span class="pre">1.0/newer_samples_weight</span></code> initially to 1.0 at the end,
+in a monotonously increasing function (cosine from pi to 2*pi).</p>
+</p></li>
+<li><p><strong>loss_func</strong> (<em>str</em><em>, </em><em>torch.nn.functional.loss</em>) – <p>Type of loss to use:</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">Huber</span></code>: Huber loss function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MSE</span></code>: Mean Squared Error loss function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAE</span></code>: Mean Absolute Error loss function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">torch.nn.functional.loss.</span></code>: loss or callable for custom loss, eg. L1-Loss</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">neuralprophet</span> <span class="kn">import</span> <span class="n">NeuralProphet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">(</span><span class="n">loss_func</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">)</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>collect_metrics</strong> (<em>list of str</em><em>, </em><em>bool</em>) – <p>Set metrics to compute.</p>
+<p>Valid: [<code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">mse</span></code>]</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">True</span></code>: [<code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: No metrics</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>impute_missing</strong> (<em>bool</em>) – <p>whether to automatically impute missing dates/values</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>imputation follows a linear method up to 10 missing values, more are filled with trend.</p>
+</div>
+</p></li>
+<li><p><strong>normalize</strong> (<em>str</em>) – <p>Type of normalization to apply to the time series.</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">off</span></code> bypasses data normalization</p></li>
+<li><p>(default, binary timeseries) <code class="docutils literal notranslate"><span class="pre">minmax</span></code> scales the minimum value to 0.0 and the maximum value to 1.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">standardize</span></code> zero-centers and divides by the standard deviation</p></li>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">soft</span></code> scales the minimum value to 0.0 and the 95th quantile to 1.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">soft1</span></code> scales the minimum value to 0.1 and the 90th quantile to 0.9</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>global_normalization</strong> (<em>bool</em>) – <p>Activation of global normalization</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: dict of dataframes is used as global_time_normalization</p></li>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">False</span></code>: local normalization</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>(</strong><strong>bool</strong><strong>)</strong> (<em>global_time_normalization</em>) – <p>Specifies global time normalization</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">True</span></code>: only valid in case of global modeling local normalization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: set time data_params locally</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>unknown_data_normalization</strong> (<em>bool</em>) – <p>Specifies unknown data normalization</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: test data is normalized with global data params even if trained with local data params (global modeling with local normalization)</p></li>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">False</span></code>: no global modeling with local normalization</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
 </ul>
 </dd>
 </dl>
@@ -354,11 +485,8 @@ parameters</p>
 <li><p><strong>lower_window</strong> (<em>int</em>) – the lower window for all the country holidays</p></li>
 <li><p><strong>upper_window</strong> (<em>int</em>) – the upper window for all the country holidays</p></li>
 <li><p><strong>regularization</strong> (<em>float</em>) – optional  scale for regularization strength</p></li>
-<li><p><strong>mode</strong> (<em>str</em>) – ‘additive’ (default) or ‘multiplicative’.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">additive</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">multiplicative</span></code>.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>NeuralProphet object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -374,33 +502,30 @@ regularization parameters into the NeuralProphet object</p>
 <li><p><strong>lower_window</strong> (<em>int</em>) – the lower window for the events in the list of events</p></li>
 <li><p><strong>upper_window</strong> (<em>int</em>) – the upper window for the events in the list of events</p></li>
 <li><p><strong>regularization</strong> (<em>float</em>) – optional  scale for regularization strength</p></li>
-<li><p><strong>mode</strong> (<em>str</em>) – ‘additive’ (default) or ‘multiplicative’.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">additive</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">multiplicative</span></code>.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>NeuralProphet object</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet.add_future_regressor">
 <span class="sig-name descname"><span class="pre">add_future_regressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'additive'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.add_future_regressor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a regressor as lagged covariate with order 1 (scalar) or as known in advance (also scalar).</p>
-<p>The dataframe passed to <cite>fit</cite> and <cite>predict</cite> will have a column with the specified name to be used as
+<dd><p>Add a regressor as lagged covariate with order 1 (scalar) or as known in advance (also scalar).
+The dataframe passed to <a class="reference internal" href="#neuralprophet.forecaster.NeuralProphet.fit" title="neuralprophet.forecaster.NeuralProphet.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a>  and <a class="reference internal" href="#neuralprophet.forecaster.NeuralProphet.predict" title="neuralprophet.forecaster.NeuralProphet.predict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a> will have a column with the specified name to be used as
 a regressor. When normalize=True, the regressor will be normalized unless it is binary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>string</em>) – name of the regressor.</p></li>
 <li><p><strong>regularization</strong> (<em>float</em>) – optional  scale for regularization strength</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em>) – optional, specify whether this regressor will be
-normalized prior to fitting.
-if ‘auto’, binary regressors will not be normalized.</p></li>
-<li><p><strong>mode</strong> (<em>str</em>) – ‘additive’ (default) or ‘multiplicative’.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – <p>optional, specify whether this regressor will be normalized prior to fitting.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>if <code class="docutils literal notranslate"><span class="pre">auto</span></code>, binary regressors will not be normalized.</p>
+</div>
+</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">additive</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">multiplicative</span></code>.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>NeuralProphet object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -408,22 +533,25 @@ if ‘auto’, binary regressors will not be normalized.</p></li>
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet.add_lagged_regressor">
 <span class="sig-name descname"><span class="pre">add_lagged_regressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_last_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.add_lagged_regressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a covariate or list of covariate time series as additional lagged regressors to be used for fitting and predicting.
-The dataframe passed to <cite>fit</cite> and <cite>predict</cite> will have the column with the specified name to be used as
+The dataframe passed to <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">predict</span></code> will have the column with the specified name to be used as
 lagged regressor. When normalize=True, the covariate will be normalized unless it is binary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>names</strong> (<em>string</em><em> or </em><em>list</em>) – name of the regressor/list of regressors.</p></li>
 <li><p><strong>regularization</strong> (<em>float</em>) – optional  scale for regularization strength</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em>) – optional, specify whether this regressor will be
-normalized prior to fitting.
-if ‘auto’, binary regressors will not be normalized.</p></li>
-<li><p><strong>only_last_value</strong> (<em>bool</em>) – False (default) use same number of lags as auto-regression
-True: only use last known value as input</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – optional, specify whether this regressor will benormalized prior to fitting.
+if <code class="docutils literal notranslate"><span class="pre">auto</span></code>, binary regressors will not be normalized.</p></li>
+<li><p><strong>only_last_value</strong> (<em>bool</em>) – <p>specifies last value handling</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">False</span></code> use same number of lags as auto-regression</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> only use last known value as input</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>NeuralProphet object</p>
+</dl>
+</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -442,9 +570,6 @@ Note: regularization and mode (additive/multiplicative) are set in the main init
 <li><p><strong>fourier_order</strong> (<em>int</em>) – number of Fourier components to use.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The NeuralProphet object.</p>
-</dd>
 </dl>
 </dd></dl>
 <dl class="py method">
@@ -454,15 +579,15 @@ Note: regularization and mode (additive/multiplicative) are set in the main init
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>dict</em><em>, </em><em>pd.DataFrame</em>) – containing column ‘ds’ and ‘y’</p></li>
-<li><p><strong>events_df</strong> (<em>dict</em><em>, </em><em>pd.DataFrame</em>) – containing column ‘ds’ and ‘event’</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
+<li><p><strong>events_df</strong> (<em>dict</em><em>, </em><em>pd.DataFrame</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code> and <code class="docutils literal notranslate"><span class="pre">event</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>with columns ‘y’, ‘ds’ and other user specified events</p>
+<dd class="field-even"><p>columns <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">ds</span></code> and other user specified events</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df (dict, pd.DataFrame)</p>
+<dd class="field-odd"><p>dict, pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -473,20 +598,25 @@ Note: regularization and mode (additive/multiplicative) are set in the main init
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – data</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
-<li><p><strong>k</strong> – number of CV folds</p></li>
-<li><p><strong>fold_pct</strong> – percentage of overall samples to be in each fold</p></li>
-<li><p><strong>fold_overlap_pct</strong> – percentage of overlap between the validation folds.</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – <p>data step sizes. Frequency of data recording,</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any valid frequency for pd.date_range, such as <code class="docutils literal notranslate"><span class="pre">5min</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">MS</span></code> or <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) to automatically set frequency.</p>
+</div>
+</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of CV folds</p></li>
+<li><p><strong>fold_pct</strong> (<em>float</em>) – percentage of overall samples to be in each fold</p></li>
+<li><p><strong>fold_overlap_pct</strong> (<em>float</em>) – percentage of overlap between the validation folds.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>df_train (pd.DataFrame):  training data
-df_val (pd.DataFrame): validation data</p>
+<dd class="field-even"><p><p>training data</p>
+<p>validation data</p>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of k tuples [(df_train, df_val), …] where</p>
+<dd class="field-odd"><p>list of k tuples [(df_train, df_val), …]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -497,16 +627,23 @@ df_val (pd.DataFrame): validation data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – data</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – <p>data step sizes. Frequency of data recording,</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any valid frequency for pd.date_range, such as <code class="docutils literal notranslate"><span class="pre">5min</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">MS</span></code> or <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) to automatically set frequency.</p>
+</div>
+</p></li>
 <li><p><strong>k</strong> (<em>int</em>) – number of CV folds</p></li>
 <li><p><strong>valid_pct</strong> (<em>float</em>) – percentage of overall samples to be in validation</p></li>
 <li><p><strong>test_pct</strong> (<em>float</em>) – percentage of overall samples to be in test</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>tuple of folds_val, folds_test, where each are same as crossvalidation_split_df returns</p>
+<dd class="field-even"><p>elements same as <a class="reference internal" href="#neuralprophet.forecaster.NeuralProphet.crossvalidation_split_df" title="neuralprophet.forecaster.NeuralProphet.crossvalidation_split_df"><code class="xref py py-meth docutils literal notranslate"><span class="pre">crossvalidation_split_df()</span></code></a> returns</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of k tuples [(folds_val, folds_test), …]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -517,29 +654,35 @@ Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – pd.DataFrame or dict of dataframes containing column ‘ds’, ‘y’ with all data</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
-<li><p><strong>validation_df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – if provided, model with performance  will be evaluated
-after each training epoch over this data.</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – <p>Data step sizes. Frequency of data recording,</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any valid frequency for pd.date_range, such as <code class="docutils literal notranslate"><span class="pre">5min</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">MS</span></code> or <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) to automatically set frequency.</p>
+</div>
+</p></li>
+<li><p><strong>validation_df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – if provided, model with performance  will be evaluated after each training epoch over this data.</p></li>
 <li><p><strong>epochs</strong> (<em>int</em>) – number of epochs to train (overrides default setting).
 default: if not specified, uses self.epochs</p></li>
-<li><p><strong>progress</strong> (<em>str</em>) – <p>Method of progress display
-options: [“bar”, “print”, “plot”, “plot-all”, “none”]</p>
-<blockquote>
-<div><ul>
-<li><p>”bar” display updating progress bar (tqdm)</p></li>
-<li><p>”print” print out progress (fallback option)</p></li>
-<li><p>”plot” plot a live updating graph of the training loss, requires [live] install or livelossplot package installed.</p></li>
-<li><p>”plot-all” “plot” extended to all recorded metrics.</p></li>
+<li><p><strong>progress</strong> (<em>str</em>) – <p>Method of progress display</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">bar</span></code> display updating progress bar (tqdm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code> print out progress (fallback option)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot</span></code> plot a live updating graph of the training loss, requires [live] install or livelossplot package installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot-all</span></code> extended to all recorded metrics.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 </p></li>
 <li><p><strong>minimal</strong> (<em>bool</em>) – whether to train without any printouts or metrics collection</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>metrics with training and potentially evaluation metrics</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -549,8 +692,7 @@ options: [“bar”, “print”, “plot”, “plot-all”, “none”]</p>
 <dd><p>Set which forecast step to focus on for metrics evaluation and plotting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>step_number</strong> (<em>int</em>) – i-th step ahead forecast to use for statistics and plotting.
-default: None.</p>
+<dd class="field-odd"><p><strong>step_number</strong> (<em>int</em>) – i-th step ahead forecast to use for statistics and plotting.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -562,14 +704,11 @@ default: None.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of self.predict.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axes</em>) – Optional, matplotlib axes on which to plot.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axes</em>) – optional, matplotlib axes on which to plot.</p></li>
 <li><p><strong>xlabel</strong> (<em>string</em>) – label name on X-axis</p></li>
 <li><p><strong>ylabel</strong> (<em>string</em>) – label name on Y-axis</p></li>
 <li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. default: (10, 6)</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -581,12 +720,19 @@ default: None.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of self.predict</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches.
-None (default):  automatic (10, 3 * npanel)</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>width, height in inches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>None (default):  automatic (10, 3 * npanel)</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
+<dd class="field-even"><p>plot of NeuralProphet components</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
 </dd>
 </dl>
 </dd></dl>
@@ -599,15 +745,18 @@ None (default):  automatic (10, 3 * npanel)</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of self.predict.</p></li>
 <li><p><strong>ax</strong> (<em>matplotlib axes</em>) – Optional, matplotlib axes on which to plot.</p></li>
-<li><p><strong>xlabel</strong> (<em>string</em>) – label name on X-axis</p></li>
-<li><p><strong>ylabel</strong> (<em>string</em>) – label name on Y-axis</p></li>
+<li><p><strong>xlabel</strong> (<em>str</em>) – label name on X-axis</p></li>
+<li><p><strong>ylabel</strong> (<em>str</em>) – abel name on Y-axis</p></li>
 <li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. default: (10, 6)</p></li>
 <li><p><strong>include_previous_forecasts</strong> (<em>int</em>) – number of previous forecasts to include in plot</p></li>
-<li><p><strong>plot_history_data</strong> – </p></li>
+<li><p><strong>plot_history_data</strong> (<em>bool</em>) – specifies plot of historical data</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
+<dd class="field-even"><p>plot of NeuralProphet forecasting</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
 </dd>
 </dl>
 </dd></dl>
@@ -618,17 +767,32 @@ None (default):  automatic (10, 3 * npanel)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>weekly_start</strong> (<em>int</em>) – specifying the start day of the weekly seasonality plot.
-0 (default) starts the week on Sunday. 1 shifts by 1 day to Monday, and so on.</p></li>
-<li><p><strong>yearly_start</strong> (<em>int</em>) – specifying the start day of the yearly seasonality plot.
-0 (default) starts the year on Jan 1. 1 shifts by 1 day to Jan 2, and so on.</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches.
-None (default):  automatic (10, 3 * npanel)</p></li>
+<li><p><strong>weekly_start</strong> (<em>int</em>) – <p>specifying the start day of the weekly seasonality plot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>0 (default) starts the week on Sunday. 1 shifts by 1 day to Monday, and so on.</p>
+</div>
+</p></li>
+<li><p><strong>yearly_start</strong> (<em>int</em>) – <p>specifying the start day of the yearly seasonality plot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>0 (default) starts the year on Jan 1. 1 shifts by 1 day to Jan 2, and so on.</p>
+</div>
+</p></li>
+<li><p><strong>df_name</strong> (<em>str</em>) – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>width, height in inches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>None (default):  automatic (10, 3 * npanel)</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
+<dd class="field-even"><p>plot of NeuralProphet forecasting</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.axes.Axes</p>
 </dd>
 </dl>
 </dd></dl>
@@ -642,29 +806,34 @@ please prepare data with make_future_dataframe.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, ‘y’ with data and
-other external variables</p></li>
-<li><p><strong>decompose</strong> (<em>bool</em>) – Whether to add individual components of forecast to the dataframe</p></li>
-<li><p><strong>raw</strong> (<em>bool</em>) – Whether return the raw forecasts sorted by forecast start date
-False (default): returns forecasts sorted by target (highlighting forecast age)</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with data</p></li>
+<li><p><strong>decompose</strong> (<em>bool</em>) – whether to add individual components of forecast to the dataframe</p></li>
+<li><p><strong>raw</strong> (<em>bool</em>) – <p>specifies raw data</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">False</span></code>: returns forecasts sorted by target (highlighting forecast age)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: return the raw forecasts sorted by forecast start date</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>df_raw (if raw=True):</dt><dd><p>columns ‘ds’, ‘y’, and [‘step&lt;i&gt;’] where step&lt;i&gt; refers to the i-step-ahead
-prediction <em>made at</em> this row’s datetime.
-e.g. step3 is the prediction for 3 steps into the future,
+<dd class="field-even"><p><p>dependent on <code class="docutils literal notranslate"><span class="pre">raw</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">raw</span> <span class="pre">==</span> <span class="pre">True</span></code>: columns <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and [<code class="docutils literal notranslate"><span class="pre">step&lt;i&gt;</span></code>] where step&lt;i&gt; refers to the i-step-ahead
+prediction <em>made at</em> this row’s datetime, e.g. step3 is the prediction for 3 steps into the future,
 predicted using information up to (excluding) this datetime.</p>
-</dd>
-<dt>df_forecast (otherwise):</dt><dd><p>columns ‘ds’, ‘y’, ‘trend’ and [‘yhat&lt;i&gt;’] where yhat&lt;i&gt; refers to
-the i-step-ahead prediction for this row’s datetime.
+<p><code class="docutils literal notranslate"><span class="pre">raw</span> <span class="pre">==</span> <span class="pre">False</span></code>: columns <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">trend</span></code> and [<code class="docutils literal notranslate"><span class="pre">yhat&lt;i&gt;</span></code>] where yhat&lt;i&gt; refers to
+the i-step-ahead prediction for this row’s datetime,
 e.g. yhat3 is the prediction for this datetime, predicted 3 steps ago, “3 steps old”.</p>
-</dd>
-</dl>
+</div>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pd.DataFrame or dict of pd.DataFrame</p>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -674,13 +843,13 @@ e.g. yhat3 is the prediction for this datetime, predicted 3 steps ago, “3 step
 <dd><p>Predict seasonality components</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, prediction dates</p>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing columns <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>seasonal components with columns of name &lt;seasonality component name&gt;</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df (pd.DataFrame, dict)</p>
+<dd class="field-odd"><p>pd.DataFrame, dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -690,23 +859,23 @@ e.g. yhat3 is the prediction for this datetime, predicted 3 steps ago, “3 step
 <dd><p>Predict only trend component of the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes  containing column ‘ds’, prediction dates</p>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>trend on prediction dates.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df (dict, pd.DataFrame)</p>
+<dd class="field-odd"><p>pd.DataFrame, dict</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet.set_true_ar_for_eval">
 <span class="sig-name descname"><span class="pre">set_true_ar_for_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">true_ar_weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.set_true_ar_for_eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>configures model to evaluate closeness of AR weights to true weights.</p>
+<dd><p>Configures model to evaluate closeness of AR weights to true weights.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>true_ar_weights</strong> (<em>np.array</em>) – True AR-parameters, if known.</p>
+<dd class="field-odd"><p><strong>true_ar_weights</strong> (<em>np.array</em>) – true AR-parameters, if known.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -719,25 +888,122 @@ Also performs basic data checks and fills in missing data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, ‘y’ with all data</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
-<li><p><strong>valid_p</strong> (<em>float</em>) – fraction of data to use for holdout validation set
-Targets will still never be shared.</p></li>
-<li><p><strong>local_split</strong> (<em>bool</em>) – Each dataframe will be split according to valid_p locally (in case of dict of dataframes)</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – <p>data step sizes. Frequency of data recording,</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any valid frequency for pd.date_range, such as <code class="docutils literal notranslate"><span class="pre">5min</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">MS</span></code> or <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) to automatically set frequency.</p>
+</div>
+</p></li>
+<li><p><strong>valid_p</strong> (<em>float</em>) – fraction of data to use for holdout validation set, targets will still never be shared.</p></li>
+<li><p><strong>local_split</strong> (<em>bool</em>) – Each dataframe will be split according to valid_p locally (in case of dict of dataframes</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>df_train (pd.DataFrame):</dt><dd><p>training data</p>
-</dd>
-<dt>df_val (pd.DataFrame):</dt><dd><p>validation data</p>
-</dd>
-</dl>
+<dd class="field-even"><p><p>training data</p>
+<p>validation data</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of two pd.DataFrames</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#neuralprophet.forecaster.NeuralProphet.crossvalidation_split_df" title="neuralprophet.forecaster.NeuralProphet.crossvalidation_split_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crossvalidation_split_df</span></code></a></dt><dd><p>Splits timeseries data in k folds for crossvalidation.</p>
+</dd>
+<dt><a class="reference internal" href="#neuralprophet.forecaster.NeuralProphet.double_crossvalidation_split_df" title="neuralprophet.forecaster.NeuralProphet.double_crossvalidation_split_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">double_crossvalidation_split_df</span></code></a></dt><dd><p>Splits timeseries data in two sets of k folds for crossvalidation on training and testing data.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'ds'</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">'2022-12-01'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">),</span> <span class="s1">'y'</span><span class="p">:</span> <span class="p">[</span><span class="mf">9.59</span><span class="p">,</span> <span class="mf">8.52</span><span class="p">,</span> <span class="mf">8.18</span><span class="p">,</span> <span class="mf">8.07</span><span class="p">,</span> <span class="mf">7.89</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'ds'</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">'2022-12-09'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">),</span> <span class="s1">'y'</span><span class="p">:</span> <span class="p">[</span><span class="mf">8.71</span><span class="p">,</span> <span class="mf">8.09</span><span class="p">,</span> <span class="mf">7.84</span><span class="p">,</span> <span class="mf">7.65</span><span class="p">,</span> <span class="mf">8.02</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'ds'</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">'2022-12-09'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">),</span> <span class="s1">'y'</span><span class="p">:</span> <span class="p">[</span><span class="mf">7.67</span><span class="p">,</span> <span class="mf">7.64</span><span class="p">,</span> <span class="mf">7.55</span><span class="p">,</span> <span class="mf">8.25</span><span class="p">,</span> <span class="mf">8.3</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df3</span>
+<span class="go">    ds              y</span>
+<span class="go">0   2022-12-09      7.67</span>
+<span class="go">1   2022-12-10      7.64</span>
+<span class="go">2   2022-12-11      7.55</span>
+<span class="go">3   2022-12-12      8.25</span>
+<span class="go">4   2022-12-13      8.30</span>
+</pre></div>
+</div>
+<dl>
+<dt>One can define a dict with many time series.</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'data1'</span><span class="p">:</span> <span class="n">df1</span><span class="p">,</span> <span class="s1">'data2'</span><span class="p">:</span> <span class="n">df2</span><span class="p">,</span> <span class="s1">'data3'</span><span class="p">:</span> <span class="n">df3</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>You can split a single dataframe.</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_val</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="n">valid_p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_train</span>
+<span class="go">    ds              y</span>
+<span class="go">0   2022-12-09      7.67</span>
+<span class="go">1   2022-12-10      7.64</span>
+<span class="go">2   2022-12-11      7.55</span>
+<span class="go">3   2022-12-12      8.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_val</span>
+<span class="go">    ds              y</span>
+<span class="go">0   2022-12-13      8.3</span>
+</pre></div>
+</div>
+</dd>
+<dt>You can also use a dict of dataframes (especially useful for global modeling), which will account for the time range of the whole group of time series as default.</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">df_dict_train</span><span class="p">,</span> <span class="n">df_dict_val</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">df_dict</span><span class="p">,</span> <span class="n">valid_p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_dict_train</span>
+<span class="go">{'data1':           ds     y</span>
+<span class="go">0 2022-12-01  9.59</span>
+<span class="go">1 2022-12-02  8.52</span>
+<span class="go">2 2022-12-03  8.18</span>
+<span class="go">3 2022-12-04  8.07</span>
+<span class="go">4 2022-12-05  7.89,</span>
+<span class="go">'data2':           ds     y</span>
+<span class="go">0 2022-12-09  8.71</span>
+<span class="go">1 2022-12-10  8.09</span>
+<span class="go">2 2022-12-11  7.84,</span>
+<span class="go">'data3':           ds     y</span>
+<span class="go">0 2022-12-09  7.67</span>
+<span class="go">1 2022-12-10  7.64</span>
+<span class="go">2 2022-12-11  7.55}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_dict_val</span>
+<span class="go">{'data2':           ds     y</span>
+<span class="go">0 2022-12-12  7.65</span>
+<span class="go">1 2022-12-13  8.02,</span>
+<span class="go">'data3':           ds     y</span>
+<span class="go">0 2022-12-12  8.25</span>
+<span class="go">1 2022-12-13  8.30}</span>
+</pre></div>
+</div>
+</dd>
+<dt>In some applications, splitting locally each time series may be helpful. In this case, one should set <cite>local_split</cite> to True.</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">df_dict_train</span><span class="p">,</span> <span class="n">df_dict_val</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">df_dict</span><span class="p">,</span> <span class="n">valid_p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">local_split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_dict_train</span>
+<span class="go">{'data1':           ds     y</span>
+<span class="go">0 2022-12-01  9.59</span>
+<span class="go">1 2022-12-02  8.52</span>
+<span class="go">2 2022-12-03  8.18</span>
+<span class="go">3 2022-12-04  8.07,</span>
+<span class="go">'data2':           ds     y</span>
+<span class="go">0 2022-12-09  8.71</span>
+<span class="go">1 2022-12-10  8.09</span>
+<span class="go">2 2022-12-11  7.84</span>
+<span class="go">3 2022-12-12  7.65,</span>
+<span class="go">'data3':           ds     y</span>
+<span class="go">0 2022-12-09  7.67</span>
+<span class="go">1 2022-12-10  7.64</span>
+<span class="go">2 2022-12-11  7.55</span>
+<span class="go">3 2022-12-12  8.25}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_dict_val</span>
+<span class="go">{'data1':           ds     y</span>
+<span class="go">0 2022-12-05  7.89,</span>
+<span class="go">'data2':           ds     y</span>
+<span class="go">0 2022-12-13  8.02,</span>
+<span class="go">'data3':           ds    y</span>
+<span class="go">0 2022-12-13  8.3}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd></dl>
@@ -747,10 +1013,13 @@ Targets will still never be shared.</p></li>
 <dd><p>Evaluate model on holdout data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>,</em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, ‘y’ with with holdout data</p>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>,</em><em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with with holdout data</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>df with evaluation metrics</p>
+<dd class="field-even"><p>evaluation metrics</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>

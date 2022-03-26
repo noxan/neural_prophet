@@ -206,16 +206,12 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -558,7 +554,13 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "aa42f2a23a434d0682b2077e0b042bf8", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c38df832eff5452a924a0a312a174e5e", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8f739161cb6f401b855ab9fa9553e957", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -572,14 +574,14 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/sub_daily_data_yosemite_temps_5_2.png" src="_images/sub_daily_data_yosemite_temps_5_2.png"/>
+<img alt="_images/sub_daily_data_yosemite_temps_5_3.png" src="_images/sub_daily_data_yosemite_temps_5_3.png"/>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/sub_daily_data_yosemite_temps_5_3.png" src="_images/sub_daily_data_yosemite_temps_5_3.png"/>
+<img alt="_images/sub_daily_data_yosemite_temps_5_4.png" src="_images/sub_daily_data_yosemite_temps_5_4.png"/>
 </div>
 </div>
 <p>The daily seasonality seems to make sense, when we account for the time being recorded in GMT, while Yosemite local time is GMT-8.</p>
@@ -588,7 +590,7 @@ div.rendered_html tbody tr:hover {
 <p>As we have <code class="docutils literal notranslate"><span class="pre">288</span></code> daily values recorded, we can increase the flexibility of <code class="docutils literal notranslate"><span class="pre">daily_seasonality</span></code>, without danger of overfitting.</p>
 <p>Further, we may want to re-visit our decision to disable changepoints, as the data clearly shows changes in trend, as is typical with the weather. We make the following changes: * increase the <code class="docutils literal notranslate"><span class="pre">changepoints_range</span></code>, as the we are doing a short-term prediction * inrease the <code class="docutils literal notranslate"><span class="pre">n_changepoints</span></code> to allow to fit to the sudden changes in trend * carefully regularize the trend changepoints by setting <code class="docutils literal notranslate"><span class="pre">trend_reg</span></code> in order to avoid overfitting</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -612,7 +614,13 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7c6b9217267349a1b79bcbc9079e7216", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "befb135fe5f04ff69832a4995895352b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c5c96ef23f3441e2b2e561559b98f0d6", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -626,14 +634,14 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/sub_daily_data_yosemite_temps_7_2.png" src="_images/sub_daily_data_yosemite_temps_7_2.png"/>
+<img alt="_images/sub_daily_data_yosemite_temps_7_3.png" src="_images/sub_daily_data_yosemite_temps_7_3.png"/>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/sub_daily_data_yosemite_temps_7_3.png" src="_images/sub_daily_data_yosemite_temps_7_3.png"/>
+<img alt="_images/sub_daily_data_yosemite_temps_7_4.png" src="_images/sub_daily_data_yosemite_temps_7_4.png"/>
 </div>
 </div>
 <div class="nbinput nblast docutils container">

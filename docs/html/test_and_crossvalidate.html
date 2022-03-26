@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -590,15 +586,15 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
-<td>0.007121</td>
-<td>31.413279</td>
-<td>1440.266357</td>
+<td>0.005307</td>
+<td>26.848057</td>
+<td>32.760937</td>
 </tr>
 </tbody>
 </table></div>
@@ -613,7 +609,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">metrics_train2</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"MS"</span><span class="p">)</span>
+<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">(</span><span class="n">seasonality_mode</span><span class="o">=</span> <span class="s2">"multiplicative"</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">metrics_train2</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"MS"</span><span class="p">)</span>
 <span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">n_historic_predictions</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
 <span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
@@ -650,7 +647,7 @@ div.rendered_html tbody tr:hover {
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s2">"air_passengers.csv"</span><span class="p">)</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"MS"</span><span class="p">,</span> <span class="n">valid_p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"MS"</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"MS"</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s2">"plot"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -664,9 +661,11 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-
+log-SmoothL1Loss
+        training                 (min:   -8.058, max:   -0.197, cur:   -8.058)
+        validation               (min:   -5.845, max:    0.102, cur:   -5.208)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -703,23 +702,23 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>307</th>
+<th>491</th>
 <td>0.000317</td>
-<td>6.178366</td>
-<td>64.096661</td>
+<td>6.244403</td>
+<td>7.929632</td>
 <td>0.0</td>
-<td>0.005971</td>
-<td>28.745131</td>
-<td>1207.533936</td>
+<td>0.005472</td>
+<td>27.306448</td>
+<td>33.266624</td>
 </tr>
 </tbody>
 </table></div>
@@ -736,7 +735,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">METRICS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'SmoothL1Loss'</span><span class="p">,</span> <span class="s1">'MAE'</span><span class="p">,</span> <span class="s1">'MSE'</span><span class="p">]</span>
+<span></span><span class="n">METRICS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'SmoothL1Loss'</span><span class="p">,</span> <span class="s1">'MAE'</span><span class="p">,</span> <span class="s1">'RMSE'</span><span class="p">]</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"seasonality_mode"</span><span class="p">:</span> <span class="s2">"multiplicative"</span><span class="p">,</span> <span class="s2">"learning_rate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s2">"air_passengers.csv"</span><span class="p">)</span>
@@ -803,33 +802,33 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>mean</th>
-<td>0.012356</td>
-<td>22.827064</td>
-<td>883.100308</td>
+<td>0.009792</td>
+<td>21.090633</td>
+<td>26.227701</td>
 </tr>
 <tr>
 <th>std</th>
-<td>0.012997</td>
-<td>8.211850</td>
-<td>508.476321</td>
+<td>0.008580</td>
+<td>7.266532</td>
+<td>9.003498</td>
 </tr>
 <tr>
 <th>min</th>
-<td>0.003793</td>
-<td>10.655480</td>
-<td>198.452499</td>
+<td>0.003340</td>
+<td>10.293222</td>
+<td>13.339386</td>
 </tr>
 <tr>
 <th>max</th>
-<td>0.034445</td>
-<td>29.894016</td>
-<td>1331.016846</td>
+<td>0.023061</td>
+<td>26.983458</td>
+<td>34.758419</td>
 </tr>
 </tbody>
 </table></div>
@@ -840,7 +839,7 @@ div.rendered_html tbody tr:hover {
 <h2>2 Using Benchmark Framework<a class="headerlink" href="#2-Using-Benchmark-Framework" title="Permalink to this headline">¶</a></h2>
 <p>The benchmark framework is designed for a 2 phase evaluation pipeline. This is in most cases sufficient, particularly when using crossvalidation. For the remainder of this tutorial we will be using normal Train-Test or Cross-Validation evaluation setups.</p>
 <p>Note: The Benchmarking Framework does currently not properly support auto-regression or lagged covariates with multiple step ahead forecasts.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
@@ -849,11 +848,19 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Importing plotly failed. Interactive plots will not work.
+</pre></div></div>
+</div>
 <section id="2.1-SimpleExperiment">
 <h3>2.1 SimpleExperiment<a class="headerlink" href="#2.1-SimpleExperiment" title="Permalink to this headline">¶</a></h3>
 <p>Let’s set up a train test experiment:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -869,6 +876,18 @@ div.rendered_html tbody tr:hover {
 <span class="n">result_train</span><span class="p">,</span> <span class="n">result_test</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fb260098c8ea489186b3d268b6628065", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "052d56ecaad5483f9c82c565329c060c", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -889,16 +908,16 @@ div.rendered_html tbody tr:hover {
 {'data': 'air_passengers',
  'model': 'NeuralProphet',
  'params': "{'seasonality_mode': 'multiplicative'}",
- 'MASE': 0.5662454805745694,
- 'RMSE': 28.829688840169517}
+ 'MASE': 1.1829004,
+ 'RMSE': 28.209255}
 </pre></div></div>
 </div>
 </section>
 <section id="2.2-CrossValidationExperiment">
 <h3>2.2 CrossValidationExperiment<a class="headerlink" href="#2.2-CrossValidationExperiment" title="Permalink to this headline">¶</a></h3>
 <p>Let’s crossvalidate:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -916,6 +935,42 @@ div.rendered_html tbody tr:hover {
 <span class="n">result_train</span><span class="p">,</span> <span class="n">result_test</span> <span class="o">=</span> <span class="n">exp_cv</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "dc921d64bf8d4e9db22b1c535aac7465", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5eba2ce8155447a6b5c3177b1d4367fd", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3618c693fbda4148912fb3dd9274f989", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3c64478c367445308bcb368d9f74ab2c", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "536037272e07411d9a7dbabfdd9edb22", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b180271ce8184fbf98306b9aff2fe3f2", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -935,8 +990,8 @@ div.rendered_html tbody tr:hover {
 {'data': 'air_passengers',
  'model': 'NeuralProphet',
  'params': "{'seasonality_mode': 'multiplicative'}",
- 'MASE': [0.5044070952378811, 0.3214836090858653, 0.6877225952888634],
- 'RMSE': [21.220949835639722, 16.892885303566555, 32.749710284868435]}
+ 'MASE': [0.85484904, 0.6028522, 1.1679459],
+ 'RMSE': [20.538774, 16.134226, 28.71692]}
 </pre></div></div>
 </div>
 </section>
@@ -947,8 +1002,8 @@ div.rendered_html tbody tr:hover {
 <p>If you are confused by this, simply ignore this section and continue your forecasting life. Or if you got curious, read up on how to evaluate machine learning models to level up your skills.</p>
 <section id="3.1-Train,-Validate-and-Test-evaluation">
 <h3>3.1 Train, Validate and Test evaluation<a class="headerlink" href="#3.1-Train,-Validate-and-Test-evaluation" title="Permalink to this headline">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -965,13 +1020,22 @@ div.rendered_html tbody tr:hover {
 <span class="n">metrics_val</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_val</span><span class="p">)</span>
 
 <span class="c1"># refit model on training and validation data and evaluate on test set.</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">(</span><span class="n">seasonality_mode</span><span class="o">=</span> <span class="s2">"multiplicative"</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">metrics_train2</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_train_val</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"MS"</span><span class="p">)</span>
 <span class="n">metrics_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -984,7 +1048,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1008,37 +1072,37 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>split</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>324</th>
-<td>0.000368</td>
-<td>5.348336</td>
-<td>46.359198</td>
+<th>563</th>
+<td>0.000379</td>
+<td>5.379905</td>
+<td>6.704538</td>
 <td>train1</td>
 </tr>
 <tr>
-<th>649</th>
-<td>0.000571</td>
-<td>6.835680</td>
-<td>72.002425</td>
+<th>491</th>
+<td>0.000318</td>
+<td>6.277920</td>
+<td>7.928728</td>
 <td>train2</td>
 </tr>
 <tr>
 <th>0</th>
-<td>0.005073</td>
-<td>18.293804</td>
-<td>639.260681</td>
+<td>0.005016</td>
+<td>18.140518</td>
+<td>25.140703</td>
 <td>validate</td>
 </tr>
 <tr>
 <th>0</th>
-<td>0.002529</td>
-<td>15.051163</td>
-<td>318.605957</td>
+<td>0.005475</td>
+<td>27.335314</td>
+<td>33.275681</td>
 <td>test</td>
 </tr>
 </tbody>
@@ -1049,11 +1113,11 @@ div.rendered_html tbody tr:hover {
 <section id="3.2-Train,-Cross-Validate-and-Cross-Test-evaluation">
 <h3>3.2 Train, Cross-Validate and Cross-Test evaluation<a class="headerlink" href="#3.2-Train,-Cross-Validate-and-Cross-Test-evaluation" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">METRICS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'SmoothL1Loss'</span><span class="p">,</span> <span class="s1">'MAE'</span><span class="p">,</span> <span class="s1">'MSE'</span><span class="p">]</span>
+<span></span><span class="n">METRICS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'SmoothL1Loss'</span><span class="p">,</span> <span class="s1">'MAE'</span><span class="p">,</span> <span class="s1">'RMSE'</span><span class="p">]</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"seasonality_mode"</span><span class="p">:</span> <span class="s2">"multiplicative"</span><span class="p">,</span> <span class="s2">"learning_rate"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s2">"air_passengers.csv"</span><span class="p">)</span>
@@ -1061,8 +1125,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1086,8 +1150,16 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1096,7 +1168,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1120,28 +1192,28 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>mean</th>
-<td>0.000269</td>
-<td>6.724876</td>
-<td>74.517579</td>
+<td>0.000265</td>
+<td>6.721306</td>
+<td>8.426241</td>
 </tr>
 <tr>
 <th>std</th>
-<td>0.000023</td>
-<td>0.090767</td>
-<td>1.726542</td>
+<td>0.000021</td>
+<td>0.091057</td>
+<td>0.133246</td>
 </tr>
 </tbody>
 </table></div>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1150,7 +1222,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1174,28 +1246,28 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>mean</th>
-<td>0.009112</td>
-<td>29.609479</td>
-<td>1148.171173</td>
+<td>0.009150</td>
+<td>30.096512</td>
+<td>31.593293</td>
 </tr>
 <tr>
 <th>std</th>
-<td>0.007296</td>
-<td>13.811697</td>
-<td>919.264304</td>
+<td>0.006674</td>
+<td>12.822483</td>
+<td>13.912322</td>
 </tr>
 </tbody>
 </table></div>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1204,7 +1276,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1228,25 +1300,34 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>mean</th>
-<td>0.001103</td>
-<td>14.406253</td>
-<td>295.007996</td>
+<td>0.001057</td>
+<td>14.137106</td>
+<td>15.214975</td>
 </tr>
 <tr>
 <th>std</th>
-<td>0.001310</td>
-<td>7.844408</td>
-<td>337.153951</td>
+<td>0.001216</td>
+<td>7.679862</td>
+<td>7.979069</td>
 </tr>
 </tbody>
 </table></div>
 </div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -565,17 +561,17 @@ div.rendered_html tbody tr:hover {
 <tr>
 <th>0</th>
 <td>2007-12-10</td>
-<td>9.590761</td>
+<td>9.5908</td>
 </tr>
 <tr>
 <th>1</th>
 <td>2007-12-11</td>
-<td>8.519590</td>
+<td>8.5196</td>
 </tr>
 <tr>
 <th>2</th>
 <td>2007-12-12</td>
-<td>8.183677</td>
+<td>8.1837</td>
 </tr>
 </tbody>
 </table></div>
@@ -598,7 +594,13 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "89724d41f4a644569394b3c1aa3439de", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "adbd7db1bed64004bc7dbe02f031b317", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "95e452720fac4bc28108f16aa15a50a2", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -633,30 +635,30 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
-<td>0.822911</td>
-<td>5.544816</td>
-<td>51.448767</td>
+<td>0.638072</td>
+<td>4.693779</td>
+<td>5.698257</td>
 <td>0.0</td>
 </tr>
 <tr>
 <th>1</th>
-<td>0.368448</td>
-<td>3.228539</td>
-<td>18.241307</td>
+<td>0.505663</td>
+<td>4.038373</td>
+<td>4.905737</td>
 <td>0.0</td>
 </tr>
 <tr>
 <th>2</th>
-<td>0.094250</td>
-<td>1.527929</td>
-<td>3.863379</td>
+<td>0.345206</td>
+<td>3.196466</td>
+<td>3.885827</td>
 <td>0.0</td>
 </tr>
 </tbody>
@@ -700,30 +702,22 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>ds</th>
 <th>y</th>
-<th>t</th>
-<th>y_scaled</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>3267</th>
+<th>3326</th>
 <td>2017-01-17</td>
 <td>NaN</td>
-<td>1.122511</td>
-<td>NaN</td>
 </tr>
 <tr>
-<th>3268</th>
+<th>3327</th>
 <td>2017-01-18</td>
 <td>NaN</td>
-<td>1.122848</td>
-<td>NaN</td>
 </tr>
 <tr>
-<th>3269</th>
+<th>3328</th>
 <td>2017-01-19</td>
-<td>NaN</td>
-<td>1.123186</td>
 <td>NaN</td>
 </tr>
 </tbody>
@@ -802,8 +796,8 @@ div.rendered_html tbody tr:hover {
 <p>We can address this by increasing the number of changepoints, giving the trend more flexibility, at the danger of overfitting.</p>
 <p>Let’s try what happens if we increase the number of changepoints to 30. Additionally, we can increase the range of data on which we fit trend changepoints to only exlude the last 10 percent (default is 20 percent).</p>
 <p>Further, we can limit the trend flexibility by regularizing it.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -817,22 +811,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2947bf30dc2e4353b7b085527e215eef", "version_major": 2, "version_minor": 0}</script></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-
-</pre></div></div>
-</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -879,7 +859,13 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "42a9d82862394fec8893af79642e4f92", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1ef4b0654d724ba78ade8acedb90c06d", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4baa40ccd2314ce7850005d7d7344c97", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">

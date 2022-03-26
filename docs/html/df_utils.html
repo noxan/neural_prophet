@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -264,65 +260,67 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.add_missing_dates_nan">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">add_missing_dates_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.add_missing_dates_nan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fills missing datetimes in ‘ds’, with NaN for all other columns</p>
+<dd><p>Fills missing datetimes in <code class="docutils literal notranslate"><span class="pre">ds</span></code>, with NaN for all other columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.Dataframe</em>) – with column ‘ds’  datetimes</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
+<li><p><strong>df</strong> (<em>pd.Dataframe</em>) – with column <code class="docutils literal notranslate"><span class="pre">ds</span></code>  datetimes</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – Frequency of data recording, any valid frequency for pd.date_range,
+such as <code class="docutils literal notranslate"><span class="pre">D</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dataframe without date-gaps but nan-values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.check_dataframe">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">check_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.check_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs basic data sanity checks and ordering</p>
-<p>Prepare dataframe for fitting or predicting.
-:param df: dataframe or dict of dataframes containing column ‘ds’
-:type df: pd.DataFrame, dict
-:param check_y: if df must have series values</p>
-<blockquote>
-<div><p>set to True if training or predicting with autoregression</p>
-</div></blockquote>
+<dd><p>Performs basic data sanity checks and ordering,
+as well as prepare dataframe for fitting or predicting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em> or </em><em>dict</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code></p></li>
+<li><p><strong>check_y</strong> (<em>bool</em>) – if df must have series values
+set to True if training or predicting with autoregression</p></li>
 <li><p><strong>covariates</strong> (<em>list</em><em> or </em><em>dict</em>) – covariate column names</p></li>
 <li><p><strong>regressors</strong> (<em>list</em><em> or </em><em>dict</em>) – regressor column names</p></li>
 <li><p><strong>events</strong> (<em>list</em><em> or </em><em>dict</em>) – event column names</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(pd.DataFrame,dict) checked df</p>
+<dd class="field-even"><p>checked dataframe</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame or dict</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.check_single_dataframe">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">check_single_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.check_single_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs basic data sanity checks and ordering</p>
-<p>Prepare dataframe for fitting or predicting.
-:param df: with columns ds
-:type df: pd.DataFrame
-:param check_y: if df must have series values</p>
-<blockquote>
-<div><p>set to True if training or predicting with autoregression</p>
-</div></blockquote>
+<dd><p>Performs basic data sanity checks and ordering
+as well as prepare dataframe for fitting or predicting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – with columns ds</p></li>
+<li><p><strong>check_y</strong> (<em>bool</em>) – if df must have series values (<code class="docutils literal notranslate"><span class="pre">True</span></code> if training or predicting with autoregression)</p></li>
 <li><p><strong>covariates</strong> (<em>list</em><em> or </em><em>dict</em>) – covariate column names</p></li>
 <li><p><strong>regressors</strong> (<em>list</em><em> or </em><em>dict</em>) – regressor column names</p></li>
 <li><p><strong>events</strong> (<em>list</em><em> or </em><em>dict</em>) – event column names</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.DataFrame</p>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -348,23 +346,23 @@ Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pandas DataFrame</em>) – Dataframe with columns ‘ds’ datestamps and ‘y’ time series values</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Dataframe with columns <code class="docutils literal notranslate"><span class="pre">ds</span></code> datestamps and <code class="docutils literal notranslate"><span class="pre">y</span></code> time series values</p></li>
 <li><p><strong>events_config</strong> (<em>OrderedDict</em>) – User specified events configs</p></li>
-<li><p><strong>events_df</strong> (<em>pd.DataFrame</em>) – containing column ‘ds’ and ‘event’</p></li>
+<li><p><strong>events_df</strong> (<em>pd.DataFrame</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code> and <code class="docutils literal notranslate"><span class="pre">event</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>input df with columns for user_specified features</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df (pd.DataFrame)</p>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.convert_num_to_str_freq">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">convert_num_to_str_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freq_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_time_stamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.convert_num_to_str_freq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert numeric frequencies into frequency tags (str)</p>
+<dd><p>Convert numeric frequencies into frequency tags</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -373,20 +371,26 @@ Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>frequency tag (str)</p>
+<dd class="field-even"><p>frequency tag</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.convert_str_to_num_freq">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">convert_str_to_num_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freq_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.convert_str_to_num_freq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert frequency tags (str) into numeric delta in ms</p>
+<dd><p>Convert frequency tags into numeric delta in ms</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>freq_str</strong> (<em>str</em>) – frequency tag</p>
+<dd class="field-odd"><p><strong>str</strong> (<em>freq_str</em>) – frequency tag</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>frequency numeric delta in ms</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numeric</p>
 </dd>
 </dl>
 </dd></dl>
@@ -402,16 +406,16 @@ Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
 <li><p><strong>n_forecasts</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
 <li><p><strong>k</strong> (<em>int</em>) – number of CV folds</p></li>
 <li><p><strong>fold_pct</strong> (<em>float</em>) – percentage of overall samples to be in each fold</p></li>
-<li><p><strong>fold_overlap_pct</strong> (<em>float</em>) – percentage of overlap between the validation folds.
-default: 0.0</p></li>
+<li><p><strong>fold_overlap_pct</strong> (<em>float</em>) – percentage of overlap between the validation folds (default: 0.0)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>df_train (pd.DataFrame):  training data
-df_val (pd.DataFrame): validation data</p>
+<dd class="field-even"><p><p>training data</p>
+<p>validation data</p>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of k tuples [(df_train, df_val), …] where</p>
+<dd class="field-odd"><p>list of k tuples [(df_train, df_val), …]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -419,41 +423,39 @@ df_val (pd.DataFrame): validation data</p>
 <dt class="sig sig-object py" id="neuralprophet.df_utils.data_params_definition">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">data_params_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariates_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressor_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.data_params_definition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize data scaling values.</p>
-<dl class="simple">
-<dt>Note: We do a z normalization on the target series ‘y’,</dt><dd><p>unlike OG Prophet, which does shift by min and scale by max.</p>
-</dd>
-</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We do a z normalization on the target series <code class="docutils literal notranslate"><span class="pre">y</span></code>,
+unlike OG Prophet, which does shift by min and scale by max.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Time series to compute normalization parameters from.</p></li>
-<li><p><strong>normalize</strong> (<em>str</em>) – <p>Type of normalization to apply to the time series.
-options: [ ‘off’, ‘minmax, ‘standardize’, ‘soft’, ‘soft1’]
-default: ‘soft’, unless the time series is binary, in which case ‘minmax’ is applied.</p>
+<li><p><strong>normalize</strong> (<em>bool</em>) – <p>Type of normalization to apply to the time series.</p>
 <blockquote>
-<div><p>’off’ bypasses data normalization
-‘minmax’ scales the minimum value to 0.0 and the maximum value to 1.0
-‘standardize’ zero-centers and divides by the standard deviation
-‘soft’ scales the minimum value to 0.0 and the 95th quantile to 1.0
-‘soft1’ scales the minimum value to 0.1 and the 90th quantile to 0.9</p>
+<div><p>options:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">soft</span></code> (default), unless the time series is binary, in which case <code class="docutils literal notranslate"><span class="pre">minmax</span></code> is applied.</p>
+<p><code class="docutils literal notranslate"><span class="pre">off</span></code> bypasses data normalization</p>
+<p><code class="docutils literal notranslate"><span class="pre">minmax</span></code> scales the minimum value to 0.0 and the maximum value to 1.0</p>
+<p><code class="docutils literal notranslate"><span class="pre">standardize</span></code> zero-centers and divides by the standard deviation</p>
+<p><code class="docutils literal notranslate"><span class="pre">soft</span></code> scales the minimum value to 0.0 and the 95th quantile to 1.0</p>
+<p><code class="docutils literal notranslate"><span class="pre">soft1</span></code> scales the minimum value to 0.1 and the 90th quantile to 0.9</p>
+</div></blockquote>
 </div></blockquote>
 </p></li>
-<li><p><strong>covariates_config</strong> (<em>OrderedDict</em>) – extra regressors with sub_parameters
-normalize (bool)</p></li>
-<li><p><strong>regressor_config</strong> (<em>OrderedDict</em>) – extra regressors (with known future values)
-with sub_parameters normalize (bool)</p></li>
+<li><p><strong>covariates_config</strong> (<em>OrderedDict</em>) – extra regressors with sub_parameters</p></li>
+<li><p><strong>normalize</strong> – data normalization</p></li>
+<li><p><strong>regressor_config</strong> (<em>OrderedDict</em>) – extra regressors (with known future values) with sub_parameters normalize (bool)</p></li>
 <li><p><strong>events_config</strong> (<em>OrderedDict</em>) – user specified events configs</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>scaling values</dt><dd><p>with ShiftScale entries containing ‘shift’ and ‘scale’ parameters</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>scaling values with ShiftScale entries containing <code class="docutils literal notranslate"><span class="pre">shift</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameters.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>data_params (OrderedDict)</p>
+<dd class="field-odd"><p>OrderedDict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -464,16 +466,19 @@ with sub_parameters normalize (bool)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – data</p></li>
-<li><p><strong>n_lags</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
-<li><p><strong>n_forecasts</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
-<li><p><strong>k</strong> (<em>int</em>) – number of CV folds</p></li>
-<li><p><strong>valid_pct</strong> (<em>float</em>) – percentage of overall samples to be in validation</p></li>
-<li><p><strong>test_pct</strong> (<em>float</em>) – percentage of overall samples to be in test</p></li>
+<li><p><strong>(</strong><strong>pd.DataFrame</strong><strong>)</strong> (<em>df</em>) – </p></li>
+<li><p><strong>(</strong><strong>int</strong><strong>)</strong> (<em>k</em>) – </p></li>
+<li><p><strong>(</strong><strong>int</strong><strong>)</strong> – </p></li>
+<li><p><strong>(</strong><strong>int</strong><strong>)</strong> – </p></li>
+<li><p><strong>(</strong><strong>float</strong><strong>)</strong> (<em>test_pct</em>) – </p></li>
+<li><p><strong>(</strong><strong>float</strong><strong>)</strong> – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>tuple of folds_val, folds_test, where each are same as crossvalidation_split_df returns</p>
+<dd class="field-even"><p>elements same as <a class="reference internal" href="#neuralprophet.df_utils.crossvalidation_split_df" title="neuralprophet.df_utils.crossvalidation_split_df"><code class="xref py py-meth docutils literal notranslate"><span class="pre">crossvalidation_split_df()</span></code></a> returns</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of k tuples [(folds_val, folds_test), …]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -485,14 +490,25 @@ with sub_parameters normalize (bool)</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>series</strong> (<em>pd.Series</em>) – series with nan to be filled in.</p></li>
-<li><p><strong>limit_linear</strong> (<em>int</em>) – maximum number of missing values to impute.
-Note: because imputation is done in both directions, this value is effectively doubled.</p></li>
-<li><p><strong>rolling</strong> (<em>int</em>) – maximal number of missing values to impute.
-Note: window width is rolling + 2*limit_linear</p></li>
+<li><p><strong>limit_linear</strong> (<em>int</em>) – <p>maximum number of missing values to impute.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>because imputation is done in both directions, this value is effectively doubled.</p>
+</div>
+</p></li>
+<li><p><strong>rolling</strong> (<em>int</em>) – <p>maximal number of missing values to impute.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>window width is rolling + 2*limit_linear</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>filled df</p>
+<dd class="field-even"><p>manipulated dataframe containing filled values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -514,7 +530,7 @@ Prevents overbleed of targets. Overbleed of inputs can be configured.</p>
 <dd class="field-even"><p>time stamp threshold defines the boundary for the train and validation sets split.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>threshold_time_stamp (str)</p>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -522,7 +538,10 @@ Prevents overbleed of targets. Overbleed of inputs can be configured.</p>
 <dt class="sig sig-object py" id="neuralprophet.df_utils.get_dist_considering_two_freqs">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">get_dist_considering_two_freqs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.get_dist_considering_two_freqs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add occasions of the two most common frequencies</p>
-<p>Note: useful for the frequency exceptions (i.e. ‘M’,’Y’,’Q’,’B’, and ‘BH’).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Useful for the frequency exceptions (i.e. <code class="docutils literal notranslate"><span class="pre">M</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code>, <code class="docutils literal notranslate"><span class="pre">Q</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, and <code class="docutils literal notranslate"><span class="pre">BH</span></code>).</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>dist</strong> (<em>list</em>) – list of occasions of frequencies</p>
@@ -530,39 +549,50 @@ Prevents overbleed of targets. Overbleed of inputs can be configured.</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>sum of the two most common frequencies occasions</p>
 </dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numeric</p>
+</dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.get_freq_dist">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">get_freq_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.get_freq_dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get frequency distribution of ‘ds’ column
-:param ds_col: ‘ds’ column of dataframe
-:type ds_col: pd.DataFrame</p>
+<dd><p>Get frequency distribution of <code class="docutils literal notranslate"><span class="pre">ds</span></code> column.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>tuple with numeric delta values (ms) and distribution of frequency counts</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ds_col</strong> (<em>pd.DataFrame</em>) – <code class="docutils literal notranslate"><span class="pre">ds</span></code> column of dataframe</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>numeric delta values (<code class="docutils literal notranslate"><span class="pre">ms</span></code>) and distribution of frequency counts</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.infer_frequency">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">infer_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_freq_percentage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.infer_frequency" title="Permalink to this definition">¶</a></dt>
-<dd><p>Automatically infers frequency of dataframe or dict of dataframes.
-:param df: data
-:type df: pd.DataFrame,dict
-:param n_lags: identical to NeuralProphet
-:type n_lags: int
-:param freq: Data step sizes. Frequency of data recording,</p>
-<blockquote>
-<div><p>Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p>
-</div></blockquote>
+<dd><p>Automatically infers frequency of dataframe or dict of dataframes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>min_freq_percentage</strong> (<em>float</em>) – threshold for defining major frequency of data
-default: 0.7</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Dataframe with columns <code class="docutils literal notranslate"><span class="pre">ds</span></code> datestamps and <code class="docutils literal notranslate"><span class="pre">y</span></code> time series values</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – <p>Data step sizes, i.e. frequency of data recording,</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any valid frequency for pd.date_range, such as <code class="docutils literal notranslate"><span class="pre">5min</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">MS</span></code> or <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default) to automatically set frequency.</p>
+</div>
+</p></li>
+<li><p><strong>n_lags</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
+<li><p><strong>min_freq_percentage</strong> (<em>float</em>) – threshold for defining major frequency of data (default: <code class="docutils literal notranslate"><span class="pre">0.7</span></code></p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Valid frequency tag according to major frequency.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -570,39 +600,45 @@ default: 0.7</p>
 <dt class="sig sig-object py" id="neuralprophet.df_utils.init_data_params">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">init_data_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariates_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressor_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_time_normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.init_data_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize data scaling values.</p>
-<p>Note: We compute and store local and global normalization parameters independent of settings.
-:param df: dict of DataFrames to compute normalization parameters from.
-:type df: dict
-:param normalize: Type of normalization to apply to the time series.</p>
-<blockquote>
-<div><p>options: [‘soft’, ‘off’, ‘minmax, ‘standardize’]
-default: ‘soft’ scales minimum to 0.1 and the 90th quantile to 0.9</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We compute and store local and global normalization parameters independent of settings.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>covariates_config</strong> (<em>OrderedDict</em>) – extra regressors with sub_parameters
-normalize (bool)</p></li>
-<li><p><strong>regressor_config</strong> (<em>OrderedDict</em>) – extra regressors (with known future values)
-with sub_parameters normalize (bool)</p></li>
+<li><p><strong>df</strong> (<em>dict</em>) – dict of DataFrames to compute normalization parameters from.</p></li>
+<li><p><strong>normalize</strong> (<em>str</em>) – <p>Type of normalization to apply to the time series.</p>
+<blockquote>
+<div><p>options:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">soft</span></code> (default), unless the time series is binary, in which case <code class="docutils literal notranslate"><span class="pre">minmax</span></code> is applied.</p>
+<p><code class="docutils literal notranslate"><span class="pre">off</span></code> bypasses data normalization</p>
+<p><code class="docutils literal notranslate"><span class="pre">minmax</span></code> scales the minimum value to 0.0 and the maximum value to 1.0</p>
+<p><code class="docutils literal notranslate"><span class="pre">standardize</span></code> zero-centers and divides by the standard deviation</p>
+<p><code class="docutils literal notranslate"><span class="pre">soft</span></code> scales the minimum value to 0.0 and the 95th quantile to 1.0</p>
+<p><code class="docutils literal notranslate"><span class="pre">soft1</span></code> scales the minimum value to 0.1 and the 90th quantile to 0.9</p>
+</div></blockquote>
+</div></blockquote>
+</p></li>
+<li><p><strong>covariates_config</strong> (<em>OrderedDict</em>) – extra regressors with sub_parameters</p></li>
+<li><p><strong>regressor_config</strong> (<em>OrderedDict</em><em>)</em>) – extra regressors (with known future values)</p></li>
 <li><p><strong>events_config</strong> (<em>OrderedDict</em>) – user specified events configs</p></li>
-<li><p><strong>global_normalization</strong> (<em>bool</em>) – True: sets global modeling training with global normalization
-(otherwise, global modeling is trained with local normalization)</p></li>
-<li><p><strong>global_time_normalization</strong> (<em>bool</em>) – True: normalize time globally across all time series
-False: normalize time locally for each time series
-(only valid in case of global modeling - local normalization)</p></li>
+<li><p><strong>global_normalization</strong> (<em>bool</em>) – <p><code class="docutils literal notranslate"><span class="pre">True</span></code>: sets global modeling training with global normalization</p>
+<p><code class="docutils literal notranslate"><span class="pre">False</span></code>: sets global modeling training with local normalization</p>
+</p></li>
+<li><p><strong>global_time_normalization</strong> (<em>bool</em>) – <p><code class="docutils literal notranslate"><span class="pre">True</span></code>: normalize time globally across all time series</p>
+<p><code class="docutils literal notranslate"><span class="pre">False</span></code>: normalize time locally for each time series</p>
+<p>(only valid in case of global modeling - local normalization)</p>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>nested dict with data_params for each dataset where each contains</dt><dd><p>ShiftScale entries containing ‘shift’ and ‘scale’ parameters for each column</p>
-</dd>
-</dl>
-<p>global_data_params (OrderedDict): ShiftScale entries containing ‘shift’ and ‘scale’ parameters for each column</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>OrderedDict</em> – nested dict with data_params for each dataset where each contains</p></li>
+<li><p><em>OrderedDict</em> – ShiftScale entries containing <code class="docutils literal notranslate"><span class="pre">shift</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameters for each column</p></li>
+</ul>
 </p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>local_data_params (OrderedDict)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -612,14 +648,14 @@ False: normalize time locally for each time series
 <dd><p>Join dict of dataframes preserving the episodes so it can be recovered later.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df_dict</strong> (<em>dict of pd.DataFrame</em>) – containing column ‘ds’, ‘y’ with training data</p>
+<dd class="field-odd"><p><strong>df_dict</strong> (<em>dict of pd.DataFrame</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with training data</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with concatenated episodes
-episodes: list containing keys of each timestamp</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df_joined</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.Dataframe</em> – Dataframe with concatenated episodes</p></li>
+<li><p><em>list</em> – keys of each timestamp</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -630,76 +666,78 @@ episodes: list containing keys of each timestamp</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df_columns</strong> (<em>pandas DataFrame</em>) – Dataframe columns</p></li>
-<li><p><strong>last_date</strong> – (pandas Datetime): last history date</p></li>
+<li><p><strong>df_columns</strong> (<em>pd.DataFrame</em>) – Dataframe columns</p></li>
+<li><p><strong>last_date</strong> (<em>pd.Datetime</em>) – last history date</p></li>
 <li><p><strong>periods</strong> (<em>int</em>) – number of future steps to predict</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
+<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording, any valid frequency
+for pd.date_range, such as <code class="docutils literal notranslate"><span class="pre">D</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code></p></li>
 <li><p><strong>events_config</strong> (<em>OrderedDict</em>) – User specified events configs</p></li>
-<li><p><strong>events_df</strong> (<em>pd.DataFrame</em>) – containing column ‘ds’ and ‘event’</p></li>
+<li><p><strong>events_df</strong> (<em>pd.DataFrame</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code> and <code class="docutils literal notranslate"><span class="pre">event</span></code></p></li>
 <li><p><strong>regressor_config</strong> (<em>OrderedDict</em>) – configuration for user specified regressors,</p></li>
-<li><p><strong>regressors_df</strong> (<em>pd.DataFrame</em>) – containing column ‘ds’ and one column for each of the external regressors</p></li>
+<li><p><strong>regressors_df</strong> (<em>pd.DataFrame</em>) – containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code> and one column for each of the external regressors</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>input df with ‘ds’ extended into future, and ‘y’ set to None</p>
+<dd class="field-even"><p>input df with <code class="docutils literal notranslate"><span class="pre">ds</span></code> extended into future, and <code class="docutils literal notranslate"><span class="pre">y</span></code> set to None</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>future_df (pd.DataFrame)</p>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.maybe_get_single_df_from_df_dict">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">maybe_get_single_df_from_df_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">received_unnamed_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.maybe_get_single_df_from_df_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>extract dataframe from single length dict if placeholder-named.</p>
-<dl class="simple">
-<dt>Args</dt><dd><p>df_dict (dict): dict with potentially single pd.DataFrame
-received_unnamed_df (bool): whether the input was unnamed</p>
-</dd>
-</dl>
+<dd><p>Extract dataframe from single length dict if placeholder-named.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>original input format - dict or df</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_dict</strong> (<em>dict</em>) – dict with potentially single pd.DataFrame</p></li>
+<li><p><strong>received_unnamed_df</strong> (<em>bool</em>) – whether the input was unnamed</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>df (pd.Dataframe, dict)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>original input format</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Dataframe or dict</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.normalize">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.normalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply data scales.</p>
-<p>Applies data scaling factors to df using data_params.</p>
+<dd><p>Applies data scaling factors to df using data_params.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – with columns ‘ds’, ‘y’, (and potentially more regressors)</p></li>
-<li><p><strong>data_params</strong> (<em>OrderedDict</em>) – scaling values,as returned by init_data_params
-with ShiftScale entries containing ‘shift’ and ‘scale’ parameters</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – with columns <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, (and potentially more regressors)</p></li>
+<li><p><strong>data_params</strong> (<em>OrderedDict</em>) – scaling values, as returned by init_data_params with ShiftScale entries containing <code class="docutils literal notranslate"><span class="pre">shift</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameters</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.DataFrame, normalized</p>
+<dd class="field-even"><p>normalized dataframes</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df</p>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.prep_copy_df_dict">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">prep_copy_df_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.prep_copy_df_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates or copy a df_dict based on the df input. It either converts a pd.DataFrame to a dict or copies it in case of a dict input.
-:param df: containing df or dict with group of dfs
-:type df: pd.DataFrame,dict</p>
+<dd><p>Creates or copy a df_dict based on the df input.
+It either converts a pd.DataFrame to a dict or copies it in case of a dict input.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>dict of dataframes or copy of dict of dataframes</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>,</em><em>dict</em>) – containing df or dict with group of dfs</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>df_dict</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrames</em> – dict of dataframes or copy of dict of dataframes</p></li>
+<li><p><em>bool</em> – whether the input was unnamed</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -710,39 +748,38 @@ with ShiftScale entries containing ‘shift’ and ‘scale’ parameters</p></l
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df_joined</strong> (<em>pd.DataFrame</em>) – Dataframe concatenated containing column ‘ds’, ‘y’ with training data</p></li>
-<li><p><strong>episodes</strong> – List containing the episodes from each timestamp</p></li>
+<li><p><strong>df_joined</strong> (<em>pd.DataFrame</em>) – Dataframe concatenated containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with training data</p></li>
+<li><p><strong>episodes</strong> (<em>List</em>) – containing the episodes from each timestamp</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Original dict before concatenation</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df_dict</p>
+<dd class="field-odd"><p>pd.Dataframe</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.split_considering_timestamp">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">split_considering_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_forecasts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs_overbleed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_time_stamp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.split_considering_timestamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Splits timeseries into train and validation sets according to given threshold_time_stamp.
-:param df_dict: dict of data
-:type df_dict: dict
-:param n_lags: identical to NeuralProphet
-:type n_lags: int
-:param n_forecasts: identical to NeuralProphet
-:type n_forecasts: int
-:param inputs_overbleed: Whether to allow last training targets to be first validation inputs (never targets)
-:type inputs_overbleed: bool
-:param threshold_time_stamp: time stamp boundary that defines splitting of data
-:type threshold_time_stamp: str</p>
+<dd><p>Splits timeseries into train and validation sets according to given threshold_time_stamp.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>training data
-df_val (pd.DataFrame, dict): validation data</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_dict</strong> (<em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
+<li><p><strong>n_lags</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
+<li><p><strong>n_forecasts</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
+<li><p><strong>inputs_overbleed</strong> (<em>bool</em>) – Whether to allow last training targets to be first validation inputs (never targets)</p></li>
+<li><p><strong>threshold_time_stamp</strong> (<em>str</em>) – time stamp boundary that defines splitting of data</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>df_train (pd.DataFrame, dict)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrame, dict</em> – training data</p></li>
+<li><p><em>pd.DataFrame, dict</em> – validation data</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -750,25 +787,25 @@ df_val (pd.DataFrame, dict): validation data</p>
 <dt class="sig sig-object py" id="neuralprophet.df_utils.split_df">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">split_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_forecasts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs_overbleed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.split_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Splits timeseries df into train and validation sets.</p>
-<p>Prevents overbleed of targets. Overbleed of inputs can be configured. In case of global modeling the split could be either local or global.</p>
+<p>Prevents overbleed of targets. Overbleed of inputs can be configured.
+In case of global modeling the split could be either local or global.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, ‘y’ with all data</p></li>
+<li><p><strong>df_dict</strong> (<em>dict</em>) – dataframe or dict of dataframes containing column <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> with all data</p></li>
 <li><p><strong>n_lags</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
 <li><p><strong>n_forecasts</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
-<li><p><strong>valid_p</strong> (<em>float</em><em>, </em><em>int</em>) – fraction (0,1) of data to use for holdout validation set,
-or number of validation samples &gt;1</p></li>
+<li><p><strong>valid_p</strong> (<em>float</em><em>, </em><em>int</em>) – fraction (0,1) of data to use for holdout validation set, or number of validation samples &gt;1</p></li>
 <li><p><strong>inputs_overbleed</strong> (<em>bool</em>) – Whether to allow last training targets to be first validation inputs (never targets)</p></li>
 <li><p><strong>local_split</strong> (<em>bool</em>) – when set to true, each episode from a dict of dataframes will be split locally</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>training data
-df_val (pd.DataFrame,dict): validation data</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df_train (pd.DataFrame,dict)</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrame, dict</em> – training data</p></li>
+<li><p><em>pd.DataFrame, dict</em> – validation data</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>

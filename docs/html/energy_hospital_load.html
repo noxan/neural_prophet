@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Renewable Energy: Forecasting hourly solar irradiance" href="energy_solar_pv.html" /><link rel="prev" title="Global Model" href="global_modeling.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Renewable Energy: Forecasting hourly solar irradiance" href="energy_solar_pv.html" /><link rel="prev" title="Live loss plotting during training" href="Live_plot_during_training.html" />
 
     <link rel="shortcut icon" href="_static/np_favicon.png"/><meta name="generator" content="sphinx-4.2.0, furo 2021.10.09"/>
         <title>Building load forecasting: Hospital in SF - NeuralProphet documentation</title>
@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -602,11 +598,11 @@ div.rendered_html tbody tr:hover {
     <span class="n">weekly_seasonality</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">trend_reg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_load_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -620,9 +616,11 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.0059, MAE=45.7, MSE=4.22e+3, RegLoss=0.000465, MAE_val=54.7, MSE_val=6.32e+3, Sm
+log-SmoothL1Loss
+        training                 (min:   -5.110, max:   -0.354, cur:   -5.110)
+        validation               (min:   -4.747, max:   -0.412, cur:   -4.552)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -659,23 +657,23 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.005904</td>
-<td>45.715567</td>
-<td>4222.154892</td>
-<td>0.000465</td>
-<td>0.008836</td>
-<td>54.702106</td>
-<td>6318.568359</td>
+<th>108</th>
+<td>0.006034</td>
+<td>45.99676</td>
+<td>63.704651</td>
+<td>0.002061</td>
+<td>0.010543</td>
+<td>60.436569</td>
+<td>86.829773</td>
 </tr>
 </tbody>
 </table></div>
@@ -691,11 +689,22 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.988% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.988% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_hospital_load_7_0.png" src="_images/energy_hospital_load_7_0.png"/>
+<img alt="_images/energy_hospital_load_7_1.png" src="_images/energy_hospital_load_7_1.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -709,11 +718,22 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.863% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.863% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_hospital_load_8_0.png" src="_images/energy_hospital_load_8_0.png"/>
+<img alt="_images/energy_hospital_load_8_1.png" src="_images/energy_hospital_load_8_1.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -733,9 +753,8 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
 </div>
 </div>
 </section>
-</section>
 <section id="1-step-ahead-forecast-with-Auto-Regression">
-<h1>1-step ahead forecast with Auto-Regression<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression" title="Permalink to this headline">¶</a></h1>
+<h2>1-step ahead forecast with Auto-Regression<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -747,12 +766,12 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
     <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">n_lags</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
-    <span class="n">ar_sparsity</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
-    <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.003</span><span class="p">,</span>
+    <span class="n">ar_reg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_load_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -766,9 +785,11 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.00157, MAE=22.1, MSE=1.12e+3, RegLoss=0.00105, MAE_val=22.5, MSE_val=1.15e+3, Sm
+log-SmoothL1Loss
+        training                 (min:   -6.431, max:   -0.740, cur:   -6.293)
+        validation               (min:   -6.479, max:   -1.179, cur:   -6.295)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -805,23 +826,23 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.001572</td>
-<td>22.054379</td>
-<td>1124.66244</td>
-<td>0.001046</td>
-<td>0.001601</td>
-<td>22.483446</td>
-<td>1145.440063</td>
+<th>108</th>
+<td>0.001849</td>
+<td>23.766048</td>
+<td>35.326185</td>
+<td>0.00114</td>
+<td>0.001845</td>
+<td>23.998619</td>
+<td>36.330311</td>
 </tr>
 </tbody>
 </table></div>
@@ -837,11 +858,22 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.988% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.988% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_hospital_load_13_0.png" src="_images/energy_hospital_load_13_0.png"/>
+<img alt="_images/energy_hospital_load_13_1.png" src="_images/energy_hospital_load_13_1.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -855,11 +887,22 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.874% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.875% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_hospital_load_14_0.png" src="_images/energy_hospital_load_14_0.png"/>
+<img alt="_images/energy_hospital_load_14_1.png" src="_images/energy_hospital_load_14_1.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -880,7 +923,7 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
 </div>
 </section>
 <section id="1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">
-<h1>1 step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h1>
+<h2>1-step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h2>
 <p>Here, we will use the power of a neural Network to fit non-linear patterns.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -894,12 +937,12 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">n_lags</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
     <span class="n">num_hidden_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">d_hidden</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">d_hidden</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_load_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -913,9 +956,11 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000175, MAE=7.68, MSE=125, RegLoss=0, MAE_val=8.15, MSE_val=140, SmoothL1Loss_va
+log-SmoothL1Loss
+        training                 (min:   -8.839, max:   -2.890, cur:   -8.839)
+        validation               (min:   -8.656, max:   -3.286, cur:   -8.642)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -952,23 +997,23 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.000175</td>
-<td>7.675793</td>
-<td>125.486209</td>
+<th>108</th>
+<td>0.000145</td>
+<td>6.901227</td>
+<td>9.84333</td>
 <td>0.0</td>
-<td>0.000195</td>
-<td>8.152453</td>
-<td>139.636078</td>
+<td>0.000176</td>
+<td>7.593913</td>
+<td>11.234858</td>
 </tr>
 </tbody>
 </table></div>
@@ -984,11 +1029,22 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.988% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.988% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_hospital_load_19_0.png" src="_images/energy_hospital_load_19_0.png"/>
+<img alt="_images/energy_hospital_load_19_1.png" src="_images/energy_hospital_load_19_1.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1002,11 +1058,22 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.874% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+INFO - (NP.df_utils._infer_frequency) - Major frequency H corresponds to 99.875% of the data.
+INFO - (NP.df_utils._infer_frequency) - Defined frequency is equal to major frequency - H
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_hospital_load_20_0.png" src="_images/energy_hospital_load_20_0.png"/>
+<img alt="_images/energy_hospital_load_20_1.png" src="_images/energy_hospital_load_20_1.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1034,9 +1101,19 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
 </pre></div>
 </div>
 </div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 <script type="application/vnd.jupyter.widget-state+json">
 {"24bf564f55644476911a6cf004a395e7": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_aab682cd3df24821a80331720f7c24e5", "placeholder": "\u200b", "style": "IPY_MODEL_f35fc9cbd82c4187a4cdc08c3ac26998", "value": " 264/297 [00:04&lt;00:00, 59.93it/s]"}}, "2d8235496ec642af8192f52d9f2692b1": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_8a192ccc35e94e9f8be85898ed583e2c", "placeholder": "\u200b", "style": "IPY_MODEL_87c170d1e00742a29e7f797e98c49cc2", "value": " 89%"}}, "4ac0917121f8498698e087259b787dcf": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_2d8235496ec642af8192f52d9f2692b1", "IPY_MODEL_c94a8ae41b994c55a96ad44806b0f1c7", "IPY_MODEL_24bf564f55644476911a6cf004a395e7"], "layout": "IPY_MODEL_94108fe9090f47c7ba2216479e0d3fac"}}, "87c170d1e00742a29e7f797e98c49cc2": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "8a192ccc35e94e9f8be85898ed583e2c": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "94108fe9090f47c7ba2216479e0d3fac": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9467345334da47a8beadc770feef952a": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "aab682cd3df24821a80331720f7c24e5": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c94a8ae41b994c55a96ad44806b0f1c7": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "danger", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_dc468cd35d2b4f0e8eb287689ac15412", "max": 297, "min": 0, "orientation": "horizontal", "style": "IPY_MODEL_9467345334da47a8beadc770feef952a", "value": 264}}, "dc468cd35d2b4f0e8eb287689ac15412": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f35fc9cbd82c4187a4cdc08c3ac26998": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}}
 </script></section>
+</section>
 
         </article>
       </div>
@@ -1052,14 +1129,14 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="global_modeling.html">
+          <a class="prev-page" href="Live_plot_during_training.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Global Model</div>
+                <div class="title">Live loss plotting during training</div>
                 
               </div>
             </a>
@@ -1093,10 +1170,10 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
             <ul>
 <li><a class="reference internal" href="#">Building load forecasting: Hospital in SF</a><ul>
 <li><a class="reference internal" href="#Generic-forecast:-Time-based-features-only">Generic forecast: Time-based features only</a></li>
+<li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
+<li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1-step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 
           </div>

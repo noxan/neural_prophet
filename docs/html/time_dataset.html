@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -272,8 +268,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inputs</strong> (<em>ordered dict</em>) – identical to returns from tabularize_univariate_datetime</p></li>
-<li><p><strong>targets</strong> (<em>np.array</em><em>, </em><em>float</em>) – identical to returns from tabularize_univariate_datetime</p></li>
+<li><p><strong>inputs</strong> (<em>ordered dict</em>) – Identical to returns from <a class="reference internal" href="#neuralprophet.time_dataset.tabularize_univariate_datetime" title="neuralprophet.time_dataset.tabularize_univariate_datetime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabularize_univariate_datetime()</span></code></a></p></li>
+<li><p><strong>targets</strong> (<em>np.array</em><em>, </em><em>float</em>) – Identical to returns from <a class="reference internal" href="#neuralprophet.time_dataset.tabularize_univariate_datetime" title="neuralprophet.time_dataset.tabularize_univariate_datetime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tabularize_univariate_datetime()</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -283,17 +279,23 @@
 <dt class="sig sig-object py" id="neuralprophet.time_dataset.fourier_series">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.time_dataset.</span></span><span class="sig-name descname"><span class="pre">fourier_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">series_order</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_dataset.fourier_series" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides Fourier series components with the specified frequency and order.</p>
-<p>Note: Identical to OG Prophet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Identical to OG Prophet.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dates</strong> (<em>pd.Series</em>) – containing timestamps.</p></li>
-<li><p><strong>period</strong> (<em>float</em>) – Number of days of the period.</p></li>
-<li><p><strong>series_order</strong> (<em>int</em>) – Number of fourier components.</p></li>
+<li><p><strong>dates</strong> (<em>pd.Series</em>) – Containing timestamps</p></li>
+<li><p><strong>period</strong> (<em>float</em>) – Number of days of the period</p></li>
+<li><p><strong>series_order</strong> (<em>int</em>) – Number of fourier components</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Matrix with seasonality features.</p>
+<dd class="field-even"><p>Matrix with seasonality features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -301,17 +303,23 @@
 <dt class="sig sig-object py" id="neuralprophet.time_dataset.fourier_series_t">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.time_dataset.</span></span><span class="sig-name descname"><span class="pre">fourier_series_t</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">series_order</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_dataset.fourier_series_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides Fourier series components with the specified frequency and order.</p>
-<p>Note: Identical to OG Prophet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is identical to Meta AI’s Prophet Library</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<em>pd.Series</em><em>, </em><em>float</em>) – containing time as floating point number of days.</p></li>
-<li><p><strong>period</strong> (<em>float</em>) – Number of days of the period.</p></li>
-<li><p><strong>series_order</strong> (<em>int</em>) – Number of fourier components.</p></li>
+<li><p><strong>t</strong> (<em>pd.Series</em><em>, </em><em>float</em>) – Containing time as floating point number of days</p></li>
+<li><p><strong>period</strong> (<em>float</em>) – Number of days of the period</p></li>
+<li><p><strong>series_order</strong> (<em>int</em>) – Number of fourier components</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Matrix with seasonality features.</p>
+<dd class="field-even"><p>Matrix with seasonality features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -322,12 +330,15 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>year_list</strong> (<em>list</em>) – a list of years</p></li>
-<li><p><strong>country</strong> (<em>string</em>) – country name</p></li>
+<li><p><strong>year_list</strong> (<em>list</em>) – List of years</p></li>
+<li><p><strong>country</strong> (<em>string</em>) – Country name</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.DataFrame with ‘ds’ and ‘holiday’.</p>
+<dd class="field-even"><p>Containing country specific holidays df with columns ‘ds’ and ‘holiday’</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -338,19 +349,17 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – dataframe with all values including the user specified events (provided by user)</p></li>
-<li><p><strong>events_config</strong> (<em>OrderedDict</em>) – user specified events, each with their
-upper, lower windows (int), regularization</p></li>
-<li><p><strong>country_holidays_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Holidays" title="neuralprophet.configure.Holidays"><em>configure.Holidays</em></a>) – Configurations (holiday_names, upper, lower windows, regularization)
-for country specific holidays</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Dataframe with all values including the user specified events (provided by user)</p></li>
+<li><p><strong>events_config</strong> (<em>OrderedDict</em>) – User specified events, each with their upper, lower windows (int), regularization</p></li>
+<li><p><strong>country_holidays_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Holidays" title="neuralprophet.configure.Holidays"><em>configure.Holidays</em></a>) – Configurations (holiday_names, upper, lower windows, regularization) for country specific holidays</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>all additive event features (both user specified and country specific)
-multiplicative_events (np.array): all multiplicative event features (both user specified and country specific)</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>additive_events (np.array)</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – All additive event features (both user specified and country specific)</p></li>
+<li><p><em>np.array</em> – All multiplicative event features (both user specified and country specific)</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -361,16 +370,16 @@ multiplicative_events (np.array): all multiplicative event features (both user s
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – dataframe with all values including the user specified regressors</p></li>
-<li><p><strong>regressors_config</strong> (<em>OrderedDict</em>) – user specified regressors config</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Dataframe with all values including the user specified regressors</p></li>
+<li><p><strong>regressors_config</strong> (<em>OrderedDict</em>) – User specified regressors config</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>all additive regressor features
-multiplicative_regressors (np.array): all multiplicative regressor features</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>additive_regressors (np.array)</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.array</em> – All additive regressor features</p></li>
+<li><p><em>np.array</em> – All multiplicative regressor features</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -382,16 +391,16 @@ multiplicative_regressors (np.array): all multiplicative regressor features</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dates</strong> (<em>pd.Series</em>) – with dates for computing seasonality features</p></li>
-<li><p><strong>season_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Season" title="neuralprophet.configure.Season"><em>Season</em></a>) – configuration from NeuralProphet</p></li>
+<li><p><strong>dates</strong> (<em>pd.Series</em>) – With dates for computing seasonality features</p></li>
+<li><p><strong>season_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Season" title="neuralprophet.configure.Season"><em>configure.Season</em></a>) – Configuration for seasonalities</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Dictionary with keys for each period name containing an np.array with the respective regression features.</dt><dd><p>each with dims: (len(dates), 2*fourier_order)</p>
+<dd class="field-even"><p>Dictionary with keys for each period name containing an np.array
+with the respective regression features. each with dims: (len(dates), 2*fourier_order)</p>
 </dd>
-</dl>
-</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OrderedDict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -399,51 +408,58 @@ multiplicative_regressors (np.array): all multiplicative regressor features</p>
 <dt class="sig sig-object py" id="neuralprophet.time_dataset.tabularize_univariate_datetime">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.time_dataset.</span></span><span class="sig-name descname"><span class="pre">tabularize_univariate_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_forecasts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country_holidays_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covar_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regressors_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_dataset.tabularize_univariate_datetime" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a tabular dataset from univariate timeseries for supervised forecasting.</p>
-<p>Note: data must be clean and have no gaps.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Data must be clean and have no gaps.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Sequence of observations
-with original ‘ds’, ‘y’ and normalized ‘t’, ‘y_scaled’ columns.</p></li>
-<li><p><strong>season_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Season" title="neuralprophet.configure.Season"><em>configure.Season</em></a>) – configuration for seasonalities.</p></li>
-<li><p><strong>n_lags</strong> (<em>int</em>) – number of lagged values of series to include as model inputs. Aka AR-order</p></li>
-<li><p><strong>n_forecasts</strong> (<em>int</em>) – number of steps to forecast into future.</p></li>
-<li><p><strong>events_config</strong> (<em>OrderedDict</em>) – user specified events, each with their
-upper, lower windows (int) and regularization</p></li>
-<li><p><strong>country_holidays_config</strong> (<em>OrderedDict</em>) – Configurations (holiday_names, upper, lower windows,
-regularization) for country specific holidays</p></li>
-<li><p><strong>covar_config</strong> (<em>OrderedDict&lt;configure.Covar&gt;</em>) – configuration for covariates</p></li>
-<li><p><strong>regressors_config</strong> (<em>OrderedDict</em>) – configuration for regressors</p></li>
-<li><p><strong>predict_mode</strong> (<em>bool</em>) – False (default) includes target values.
-True does not include targets but includes entire dataset as input</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Sequence of observations with original <code class="docutils literal notranslate"><span class="pre">ds</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and normalized <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">y_scaled</span></code> columns</p></li>
+<li><p><strong>season_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Season" title="neuralprophet.configure.Season"><em>configure.Season</em></a>) – Configuration for seasonalities</p></li>
+<li><p><strong>n_lags</strong> (<em>int</em>) – Number of lagged values of series to include as model inputs (aka AR-order)</p></li>
+<li><p><strong>n_forecasts</strong> (<em>int</em>) – Number of steps to forecast into future</p></li>
+<li><p><strong>events_config</strong> (<em>OrderedDict</em><em>)</em>) – User specified events, each with their upper, lower windows (int) and regularization</p></li>
+<li><p><strong>country_holidays_config</strong> (<em>OrderedDict</em><em>)</em>) – Configurations (holiday_names, upper, lower windows, regularization) for country specific holidays</p></li>
+<li><p><strong>covar_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.Covar" title="neuralprophet.configure.Covar"><em>configure.Covar</em></a>) – Configuration for covariates</p></li>
+<li><p><strong>regressors_config</strong> (<em>OrderedDict</em>) – Configuration for regressors</p></li>
+<li><p><strong>predict_mode</strong> (<em>bool</em>) – <p>Chooses the prediction mode</p>
+<dl class="simple">
+<dt>Options</dt><dd><ul>
+<li><p>(default) <code class="docutils literal notranslate"><span class="pre">False</span></code>: Includes target values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: Does not include targets but includes entire dataset as input</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl>
-<dt>model inputs, each of len(df) but with varying dimensions</dt><dd><p>time (np.array, float), dims: (num_samples, 1)
-seasonalities (OrderedDict), named seasonalities, each with features</p>
-<blockquote>
-<div><p>(np.array, float) of dims: (num_samples, n_features[name])</p>
-</div></blockquote>
-<p>lags (np.array, float), dims: (num_samples, n_lags)
-covariates (OrderedDict), named covariates, each with features</p>
-<blockquote>
-<div><p>(np.array, float) of dims: (num_samples, n_lags)</p>
-</div></blockquote>
-<dl class="simple">
-<dt>events (OrderedDict), events, each with features</dt><dd><p>(np.array, float) of dims: (num_samples, n_lags)</p>
-</dd>
-<dt>regressors (OrderedDict), regressors, each with features</dt><dd><p>(np.array, float) of dims: (num_samples, n_lags)</p>
+<dd class="field-even"><p><ul>
+<li><p><em>OrderedDict</em> – Model inputs, each of len(df) but with varying dimensions</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Contains the following data:</p>
+<dl>
+<dt>Model Inputs</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> (np.array, float), dims: (num_samples, 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seasonalities</span></code> (OrderedDict), named seasonalities</p></li>
+</ul>
+<p>each with features (np.array, float) - dims: (num_samples, n_features[name])
+* <code class="docutils literal notranslate"><span class="pre">lags</span></code> (np.array, float), dims: (num_samples, n_lags)
+* <code class="docutils literal notranslate"><span class="pre">covariates</span></code> (OrderedDict), named covariates,
+each with features (np.array, float) of dims: (num_samples, n_lags)
+* <code class="docutils literal notranslate"><span class="pre">events</span></code> (OrderedDict), events,
+each with features (np.array, float) of dims: (num_samples, n_lags)
+* <code class="docutils literal notranslate"><span class="pre">regressors</span></code> (OrderedDict), regressors,
+each with features (np.array, float) of dims: (num_samples, n_lags)</p>
 </dd>
 </dl>
-</dd>
-<dt>targets (np.array, float): targets to be predicted of same length as each of the model inputs,</dt><dd><p>dims: (num_samples, n_forecasts)</p>
-</dd>
-</dl>
+</div>
+</li>
+<li><p><em>np.array, float</em> – Targets to be predicted of same length as each of the model inputs, dims: (num_samples, n_forecasts)</p></li>
+</ul>
 </p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>inputs (OrderedDict)</p>
 </dd>
 </dl>
 </dd></dl>

@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -552,7 +548,7 @@ div.rendered_html tbody tr:hover {
 <span class="p">)</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_pv_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -566,9 +562,11 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-
+log-SmoothL1Loss
+        training                 (min:   -4.688, max:   -0.279, cur:   -4.688)
+        validation               (min:   -4.536, max:   -1.100, cur:   -4.273)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -605,23 +603,23 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.009197</td>
-<td>92.454981</td>
-<td>14308.832125</td>
+<th>108</th>
+<td>0.009209</td>
+<td>92.148668</td>
+<td>118.048201</td>
 <td>0.0</td>
-<td>0.013244</td>
-<td>127.825119</td>
-<td>20605.609375</td>
+<td>0.013935</td>
+<td>131.747787</td>
+<td>147.242722</td>
 </tr>
 </tbody>
 </table></div>
@@ -706,9 +704,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-</section>
 <section id="1-step-ahead-forecast-with-Auto-Regresseion">
-<h1>1-step ahead forecast with Auto-Regresseion<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regresseion" title="Permalink to this headline">¶</a></h1>
+<h2>1-step ahead forecast with Auto-Regresseion<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regresseion" title="Permalink to this headline">¶</a></h2>
 <p>In this second section, we will train a 1-step ahead forecaster on solar irradiance data (that can be a proxy for solar PV production). We can train this forecaster considering the privious 24 steps and disabling trend and seasonality.</p>
 <p>The paramters that we can modify are the number of lags and the AR sparsity.</p>
 <div class="nbinput docutils container">
@@ -727,7 +724,7 @@ div.rendered_html tbody tr:hover {
 
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_pv_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -741,9 +738,11 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-
+log-SmoothL1Loss
+        training                 (min:   -6.236, max:   -2.486, cur:   -6.236)
+        validation               (min:   -7.432, max:   -3.793, cur:   -7.420)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -780,23 +779,23 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.001957</td>
-<td>30.255167</td>
-<td>3045.023082</td>
+<th>108</th>
+<td>0.001958</td>
+<td>30.204243</td>
+<td>52.720051</td>
 <td>0.0</td>
-<td>0.000602</td>
-<td>18.303713</td>
-<td>935.846252</td>
+<td>0.000599</td>
+<td>18.234327</td>
+<td>30.539005</td>
 </tr>
 </tbody>
 </table></div>
@@ -887,9 +886,10 @@ div.rendered_html tbody tr:hover {
 <img alt="_images/energy_solar_pv_18_0.png" src="_images/energy_solar_pv_18_0.png"/>
 </div>
 </div>
+</section>
 <section id="Sparsifying-the-AR-coefficients">
 <h2>Sparsifying the AR coefficients<a class="headerlink" href="#Sparsifying-the-AR-coefficients" title="Permalink to this headline">¶</a></h2>
-<p>By setting an <code class="docutils literal notranslate"><span class="pre">ar_sparsity</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> we can reduce the number of non-zero AR coefficients.</p>
+<p>By setting an <code class="docutils literal notranslate"><span class="pre">ar_reg</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> we can reduce the number of non-zero AR coefficients.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -901,13 +901,13 @@ div.rendered_html tbody tr:hover {
     <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">n_lags</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
-    <span class="n">ar_sparsity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">ar_reg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_pv_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -921,9 +921,11 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-
+log-SmoothL1Loss
+        training                 (min:   -6.178, max:   -0.417, cur:   -6.157)
+        validation               (min:   -7.415, max:   -0.230, cur:   -7.319)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -960,23 +962,23 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.002148</td>
-<td>32.992762</td>
-<td>3342.54368</td>
-<td>0.001164</td>
-<td>0.00068</td>
-<td>19.354525</td>
-<td>1058.18103</td>
+<th>108</th>
+<td>0.002119</td>
+<td>32.044212</td>
+<td>55.196571</td>
+<td>0.001024</td>
+<td>0.000663</td>
+<td>18.364031</td>
+<td>32.107029</td>
 </tr>
 </tbody>
 </table></div>
@@ -1000,9 +1002,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-</section>
 <section id="1-step-ahead-forecast-with-Auto-Regression-including-Integration">
-<h1>1-step ahead forecast with Auto-Regression including Integration<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration" title="Permalink to this headline">¶</a></h1>
+<h2>1-step ahead forecast with Auto-Regression including Integration<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration" title="Permalink to this headline">¶</a></h2>
 <p>Next, we will add the differences of the series as a lagged covariate. This basically extends the model from AR to ARI, where the I stands for ‘integrated’ time series.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1082,7 +1083,7 @@ div.rendered_html tbody tr:hover {
 <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">add_lagged_regressor</span><span class="p">(</span><span class="s2">"I"</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">"standardize"</span><span class="p">)</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
 
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1096,9 +1097,11 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-
+log-SmoothL1Loss
+        training                 (min:   -6.244, max:   -0.067, cur:   -6.244)
+        validation               (min:   -7.431, max:   -0.676, cur:   -7.428)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1135,23 +1138,23 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
+<th>108</th>
 <td>0.001941</td>
-<td>29.899686</td>
-<td>3019.55232</td>
+<td>29.853179</td>
+<td>52.040566</td>
 <td>0.0</td>
-<td>0.000599</td>
-<td>18.041283</td>
-<td>931.748108</td>
+<td>0.000594</td>
+<td>17.883106</td>
+<td>30.412052</td>
 </tr>
 </tbody>
 </table></div>
@@ -1176,9 +1179,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">
-<h1>1 step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h1>
-<p>There is something to consider here, if we consider a neural network with at least one hidden layer. For a high enough learning rate (probably &gt; 0.1), the gradient seems to vanish and forces the AR net output to 0.</p>
-<p>From below, we can see that the forecast output has a strange behavior. it looks like the output is exactly the sum of the weekly, daily seasonlality with trend. With no noise and changes at all.</p>
+<h2>1-step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h2>
+<p>There is something to consider here, if we consider a neural network with at least one hidden layer: Learning Rate matters when training a Neural Network.</p>
+<div class="line-block">
+<div class="line">For a high enough learning rate (probably &gt; 0.1), the gradient seems to vanish and forces the AR net output to 0.</div>
+<div class="line">An easy way to void this issue is to set the learning rate at a low enough value, likely around 0.01 to 0.001.</div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
@@ -1191,13 +1197,15 @@ div.rendered_html tbody tr:hover {
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">n_lags</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
     <span class="n">num_hidden_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">d_hidden</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
-    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">d_hidden</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_pv_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
-
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">sf_pv_df</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"I"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sf_pv_df</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">sf_pv_df</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">add_lagged_regressor</span><span class="p">(</span><span class="s2">"I"</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">"standardize"</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="s1">'plot'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1211,69 +1219,15 @@ div.rendered_html tbody tr:hover {
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-
+log-SmoothL1Loss
+        training                 (min:   -6.682, max:   -1.450, cur:   -6.682)
+        validation               (min:   -7.519, max:   -1.754, cur:   -7.297)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">fig_comp</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot_components</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/energy_solar_pv_30_0.png" src="_images/energy_solar_pv_30_0.png"/>
-</div>
-</div>
-<section id="Learning-Rate-matters-when-training-a-Neural-Network.">
-<h2>Learning Rate matters when training a Neural Network.<a class="headerlink" href="#Learning-Rate-matters-when-training-a-Neural-Network." title="Permalink to this headline">¶</a></h2>
-<p>An easy fix is to set the learning rate at a low enough value, likely around 0.01 to 0.001.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">(</span>
-    <span class="n">growth</span><span class="o">=</span><span class="s1">'off'</span><span class="p">,</span>
-    <span class="n">yearly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">n_lags</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
-    <span class="n">num_hidden_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">d_hidden</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
-    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split_df</span><span class="p">(</span><span class="n">sf_pv_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">valid_p</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">)</span>
-
-<span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'H'</span><span class="p">,</span> <span class="n">validation_df</span><span class="o">=</span><span class="n">df_test</span><span class="p">,</span> <span class="n">plot_live_loss</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/energy_solar_pv_32_0.png" src="_images/energy_solar_pv_32_0.png"/>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1282,7 +1236,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1306,30 +1260,30 @@ div.rendered_html tbody tr:hover {
 <th></th>
 <th>SmoothL1Loss</th>
 <th>MAE</th>
-<th>MSE</th>
+<th>RMSE</th>
 <th>RegLoss</th>
 <th>SmoothL1Loss_val</th>
 <th>MAE_val</th>
-<th>MSE_val</th>
+<th>RMSE_val</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>107</th>
-<td>0.001331</td>
-<td>20.654574</td>
-<td>2070.965949</td>
+<th>108</th>
+<td>0.001253</td>
+<td>20.724888</td>
+<td>41.326194</td>
 <td>0.0</td>
-<td>0.00055</td>
-<td>13.492601</td>
-<td>855.404907</td>
+<td>0.000677</td>
+<td>15.56223</td>
+<td>32.46497</td>
 </tr>
 </tbody>
 </table></div>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1341,11 +1295,11 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_solar_pv_34_0.png" src="_images/energy_solar_pv_34_0.png"/>
+<img alt="_images/energy_solar_pv_31_0.png" src="_images/energy_solar_pv_31_0.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1359,11 +1313,11 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_solar_pv_35_0.png" src="_images/energy_solar_pv_35_0.png"/>
+<img alt="_images/energy_solar_pv_32_0.png" src="_images/energy_solar_pv_32_0.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1375,11 +1329,11 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_solar_pv_36_0.png" src="_images/energy_solar_pv_36_0.png"/>
+<img alt="_images/energy_solar_pv_33_0.png" src="_images/energy_solar_pv_33_0.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1391,7 +1345,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/energy_solar_pv_37_0.png" src="_images/energy_solar_pv_37_0.png"/>
+<img alt="_images/energy_solar_pv_34_0.png" src="_images/energy_solar_pv_34_0.png"/>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1463,15 +1417,10 @@ div.rendered_html tbody tr:hover {
             <ul>
 <li><a class="reference internal" href="#">Renewable Energy: Forecasting hourly solar irradiance</a><ul>
 <li><a class="reference internal" href="#Generic-forecast:-Time-based-features-only">Generic forecast: Time-based features only</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a><ul>
+<li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
 <li><a class="reference internal" href="#Sparsifying-the-AR-coefficients">Sparsifying the AR coefficients</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a><ul>
-<li><a class="reference internal" href="#Learning-Rate-matters-when-training-a-Neural-Network.">Learning Rate matters when training a Neural Network.</a></li>
+<li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1-step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 </li>
 </ul>

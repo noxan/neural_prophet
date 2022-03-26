@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -535,9 +531,9 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="Sparsifying-the-AR-coefficients">
 <h2>Sparsifying the AR coefficients<a class="headerlink" href="#Sparsifying-the-AR-coefficients" title="Permalink to this headline">¶</a></h2>
-<p>The autoregression component of NeuralProphet is defined as a AR-Net (<a class="reference external" href="https://arxiv.org/abs/1911.12436">paper</a>, <a class="reference external" href="https://github.com/ourownstory/AR-Net">github</a>). Thus, we can set <code class="docutils literal notranslate"><span class="pre">ar_sparsity</span></code> to a number smaller one, if we like to induce sparsity in the AR coefficients.</p>
+<p>The autoregression component of NeuralProphet is defined as a AR-Net (<a class="reference external" href="https://arxiv.org/abs/1911.12436">paper</a>, <a class="reference external" href="https://github.com/ourownstory/AR-Net">github</a>). Thus, we can set <code class="docutils literal notranslate"><span class="pre">ar_reg</span></code> to a number greater zero, if we like to induce sparsity in the AR coefficients.</p>
 <p>However, fitting a model with multiple components and regularizations can be harder to fit and in some cases you may need to take manual control over the training hyperparameters.</p>
-<p>We will start by setting a sparsity to 50%</p>
+<p>We will start by setting regularization to 0.1</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -550,7 +546,7 @@ div.rendered_html tbody tr:hover {
     <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">ar_sparsity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+    <span class="n">ar_reg</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'5min'</span><span class="p">)</span> <span class="c1"># validate_each_epoch=True, plot_live_loss=True</span>
 </pre></div>
@@ -617,7 +613,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="Further-reducing-the-non-zero-AR-coefficents">
 <h2>Further reducing the non-zero AR-coefficents<a class="headerlink" href="#Further-reducing-the-non-zero-AR-coefficents" title="Permalink to this headline">¶</a></h2>
-<p>By setting the ar_sparsity lower, we can further reduce the number of non-zero weights. Here we set it to 10%</p>
+<p>By setting the ar_reg higher, we can further reduce the number of non-zero weights. Here we set it to 1</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -630,7 +626,7 @@ div.rendered_html tbody tr:hover {
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">ar_sparsity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">ar_reg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'5min'</span><span class="p">)</span>
 </pre></div>
@@ -697,7 +693,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="Extreme-sparsity">
 <h2>Extreme sparsity<a class="headerlink" href="#Extreme-sparsity" title="Permalink to this headline">¶</a></h2>
-<p>The lower we set <code class="docutils literal notranslate"><span class="pre">ar_sparsity</span></code>, the fewer non-zero weiths are fitted by the model. Here we set it to 1%, which should lead to a single non-zero lag.</p>
+<p>The higher we set <code class="docutils literal notranslate"><span class="pre">ar_reg</span></code>, the fewer non-zero weiths are fitted by the model. Here we set it to 10, which should lead to a single non-zero lag.</p>
 <p>Note: Extreme values can lead to training instability.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -711,7 +707,7 @@ div.rendered_html tbody tr:hover {
     <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">ar_sparsity</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">ar_reg</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'5min'</span><span class="p">)</span>
 </pre></div>
@@ -741,15 +737,6 @@ div.rendered_html tbody tr:hover {
 <img alt="_images/sparse_autoregression_yosemite_temps_16_0.png" src="_images/sparse_autoregression_yosemite_temps_16_0.png"/>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -764,7 +751,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/sparse_autoregression_yosemite_temps_18_0.png" src="_images/sparse_autoregression_yosemite_temps_18_0.png"/>
+<img alt="_images/sparse_autoregression_yosemite_temps_17_0.png" src="_images/sparse_autoregression_yosemite_temps_17_0.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -781,7 +768,16 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/sparse_autoregression_yosemite_temps_19_0.png" src="_images/sparse_autoregression_yosemite_temps_19_0.png"/>
+<img alt="_images/sparse_autoregression_yosemite_temps_18_0.png" src="_images/sparse_autoregression_yosemite_temps_18_0.png"/>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
 </div>
 </div>
 </section>

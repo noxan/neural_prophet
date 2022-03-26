@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -516,6 +512,9 @@ div.rendered_html tbody tr:hover {
     <span class="o">!</span>pip install git+https://github.com/ourownstory/neural_prophet.git # may take a <span class="k">while</span>
     <span class="c1">#!pip install neuralprophet # much faster, but may not have the latest upgrades/bugfixes</span>
 
+<span class="c1"># we also need prophet for this notebook</span>
+<span class="c1"># !pip install prophet</span>
+
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">neuralprophet</span> <span class="kn">import</span> <span class="n">NeuralProphet</span><span class="p">,</span> <span class="n">set_log_level</span>
 <span class="kn">from</span> <span class="nn">neuralprophet.benchmark</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">NeuralProphetModel</span><span class="p">,</span> <span class="n">ProphetModel</span>
@@ -529,7 +528,8 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered by tests. Please report any bugs you find.
+Importing plotly failed. Interactive plots will not work.
+INFO - (NP.benchmark.&lt;module&gt;) - Note: The benchmarking framework is not properly documented.Please help us by reporting any bugs and adding documentation.Multiprocessing is not covered by tests and may break on your device.If you use multiprocessing, only run one benchmark per python script.
 </pre></div></div>
 </div>
 <section id="Load-data">
@@ -598,8 +598,8 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <section id="1.-SimpleBenchmark">
 <h2>1. SimpleBenchmark<a class="headerlink" href="#1.-SimpleBenchmark" title="Permalink to this headline">¶</a></h2>
 <p>Setting up a series of Train Test Experiments is quick:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -612,6 +612,37 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <span class="n">results_train</span><span class="p">,</span> <span class="n">results_test</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:prophet:Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
+INFO:prophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial log joint probability = -2.35721
+    Iter      log prob        ||dx||      ||grad||       alpha      alpha0  # evals  Notes
+      99       383.095   0.000197806       75.6156     0.07304           1      124
+    Iter      log prob        ||dx||      ||grad||       alpha      alpha0  # evals  Notes
+     112       383.482   0.000187545       141.645   1.283e-06       0.001      179  LS failed, Hessian reset
+     159       384.105   0.000328631       165.657   3.031e-06       0.001      277  LS failed, Hessian reset
+     199       384.233   0.000179066       78.5608      0.4924      0.4924      326
+    Iter      log prob        ||dx||      ||grad||       alpha      alpha0  # evals  Notes
+     299       385.249    0.00016096       76.7537      0.2907      0.2907      446
+    Iter      log prob        ||dx||      ||grad||       alpha      alpha0  # evals  Notes
+     314       385.282   9.21668e-05       100.953   1.111e-06       0.001      501  LS failed, Hessian reset
+     346       385.294   7.66049e-06       75.7986   9.901e-08       0.001      582  LS failed, Hessian reset
+     372       385.294    8.2438e-09       78.8225       0.328       0.328      615
+Optimization terminated normally:
+  Convergence detected: absolute parameter change was below tolerance
+</pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -660,20 +691,20 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>24.814017</td>
-<td>844.513472</td>
-<td>0.571375</td>
-<td>29.060514</td>
+<td>24.027794</td>
+<td>795.101013</td>
+<td>1.182601</td>
+<td>28.197536</td>
 </tr>
 <tr>
 <th>1</th>
 <td>air_passengers</td>
 <td>Prophet</td>
 <td>{'seasonality_mode': 'multiplicative'}</td>
-<td>29.818648</td>
-<td>1142.139138</td>
-<td>0.686614</td>
-<td>33.795549</td>
+<td>29.818647</td>
+<td>1142.139160</td>
+<td>1.467615</td>
+<td>33.795551</td>
 </tr>
 </tbody>
 </table></div>
@@ -749,10 +780,10 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>0.278579</td>
-<td>7.664800</td>
-<td>0.011388</td>
-<td>0.696316</td>
+<td>0.280458</td>
+<td>7.657820</td>
+<td>0.011841</td>
+<td>0.713385</td>
 <td>train</td>
 </tr>
 <tr>
@@ -771,10 +802,10 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>0.482023</td>
-<td>22.380878</td>
-<td>0.140785</td>
-<td>5.769275</td>
+<td>0.880757</td>
+<td>21.963869</td>
+<td>0.244119</td>
+<td>5.522509</td>
 <td>test</td>
 </tr>
 <tr>
@@ -782,9 +813,9 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>Prophet</td>
 <td>{'seasonality_mode': 'multiplicative'}</td>
-<td>0.479454</td>
+<td>0.893797</td>
 <td>22.778341</td>
-<td>0.109195</td>
+<td>0.161704</td>
 <td>4.224042</td>
 <td>test</td>
 </tr>
@@ -856,16 +887,16 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>[0.5014669235699923, 0.3006991286697633, 0.643...</td>
-<td>[20.975299319246627, 16.12341769010618, 30.043...</td>
+<td>[0.8573083, 0.5941888, 1.1907747]</td>
+<td>[20.638454, 15.961023, 29.292131]</td>
 </tr>
 <tr>
 <th>1</th>
 <td>air_passengers</td>
 <td>Prophet</td>
 <td>{'seasonality_mode': 'multiplicative'}</td>
-<td>[0.5885898654326461, 0.3302688815416577, 0.519...</td>
-<td>[24.617703272976527, 16.936631879241148, 26.78...</td>
+<td>[1.0298454, 0.66658664, 0.9849584]</td>
+<td>[24.617702, 16.936632, 26.780687]</td>
 </tr>
 </tbody>
 </table></div>
@@ -894,7 +925,7 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">air_passengers_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s1">'air_passengers.csv'</span><span class="p">)</span>
 <span class="n">peyton_manning_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s1">'wp_log_peyton_manning.csv'</span><span class="p">)</span>
-<span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MAE"</span><span class="p">,</span> <span class="s2">"MSE"</span><span class="p">,</span> <span class="s2">"RMSE"</span><span class="p">,</span> <span class="s2">"MASE"</span><span class="p">,</span> <span class="s2">"MSSE"</span><span class="p">,</span> <span class="s2">"MAPE"</span><span class="p">,</span> <span class="s2">"SMAPE"</span><span class="p">]</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MAE"</span><span class="p">,</span> <span class="s2">"MSE"</span><span class="p">,</span> <span class="s2">"RMSE"</span><span class="p">,</span> <span class="s2">"MASE"</span><span class="p">,</span> <span class="s2">"RMSSE"</span><span class="p">,</span> <span class="s2">"MAPE"</span><span class="p">,</span> <span class="s2">"SMAPE"</span><span class="p">]</span>
 <span class="n">experiments</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">SimpleExperiment</span><span class="p">(</span>
         <span class="n">model_class</span><span class="o">=</span><span class="n">NeuralProphetModel</span><span class="p">,</span>
@@ -972,7 +1003,7 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <th>MSE</th>
 <th>RMSE</th>
 <th>MASE</th>
-<th>MSSE</th>
+<th>RMSSE</th>
 <th>MAPE</th>
 <th>SMAPE</th>
 </tr>
@@ -983,52 +1014,52 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>23.922920</td>
-<td>795.467295</td>
-<td>28.204030</td>
-<td>0.550857</td>
-<td>0.305727</td>
-<td>5.749847</td>
-<td>2.766594</td>
+<td>24.005142</td>
+<td>793.559387</td>
+<td>28.170187</td>
+<td>1.181486</td>
+<td>1.090349</td>
+<td>5.773936</td>
+<td>2.777174</td>
 </tr>
 <tr>
 <th>1</th>
 <td>air_passengers</td>
 <td>Prophet</td>
 <td>{'seasonality_mode': 'multiplicative'}</td>
-<td>29.818648</td>
-<td>1142.139138</td>
-<td>33.795549</td>
-<td>0.686614</td>
-<td>0.438966</td>
+<td>29.818647</td>
+<td>1142.139160</td>
+<td>33.795551</td>
+<td>1.467615</td>
+<td>1.308083</td>
 <td>7.471930</td>
-<td>3.558548</td>
+<td>3.558547</td>
 </tr>
 <tr>
 <th>2</th>
 <td>peyton_manning</td>
 <td>NeuralProphet</td>
 <td>{'learning_rate': 0.1}</td>
-<td>0.544561</td>
-<td>0.409436</td>
-<td>0.639872</td>
-<td>1.542943</td>
-<td>1.537802</td>
-<td>7.006563</td>
-<td>3.374985</td>
+<td>0.575561</td>
+<td>0.446854</td>
+<td>0.668472</td>
+<td>1.870918</td>
+<td>1.411006</td>
+<td>7.394003</td>
+<td>3.551846</td>
 </tr>
 <tr>
 <th>3</th>
 <td>peyton_manning</td>
 <td>Prophet</td>
 <td>{}</td>
-<td>0.594528</td>
-<td>0.463643</td>
-<td>0.680913</td>
-<td>1.684520</td>
-<td>1.741397</td>
-<td>7.673804</td>
-<td>3.682554</td>
+<td>0.597307</td>
+<td>0.465471</td>
+<td>0.682255</td>
+<td>1.941605</td>
+<td>1.440099</td>
+<td>7.704831</td>
+<td>3.697093</td>
 </tr>
 </tbody>
 </table></div>
@@ -1110,14 +1141,14 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <th>MSE</th>
 <th>RMSE</th>
 <th>MASE</th>
-<th>MSSE</th>
+<th>RMSSE</th>
 <th>MAPE</th>
 <th>SMAPE</th>
 <th>MAE_std</th>
 <th>MSE_std</th>
 <th>RMSE_std</th>
 <th>MASE_std</th>
-<th>MSSE_std</th>
+<th>RMSSE_std</th>
 <th>MAPE_std</th>
 <th>SMAPE_std</th>
 <th>split</th>
@@ -1129,20 +1160,20 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>6.016460</td>
-<td>61.312444</td>
-<td>7.806123</td>
-<td>0.282338</td>
-<td>0.081969</td>
-<td>3.053079</td>
-<td>1.512873</td>
-<td>0.573447</td>
-<td>9.319967</td>
-<td>0.613913</td>
-<td>0.013311</td>
-<td>0.009355</td>
-<td>0.106123</td>
-<td>0.053336</td>
+<td>5.996241</td>
+<td>59.247303</td>
+<td>7.662074</td>
+<td>0.281055</td>
+<td>0.279981</td>
+<td>3.043633</td>
+<td>1.511519</td>
+<td>0.633657</td>
+<td>10.927888</td>
+<td>0.734798</td>
+<td>0.012510</td>
+<td>0.013638</td>
+<td>0.079835</td>
+<td>0.040635</td>
 <td>train</td>
 </tr>
 <tr>
@@ -1151,18 +1182,18 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>Prophet</td>
 <td>{'seasonality_mode': 'multiplicative'}</td>
 <td>6.655735</td>
-<td>75.848123</td>
+<td>75.848122</td>
 <td>8.616463</td>
 <td>0.310869</td>
-<td>0.098696</td>
+<td>0.313269</td>
 <td>3.089578</td>
 <td>1.553327</td>
-<td>0.952939</td>
-<td>20.968356</td>
+<td>0.952938</td>
+<td>20.968357</td>
 <td>1.266764</td>
 <td>0.021078</td>
-<td>0.014689</td>
-<td>0.261419</td>
+<td>0.023619</td>
+<td>0.261420</td>
 <td>0.132790</td>
 <td>train</td>
 </tr>
@@ -1171,20 +1202,20 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>NeuralProphet</td>
 <td>{'seasonality_mode': 'multiplicative', 'learni...</td>
-<td>19.514176</td>
-<td>528.803367</td>
-<td>22.342478</td>
-<td>0.482325</td>
-<td>0.233347</td>
-<td>4.630512</td>
-<td>2.340100</td>
-<td>6.610696</td>
-<td>252.724588</td>
-<td>5.442155</td>
-<td>0.135160</td>
-<td>0.089620</td>
-<td>1.386856</td>
-<td>0.732939</td>
+<td>19.368925</td>
+<td>522.388733</td>
+<td>22.173418</td>
+<td>0.894181</td>
+<td>0.802707</td>
+<td>4.570522</td>
+<td>2.310261</td>
+<td>6.710804</td>
+<td>258.608643</td>
+<td>5.543307</td>
+<td>0.240341</td>
+<td>0.144602</td>
+<td>1.391520</td>
+<td>0.738841</td>
 <td>test</td>
 </tr>
 <tr>
@@ -1192,18 +1223,18 @@ WARNING - (NP.benchmark.&lt;module&gt;) - Benchmarking Framework is not covered 
 <td>air_passengers</td>
 <td>Prophet</td>
 <td>{'seasonality_mode': 'multiplicative'}</td>
-<td>19.052098</td>
-<td>536.695336</td>
+<td>19.052099</td>
+<td>536.695312</td>
 <td>22.778341</td>
-<td>0.479454</td>
-<td>0.249282</td>
+<td>0.893797</td>
+<td>0.835219</td>
 <td>4.604149</td>
 <td>2.272174</td>
 <td>3.876074</td>
-<td>182.404522</td>
+<td>182.404541</td>
 <td>4.224042</td>
-<td>0.109195</td>
-<td>0.103208</td>
+<td>0.161704</td>
+<td>0.157025</td>
 <td>0.710556</td>
 <td>0.353903</td>
 <td>test</td>

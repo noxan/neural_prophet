@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -289,14 +285,18 @@ registered hooks while the latter silently ignores them.</p>
 <dt class="sig sig-object py" id="neuralprophet.time_net.TimeNet">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.time_net.</span></span><span class="sig-name descname"><span class="pre">TimeNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_trend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_season</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_covar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_regressors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_events</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_holidays</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_forecasts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_hidden_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_net.TimeNet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Linear time regression fun and some not so linear fun.</p>
-<p>A modular model that models classic time-series components
-- trend
-- seasonality
-- auto-regression (as AR-Net)
-- covariates (as AR-Net)
-- apriori regressors
-- events and holidays
-by using Neural Network components.
+<dl class="simple">
+<dt>A modular model that models classic time-series components</dt><dd><ul class="simple">
+<li><p>trend</p></li>
+<li><p>seasonality</p></li>
+<li><p>auto-regression (as AR-Net)</p></li>
+<li><p>covariates (as AR-Net)</p></li>
+<li><p>apriori regressors</p></li>
+<li><p>events and holidays</p></li>
+</ul>
+</dd>
+</dl>
+<p>by using Neural Network components.
 The Auto-regression and covariate components can be configured as a deeper network (AR-Net).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.time_net.TimeNet.all_covariates">
@@ -304,11 +304,14 @@ The Auto-regression and covariate components can be configured as a deeper netwo
 <dd><p>Compute all covariate components.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>covariates</strong> (<em>dict</em><em>(</em><em>torch tensor</em><em>, </em><em>float</em><em>)</em>) – dict of named covariates (keys) with their features (values)
+<dd class="field-odd"><p><strong>covariates</strong> (<em>dict</em><em>(</em><em>torch.Tensor</em><em>, </em><em>float</em><em>)</em>) – dict of named covariates (keys) with their features (values)
 dims of each dict value: (batch, n_lags)</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>forecast component of dims (batch, n_forecasts)</p>
+<dd class="field-even"><p>Forecast component of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -318,11 +321,14 @@ dims of each dict value: (batch, n_lags)</p>
 <dd><p>Compute all seasonality components.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>s</strong> (<em>dict</em><em>(</em><em>torch tensor</em><em>, </em><em>float</em><em>)</em>) – dict of named seasonalities (keys) with their features (values)
-dims of each dict value: (batch, n_forecasts, n_features)</p>
+<dd class="field-odd"><p><strong>s</strong> (<em>torch.Tensor</em><em>, </em><em>float</em>) – dict of named seasonalities (keys) with their features (values)
+dims of each dict value (batch, n_forecasts, n_features)</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>forecast component of dims (batch, n_forecasts)</p>
+<dd class="field-even"><p>Forecast component of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -337,14 +343,13 @@ dims of each dict value: (batch, n_forecasts, n_features)</p>
 <dd><p>Computes auto-regessive model component AR-Net.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lags</strong> (<em>torch tensor</em><em>, </em><em>float</em>) – previous times series values.
-dims: (batch, n_lags)</p>
+<dd class="field-odd"><p><strong>lags</strong> (<em>torch.Tensor</em><em>, </em><em>float</em>) – Previous times series values, dims: (batch, n_lags)</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(batch, n_forecasts)</p>
+<dd class="field-even"><p>Forecast component of dims: (batch, n_forecasts)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>forecast component of dims</p>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -352,32 +357,35 @@ dims: (batch, n_lags)</p>
 <dt class="sig sig-object py" id="neuralprophet.time_net.TimeNet.compute_components">
 <span class="sig-name descname"><span class="pre">compute_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_net.TimeNet.compute_components" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method returns the values of each model component.</p>
-<p>Time input is required. Minimum model setup is a linear trend.
-:param inputs:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>time (torch tensor float): normalized time</dt><dd><p>dims: (batch, n_forecasts)</p>
-</dd>
-<dt>lags (torch tensor, float): previous times series values.</dt><dd><p>dims: (batch, n_lags)</p>
-</dd>
-<dt>seasonalities (dict(torch tensor, float)): dict of named seasonalities (keys) with their features (values)</dt><dd><p>dims of each dict value: (batch, n_forecasts, n_features)</p>
-</dd>
-<dt>covariates (dict(torch tensor, float)): dict of named covariates (keys) with their features (values)</dt><dd><p>dims of each dict value: (batch, n_lags)</p>
-</dd>
-<dt>events (torch tensor, float): all event features</dt><dd><p>dims: (batch, n_forecasts, n_features)</p>
-</dd>
-</dl>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Time input is required. Minimum model setup is a linear trend.</p>
+</div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><dl class="simple">
-<dt>value</dt><dd><p>with elements of dims (batch, n_forecasts)</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> (<em>dict</em>) – <p>Model inputs, each of len(df) but with varying dimensions</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Contains the following data:</p>
+<dl class="simple">
+<dt>Model Inputs</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> (torch.Tensor , loat), normalized time, dims: (batch, n_forecasts)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lags</span></code> (torch.Tensor, float), dims: (batch, n_lags)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seasonalities</span></code> (torch.Tensor, float), dict of named seasonalities (keys) with their features (values), dims of each dict value (batch, n_forecasts, n_features)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">covariates</span></code> (torch.Tensor, float), dict of named covariates (keys) with their features (values), dims of each dict value: (batch, n_lags)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">events</span></code> (torch.Tensor, float), all event features, dims (batch, n_forecasts, n_features)</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">``</span></a>regressors``(torch.Tensor, float), all regressor features, dims (batch, n_forecasts, n_features)</p></li>
+</ul>
 </dd>
 </dl>
+</div>
 </p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict of forecast_component</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Containing forecast coomponents with elements of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -388,13 +396,15 @@ dims: (batch, n_lags)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lags</strong> (<em>torch tensor</em><em>, </em><em>float</em>) – lagged values of covariate
-dims: (batch, n_lags)</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – name of covariate. for attributiun to corresponding model weights.</p></li>
+<li><p><strong>lags</strong> (<em>torch.Tensor</em><em>, </em><em>float</em>) – Lagged values of covariate, dims: (batch, n_lags)</p></li>
+<li><p><strong>nam</strong> (<em>str</em>) – Mame of covariate, for attributiun to corresponding model weights</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>forecast component of dims (batch, n_forecasts)</p>
+<dd class="field-even"><p>Forecast component of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -402,27 +412,35 @@ dims: (batch, n_lags)</p></li>
 <dt class="sig sig-object py" id="neuralprophet.time_net.TimeNet.forward">
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_net.TimeNet.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method defines the model forward pass.</p>
-<p>Time input is required. Minimum model setup is a linear trend.
-:param inputs:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>time (torch tensor float): normalized time</dt><dd><p>dims: (batch, n_forecasts)</p>
-</dd>
-<dt>lags (torch tensor, float): previous times series values.</dt><dd><p>dims: (batch, n_lags)</p>
-</dd>
-<dt>seasonalities (dict(torch tensor, float)): dict of named seasonalities (keys) with their features (values)</dt><dd><p>dims of each dict value: (batch, n_forecasts, n_features)</p>
-</dd>
-<dt>covariates (dict(torch tensor, float)): dict of named covariates (keys) with their features (values)</dt><dd><p>dims of each dict value: (batch, n_lags)</p>
-</dd>
-<dt>events (torch tensor, float): all event features</dt><dd><p>dims: (batch, n_forecasts, n_features)</p>
-</dd>
-<dt>regressors (torch tensor, float): all regressor features</dt><dd><p>dims: (batch, n_forecasts, n_features)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Time input is required. Minimum model setup is a linear trend.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> (<em>dict</em>) – <p>Model inputs, each of len(df) but with varying dimensions</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Contains the following data:</p>
+<dl class="simple">
+<dt>Model Inputs</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> (torch.Tensor , loat), normalized time, dims: (batch, n_forecasts)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lags</span></code> (torch.Tensor, float), dims: (batch, n_lags)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seasonalities</span></code> (torch.Tensor, float), dict of named seasonalities (keys) with their features (values), dims of each dict value (batch, n_forecasts, n_features)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">covariates</span></code> (torch.Tensor, float), dict of named covariates (keys) with their features (values), dims of each dict value: (batch, n_lags)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">events</span></code> (torch.Tensor, float), all event features, dims (batch, n_forecasts, n_features)</p></li>
+<li><p><a href="#id3"><span class="problematic" id="id4">``</span></a>regressors``(torch.Tensor, float), all regressor features, dims (batch, n_forecasts, n_features)</p></li>
+</ul>
 </dd>
 </dl>
-</div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>forecast of dims (batch, n_forecasts)</p>
+</div>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Forecast of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -437,14 +455,13 @@ dims: (batch, n_lags)</p></li>
 <dd><p>Retrieve the weights of event features given the name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em>) – Event name</p>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Event name</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dict of the weights of all offsets corresponding
-to a particular event.</p>
+<dd class="field-even"><p>Dict of the weights of all offsets corresponding to a particular event</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>event_param_dict (OrderedDict)</p>
+<dd class="field-odd"><p>OrderedDict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -460,7 +477,7 @@ to a particular event.</p>
 <dd class="field-even"><p>Weight corresponding to the given regressor</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>weight (torch.tensor)</p>
+<dd class="field-odd"><p>torch.tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -473,20 +490,20 @@ to a particular event.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.time_net.TimeNet.scalar_features_effects">
 <span class="sig-name descname"><span class="pre">scalar_features_effects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.time_net.TimeNet.scalar_features_effects" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes events component of the model
-:param features: features (either additive or multiplicative) related to event component</p>
-<blockquote>
-<div><p>dims: (batch, n_forecasts, n_features)</p>
-</div></blockquote>
+<dd><p>Computes events component of the model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>params</strong> (<em>nn.Parameter</em>) – params (either additive or multiplicative) related to events</p></li>
-<li><p><strong>indices</strong> (<em>list of int</em>) – indices in the feature tensors related to a particular event</p></li>
+<li><p><strong>features</strong> (<em>torch.Tensor</em><em>, </em><em>float</em>) – Features (either additive or multiplicative) related to event component dims (batch, n_forecasts, n_features)</p></li>
+<li><p><strong>params</strong> (<em>nn.Parameter</em>) – Params (either additive or multiplicative) related to events</p></li>
+<li><p><strong>indices</strong> (<em>list of int</em>) – Indices in the feature tensors related to a particular event</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>forecast component of dims (batch, n_forecasts)</p>
+<dd class="field-even"><p>Forecast component of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -497,13 +514,15 @@ to a particular event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>features</strong> (<em>torch tensor</em><em>, </em><em>float</em>) – features related to seasonality component
-dims: (batch, n_forecasts, n_features)</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – name of seasonality. for attributiun to corresponding model weights.</p></li>
+<li><p><strong>features</strong> (<em>torch.Tensor</em><em>, </em><em>float</em>) – Features related to seasonality component, dims: (batch, n_forecasts, n_features)</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of seasonality. for attributiun to corresponding model weights.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>forecast component of dims (batch, n_forecasts)</p>
+<dd class="field-even"><p>Forecast component of dims (batch, n_forecasts)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -513,11 +532,13 @@ dims: (batch, n_forecasts, n_features)</p></li>
 <dd><p>Computes trend based on model configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>t</strong> (<em>torch tensor float</em>) – normalized time
-dimensions (batch, n_forecasts)</p>
+<dd class="field-odd"><p><strong>t</strong> (<em>torch.Tensor float</em>) – normalized time, dim: (batch, n_forecasts)</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Trend component, same dimensions as input t</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -528,10 +549,13 @@ dimensions (batch, n_forecasts)</p>
 <dd><p>Create and initialize a new torch Parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dims</strong> (<em>list</em><em> or </em><em>tuple</em>) – desired dimensions of parameter</p>
+<dd class="field-odd"><p><strong>dims</strong> (<em>list</em><em> or </em><em>tuple</em>) – Desired dimensions of parameter</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>initialized Parameter</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nn.Parameter</p>
 </dd>
 </dl>
 </dd></dl>

@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -527,7 +523,9 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">data_location</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/ourownstory/neuralprophet-data/main/datasets/"</span>
-<span class="n">df_ercot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s2">"energy/ERCOT_load.csv"</span><span class="p">)</span>
+<span class="n">df_ercot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s2">"multivariate/load_ercot_regions.csv"</span><span class="p">)</span>
+<span class="n">df_ercot_y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_location</span> <span class="o">+</span> <span class="s2">"energy/load_ercot.csv"</span><span class="p">)</span>
+<span class="n">df_ercot</span><span class="p">[</span><span class="s1">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ercot_y</span><span class="p">[</span><span class="s1">'y'</span><span class="p">]</span>
 <span class="n">df_ercot</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -661,7 +659,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-1
+0
 </pre></div></div>
 </div>
 <section id="Baseline-Model">
@@ -789,7 +787,7 @@ div.rendered_html tbody tr:hover {
 <section id="3-steps-ahead-AR-and-Lagged-Regressors-Model">
 <h2>3-steps ahead AR and Lagged Regressors Model<a class="headerlink" href="#3-steps-ahead-AR-and-Lagged-Regressors-Model" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -815,7 +813,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -853,7 +851,7 @@ div.rendered_html tbody tr:hover {
 <section id="24-steps-ahead-Long-AR-Model">
 <h2>24-steps ahead Long AR Model<a class="headerlink" href="#24-steps-ahead-Long-AR-Model" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -877,7 +875,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -915,7 +913,7 @@ div.rendered_html tbody tr:hover {
 <section id="24-steps-ahead-Long-AR-Model-with-last-observation-of-Lagged-Regressors">
 <h2>24-steps ahead Long AR Model with last observation of Lagged Regressors<a class="headerlink" href="#24-steps-ahead-Long-AR-Model-with-last-observation-of-Lagged-Regressors" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -940,7 +938,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -958,10 +956,10 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1243: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
+WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1886: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
   df_forecast["{}{}".format(comp, forecast_lag)] = yhat
 
-WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1251: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
+WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1894: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
   df_forecast[comp] = yhat
 
 </pre></div></div>
@@ -991,7 +989,7 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 <section id="24-steps-ahead-AR-Model-with-full-Lagged-Regressors">
 <h2>24-steps ahead AR Model with full Lagged Regressors<a class="headerlink" href="#24-steps-ahead-AR-Model-with-full-Lagged-Regressors" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1016,7 +1014,7 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1034,10 +1032,10 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1243: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
+WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1886: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
   df_forecast["{}{}".format(comp, forecast_lag)] = yhat
 
-WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1251: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
+WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1894: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
   df_forecast[comp] = yhat
 
 </pre></div></div>
@@ -1067,7 +1065,7 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 <section id="24-steps-ahead-Neural-Model-with-Long-AR">
 <h2>24-steps ahead Neural Model with Long AR<a class="headerlink" href="#24-steps-ahead-Neural-Model-with-Long-AR" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1095,7 +1093,7 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1133,7 +1131,7 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 <section id="24-steps-ahead-Neural-Model-with-Long-AR-and-Lagged-Regressors">
 <h2>24-steps ahead Neural Model with Long AR and Lagged Regressors<a class="headerlink" href="#24-steps-ahead-Neural-Model-with-Long-AR-and-Lagged-Regressors" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1162,7 +1160,7 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1180,10 +1178,10 @@ WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neur
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1243: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
+WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1886: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
   df_forecast["{}{}".format(comp, forecast_lag)] = yhat
 
-WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1251: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
+WARNING - (py.warnings._showwarnmsg) - /home/tabletop/github/neural_prophet/neuralprophet/forecaster.py:1894: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead.  To get a de-fragmented frame, use `newframe = frame.copy()`
   df_forecast[comp] = yhat
 
 </pre></div></div>

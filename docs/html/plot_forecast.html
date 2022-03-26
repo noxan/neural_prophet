@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -264,17 +260,41 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of m.predict.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axes</em>) – on which to plot.</p></li>
-<li><p><strong>xlabel</strong> (<em>str</em>) – label name on X-axis</p></li>
-<li><p><strong>ylabel</strong> (<em>str</em>) – label name on Y-axis</p></li>
+<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – Output of m.predict</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axes</em>) – Axes to plot on</p></li>
+<li><p><strong>xlabel</strong> (<em>str</em>) – Label name on X-axis</p></li>
+<li><p><strong>ylabel</strong> (<em>str</em>) – Label name on Y-axis</p></li>
 <li><p><strong>highlight_forecast</strong> (<em>int</em>) – i-th step ahead forecast to highlight.</p></li>
-<li><p><strong>line_per_origin</strong> (<em>bool</em>) – print a line per forecast of one per forecast age</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches.</p></li>
+<li><p><strong>line_per_origin</strong> (<em>bool</em>) – Print a line per forecast of one per forecast age</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – Width, height in inches.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
+<dd class="field-even"><p><p>Figure showing the NeuralProphet forecast</p>
+<p class="rubric">Examples</p>
+<p>Base usage</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">neuralprophet</span> <span class="kn">import</span> <span class="n">NeuralProphet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">future</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig_forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additional plot specifications</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig_forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">xlabel</span><span class="o">=</span><span class="s2">"ds"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">ylabel</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">highlight_forecast</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">line_per_origin</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.pyplot.figure</p>
 </dd>
 </dl>
 </dd></dl>
@@ -285,17 +305,23 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – fitted model.</p></li>
-<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of m.predict.</p></li>
+<li><p><strong>m</strong> (<a class="reference internal" href="forecaster.html#neuralprophet.forecaster.NeuralProphet" title="neuralprophet.forecaster.NeuralProphet"><em>NeuralProphet</em></a>) – Fitted model</p></li>
+<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – Output of m.predict</p></li>
 <li><p><strong>forecast_in_focus</strong> (<em>int</em>) – n-th step ahead forecast AR-coefficients to plot</p></li>
-<li><p><strong>one_period_per_season</strong> (<em>bool</em>) – plot one period per season
-instead of the true seasonal components of the forecast.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches.
-None (default):  automatic (10, 3 * npanel)</p></li>
+<li><p><strong>one_period_per_season</strong> (<em>bool</em>) – Plot one period per season, instead of the true seasonal components of the forecast.</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">None</span></code> -&gt;  automatic <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">3</span> <span class="pre">*</span> <span class="pre">npanel)</span></code></p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A matplotlib figure.</p>
+<dd class="field-even"><p>Figure showing the NeuralProphet forecast components</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.pyplot.figure</p>
 </dd>
 </dl>
 </dd></dl>
@@ -306,20 +332,27 @@ None (default):  automatic (10, 3 * npanel)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of m.predict.</p></li>
-<li><p><strong>comp_name</strong> (<em>str</em>) – Name of the component to plot.</p></li>
-<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>multiplicative</strong> (<em>bool</em>) – set y axis as percentage</p></li>
-<li><p><strong>bar</strong> (<em>bool</em>) – make barplot</p></li>
-<li><p><strong>rolling</strong> (<em>int</em>) – rolling average underplot</p></li>
-<li><p><strong>add_x</strong> (<em>bool</em>) – add x symbols to plotted points</p></li>
+<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – Output of m.predict</p></li>
+<li><p><strong>comp_name</strong> (<em>str</em>) – Name of the component to plot</p></li>
+<li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches. Ignored if ax is not None</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>multiplicative</strong> (<em>bool</em>) – Set y axis as percentage</p></li>
+<li><p><strong>bar</strong> (<em>bool</em>) – Make barplot</p></li>
+<li><p><strong>rolling</strong> (<em>int</em>) – Rolling average underplot</p></li>
+<li><p><strong>add_x</strong> (<em>bool</em>) – Add x symbols to plotted points</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing a particular forecast component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>
@@ -330,21 +363,32 @@ default: (10, 6)</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of m.predict.</p></li>
+<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – Output of m.predict.</p></li>
 <li><p><strong>comp_name</strong> (<em>str</em>) – Name of the component to plot.</p></li>
 <li><p><strong>plot_name</strong> (<em>str</em>) – Name of the plot Title.</p></li>
-<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – matplotlib Axes to plot on.</p></li>
-<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. Ignored if ax is not None.
-default: (10, 6)</p></li>
-<li><p><strong>multiplicative</strong> (<em>bool</em>) – set y axis as percentage</p></li>
-<li><p><strong>bar</strong> (<em>bool</em>) – make barplot</p></li>
-<li><p><strong>focus</strong> (<em>int</em>) – forecast number to portray in detail.</p></li>
-<li><p><strong>num_overplot</strong> (<em>int</em>) – overplot all forecasts up to num
-None (default): only plot focus</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em>) – Matplotlib Axes to plot on.</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – <p>Width, height in inches, ignored if ax is not None.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">figsize</span> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">6)</span></code></p>
+</div>
+</p></li>
+<li><p><strong>multiplicative</strong> (<em>bool</em>) – Set y axis as percentage</p></li>
+<li><p><strong>bar</strong> (<em>bool</em>) – Make barplot</p></li>
+<li><p><strong>focus</strong> (<em>int</em>) – Forecast number to portray in detail.</p></li>
+<li><p><strong>num_overplot</strong> (<em>int</em>) – <p>Overplot all forecasts up to num</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default value is set to <code class="docutils literal notranslate"><span class="pre">num_overplot</span> <span class="pre">=</span> <span class="pre">None</span></code> -&gt; only plot focus</p>
+</div>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a list of matplotlib artists</p>
+<dd class="field-even"><p>List of Artist objects containing a particular forecast component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.artist.Artist</p>
 </dd>
 </dl>
 </dd></dl>

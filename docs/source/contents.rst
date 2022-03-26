@@ -103,6 +103,7 @@ Get started with Tutorials
    sub_daily_data_yosemite_temps.nblink
    trend_peyton_manning.nblink
    global_modeling.nblink
+   Live_plot_during_training.nblink
    
 
 .. toctree::

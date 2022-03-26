@@ -206,16 +206,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Live_plot_during_training.html">Live loss plotting during training</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -259,16 +255,23 @@
 <span id="core-module-documentation"></span><h1>Core Module Documentation<a class="headerlink" href="#module-neuralprophet.configure" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="neuralprophet.configure.AR">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.configure.</span></span><span class="sig-name descname"><span class="pre">AR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_sparsity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.AR" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.configure.</span></span><span class="sig-name descname"><span class="pre">AR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_reg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.AR" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.configure.AR.regularize">
 <span class="sig-name descname"><span class="pre">regularize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.AR.regularize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Regularization of AR coefficients
-:param weights: Model weights to be regularized towards zero
-:type weights: torch tensor</p>
+<dd><p>Regularization of AR coefficients</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>regularization loss, scalar</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>weights</strong> (<em>torch.Tensor</em>) – Model weights to be regularized towards zero</p></li>
+<li><p><strong>original</strong> (<em>bool</em>) – Do not penalize non-zeros</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Regularization loss</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numeric</p>
 </dd>
 </dl>
 </dd></dl>
@@ -307,7 +310,7 @@
 <dd></dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="neuralprophet.configure.Train">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.configure.</span></span><span class="sig-name descname"><span class="pre">Train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">learning_rate:</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span></em>, <em class="sig-param"><span class="pre">batch_size:</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span></em>, <em class="sig-param"><span class="pre">loss_func:</span> <span class="pre">(&lt;class</span> <span class="pre">'str'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.loss._Loss'&gt;</span></em>, <em class="sig-param"><span class="pre">'typing.Callable')</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">(&lt;class</span> <span class="pre">'str'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'torch.optim.optimizer.Optimizer'&gt;)</span></em>, <em class="sig-param"><span class="pre">newer_samples_weight:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0</span></em>, <em class="sig-param"><span class="pre">newer_samples_start:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">ar_sparsity:</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">reg_delay_pct:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">reg_lambda_trend:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">trend_reg_threshold:</span> <span class="pre">(&lt;class</span> <span class="pre">'bool'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;)</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">reg_lambda_season:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.Train" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.configure.</span></span><span class="sig-name descname"><span class="pre">Train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">learning_rate:</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span></em>, <em class="sig-param"><span class="pre">epochs:</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span></em>, <em class="sig-param"><span class="pre">batch_size:</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></em>, <em class="sig-param"><span class="pre">None)</span></em>, <em class="sig-param"><span class="pre">loss_func:</span> <span class="pre">(&lt;class</span> <span class="pre">'str'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.loss._Loss'&gt;</span></em>, <em class="sig-param"><span class="pre">'typing.Callable')</span></em>, <em class="sig-param"><span class="pre">optimizer:</span> <span class="pre">(&lt;class</span> <span class="pre">'str'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'torch.optim.optimizer.Optimizer'&gt;)</span></em>, <em class="sig-param"><span class="pre">newer_samples_weight:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0</span></em>, <em class="sig-param"><span class="pre">newer_samples_start:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">reg_delay_pct:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></em>, <em class="sig-param"><span class="pre">reg_lambda_trend:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">trend_reg_threshold:</span> <span class="pre">(&lt;class</span> <span class="pre">'bool'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;)</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">reg_lambda_season:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.Train" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="neuralprophet.configure.Trend">
