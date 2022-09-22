@@ -379,7 +379,7 @@ class NeuralProphet:
         self.config_events = None
         self.config_country_holidays = None
 
-        # Extra Regressors
+        # Extra lagged and future regressors
         self.config_covar = None
         self.config_future_regressors = None
 
