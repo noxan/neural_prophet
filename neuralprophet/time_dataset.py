@@ -308,7 +308,7 @@ def tabularize_univariate_datetime(
 
     # get the regressors features
     if config_future_regressors is not None:
-        additive_regressors, multiplicative_regressors = make_regressors_features(df, config_future_regressors)
+        additive_regressors, multiplicative_regressors = make_future_regressors_features(df, config_future_regressors)
 
         regressors = OrderedDict({})
         if max_lags == 0:
@@ -546,8 +546,8 @@ def make_events_features(df, config_events=None, config_country_holidays=None):
     return additive_events, multiplicative_events
 
 
-def make_regressors_features(df, config_future_regressors):
-    """Construct arrays of all scalar regressor features
+def make_future_regressors_features(df, config_future_regressors):
+    """Construct arrays of all scalar future regressor features
 
     Parameters
     ----------
