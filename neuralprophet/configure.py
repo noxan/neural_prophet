@@ -346,7 +346,7 @@ class Covar:
 
 
 @dataclass
-class Regressor:
+class FutureRegressor:
     reg_lambda: float
     normalize: str
     mode: str

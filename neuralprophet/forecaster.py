@@ -489,7 +489,7 @@ class NeuralProphet:
 
         if self.config_future_regressors is None:
             self.config_future_regressors = {}
-        self.config_future_regressors[name] = configure.Regressor(
+        self.config_future_regressors[name] = configure.FutureRegressor(
             reg_lambda=regularization, normalize=normalize, mode=mode
         )
         return self
