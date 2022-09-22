@@ -390,7 +390,7 @@ def normalize(df, data_params):
     return df
 
 
-def check_single_dataframe(df, check_y, covariates, regressors, events):
+def check_single_dataframe(df, check_y, covariates, future_regressors, events):
     """Performs basic data sanity checks and ordering
     as well as prepare dataframe for fitting or predicting.
 
@@ -402,7 +402,7 @@ def check_single_dataframe(df, check_y, covariates, regressors, events):
             if df must have series values (``True`` if training or predicting with autoregression)
         covariates : list or dict
             covariate column names
-        regressors : list or dict
+        future_regressors : list or dict
             regressor column names
         events : list or dict
             event column names
@@ -436,11 +436,11 @@ def check_single_dataframe(df, check_y, covariates, regressors, events):
             columns.extend(covariates)
         else:  # treat as dict
             columns.extend(covariates.keys())
-    if regressors is not None:
-        if type(regressors) is list:
-            columns.extend(regressors)
+    if future_regressors is not None:
+        if type(future_regressors) is list:
+            columns.extend(future_regressors)
         else:  # treat as dict
-            columns.extend(regressors.keys())
+            columns.extend(future_regressors.keys())
     if events is not None:
         if type(events) is list:
             columns.extend(events)
@@ -465,7 +465,7 @@ def check_single_dataframe(df, check_y, covariates, regressors, events):
     return df
 
 
-def check_dataframe(df, check_y=True, covariates=None, regressors=None, events=None):
+def check_dataframe(df, check_y=True, covariates=None, future_regressors=None, events=None):
     """Performs basic data sanity checks and ordering,
     as well as prepare dataframe for fitting or predicting.
 
@@ -478,7 +478,7 @@ def check_dataframe(df, check_y=True, covariates=None, regressors=None, events=N
             set to True if training or predicting with autoregression
         covariates : list or dict
             covariate column names
-        regressors : list or dict
+        future_regressors : list or dict
             regressor column names
         events : list or dict
             event column names
@@ -491,7 +491,7 @@ def check_dataframe(df, check_y=True, covariates=None, regressors=None, events=N
     df, _, _, _ = prep_or_copy_df(df)
     checked_df = pd.DataFrame()
     for df_name, df_i in df.groupby("ID"):
-        df_aux = check_single_dataframe(df_i, check_y, covariates, regressors, events).copy(deep=True)
+        df_aux = check_single_dataframe(df_i, check_y, covariates, future_regressors, events).copy(deep=True)
         df_aux["ID"] = df_name
         checked_df = pd.concat((checked_df, df_aux), ignore_index=True)
     return checked_df

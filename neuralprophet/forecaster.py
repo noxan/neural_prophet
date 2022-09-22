@@ -2015,7 +2015,7 @@ class NeuralProphet:
             df=df,
             check_y=check_y,
             covariates=self.config_covar if exogenous else None,
-            regressors=self.config_future_regressors if exogenous else None,
+            future_regressors=self.config_future_regressors if exogenous else None,
             events=self.config_events if exogenous else None,
         )
 
