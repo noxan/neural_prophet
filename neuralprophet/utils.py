@@ -163,7 +163,7 @@ def reg_func_covariates(config_covariates, model):
 
 def reg_func_regressors(config_future_regressors, model):
     """
-    Regularization of regressors coefficients to induce sparsity
+    Regularization of future regressors coefficients to induce sparsity.
 
     Parameters
     ----------
@@ -177,14 +177,14 @@ def reg_func_regressors(config_future_regressors, model):
         scalar
             Regularization loss
     """
-    reg_regressor_loss = 0.0
-    for regressor, configs in config_future_regressors.items():
-        reg_lambda = configs.reg_lambda
+    regularization_loss_future_regressors = 0.0
+    for future_regressor, config in config_future_regressors.items():
+        reg_lambda = config.reg_lambda
         if reg_lambda is not None:
-            weight = model.get_reg_weights(regressor)
-            reg_regressor_loss += reg_lambda * reg_func_abs(weight)
+            weight = model.get_reg_weights(future_regressor)
+            regularization_loss_future_regressors += reg_lambda * reg_func_abs(weight)
 
-    return reg_regressor_loss
+    return regularization_loss_future_regressors
 
 
 def symmetric_total_percentage_error(values, estimates):
