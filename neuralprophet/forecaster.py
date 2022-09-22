@@ -33,7 +33,7 @@ class NeuralProphet:
     """NeuralProphet forecaster.
 
     A simple yet powerful forecaster that models:
-    Trend, seasonality, events, holidays, auto-regression, lagged covariates, and future-known regressors.
+    Trend, seasonality, events, holidays, auto-regression, lagged covariates, and future regressors.
     Can be regularized and configured to model nonlinear relationships.
 
     Parameters
@@ -407,36 +407,36 @@ class NeuralProphet:
         Parameters
         ----------
             names : string or list
-                name of the regressor/list of regressors.
+                name of the lagged regressor/list of lagged regressors.
             n_lags : int
-                previous regressors time steps to use as input in the predictor (covar order)
+                previous lagged regressors time steps to use as input in the predictor (covar order)
                 if ``auto``, time steps will be equivalent to the AR order (default)
-                if ``scalar``, all the regressors will only use last known value as input
+                if ``scalar``, all the lagged regressors will only use last known value as input
             regularization : float
                 optional  scale for regularization strength
             normalize : bool
-                optional, specify whether this regressor will benormalized prior to fitting.
-                if ``auto``, binary regressors will not be normalized.
+                optional, specify whether this lagged regressor will benormalized prior to fitting.
+                if ``auto``, binary lagged regressors will not be normalized.
         """
         if n_lags == 0 or n_lags is None:
             n_lags = 0
             log.warning(
-                "Please, set n_lags to a value greater than 0 or to the options 'scalar' or 'auto'. No lags will be added to regressors when n_lags = 0 or n_lags is None"
+                "Please, set n_lags to a value greater than 0 or to the options 'scalar' or 'auto'. No lags will be added to lagged regressors when n_lags = 0 or n_lags is None"
             )
         if n_lags == "auto":
             if self.n_lags is not None and self.n_lags > 0:
                 n_lags = self.n_lags
                 log.info(
-                    f"n_lags = 'auto', number of lags for regressor is set to Autoregression number of lags ({self.n_lags})"
+                    f"n_lags = 'auto', number of lags for lagged regressor is set to Autoregression number of lags ({self.n_lags})"
                 )
             else:
                 n_lags = 1
                 log.info(
-                    "n_lags = 'auto', but there is no lags for Autoregression. Number of lags for regressor is automatically set to 1"
+                    "n_lags = 'auto', but there is no lags for Autoregression. Number of lags for lagged regressor is automatically set to 1"
                 )
         if n_lags == "scalar":
             n_lags = 1
-            log.info("n_lags = 'scalar', number of lags for regressor is set to 1")
+            log.info("n_lags = 'scalar', number of lags for lagged regressor is set to 1")
         only_last_value = False if n_lags > 1 else True
         if self.fitted:
             raise Exception("Lagged regressors must be added prior to model fitting.")
@@ -455,9 +455,9 @@ class NeuralProphet:
         return self
 
     def add_future_regressor(self, name, regularization=None, normalize="auto", mode="additive"):
-        """Add a regressor as lagged covariate with order 1 (scalar) or as known in advance (also scalar).
-        The dataframe passed to :meth:`fit`  and :meth:`predict` will have a column with the specified name to be used as
-        a regressor. When normalize=True, the regressor will be normalized unless it is binary.
+        """Add a future regressor as lagged covariate with order 1 (scalar) or as known in advance (also scalar).
+        The dataframe passed to :meth:`fit`  and :meth:`predict` will have a column with the specified name to be used
+        as a future regressor. When normalize=True, the future regressor will be normalized unless it is binary.
 
         Note
         ----
@@ -466,15 +466,15 @@ class NeuralProphet:
         Parameters
         ----------
             name : string
-                name of the regressor.
+                name of the future regressor.
             regularization : float
                 optional  scale for regularization strength
             normalize : bool
-                optional, specify whether this regressor will be normalized prior to fitting.
+                optional, specify whether this future regressor will be normalized prior to fitting.
 
                 Note
                 ----
-                if ``auto``, binary regressors will not be normalized.
+                if ``auto``, binary future regressors will not be normalized.
             mode : str
                 ``additive`` (default) or ``multiplicative``.
         """
