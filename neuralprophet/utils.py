@@ -161,7 +161,7 @@ def reg_func_covariates(config_covariates, model):
     return reg_covariate_loss
 
 
-def reg_func_regressors(config_future_regressors, model):
+def reg_func_future_regressors(config_future_regressors, model):
     """
     Regularization of future regressors coefficients to induce sparsity.
 

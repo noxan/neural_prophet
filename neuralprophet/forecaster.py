@@ -2271,8 +2271,7 @@ class NeuralProphet:
 
             # Regularize future regressors: sparsify regressor features coefficients
             if self.config_future_regressors is not None:
-                reg_regressor_loss = utils.reg_func_regressors(self.config_future_regressors, self.model)
-                reg_loss += reg_regressor_loss
+                reg_loss += utils.reg_func_future_regressors(self.config_future_regressors, self.model)
 
         reg_loss = delay_weight * reg_loss
         loss = loss + reg_loss
