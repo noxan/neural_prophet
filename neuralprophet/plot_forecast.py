@@ -254,7 +254,7 @@ def plot_components(
             }
         )
 
-    # Add Regressors
+    # Add future regressors
     if "future_regressors_additive" in fcst.columns:
         components.append(
             {

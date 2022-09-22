@@ -113,7 +113,7 @@ def get_parameter_components(m, forecast_in_focus, df_name="__df__"):
     # all scalar regressors will be plotted together
     # collected as tuples (name, weights)
 
-    # Add Regressors
+    # Add future regressors
     additive_future_regressors = []
     multiplicative_future_regressors = []
     if m.config_future_regressors is not None:

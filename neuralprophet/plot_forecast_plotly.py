@@ -295,7 +295,7 @@ def plot_components(m, fcst, forecast_in_focus=None, one_period_per_season=True,
             }
         )
 
-    # Add Regressors
+    # Add future regressors
     if "future_regressors_additive" in fcst.columns:
         components.append(
             {
