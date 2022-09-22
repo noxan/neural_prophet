@@ -95,9 +95,9 @@ def test_df_utils_func():
     global_data_params = df_utils.init_data_params(df_global, normalize="soft1")
     global_data_params = df_utils.init_data_params(df_global, normalize="standardize")
 
-    log.debug(f"Time Threshold: \n {time_threshold}" )
-    log.debug(f"Df_train: \n {df_train}" )
-    log.debug(f"Df_val: \n {df_val}" )
+    log.debug(f"Time Threshold: \n {time_threshold}")
+    log.debug(f"Df_train: \n {df_train}")
+    log.debug(f"Df_val: \n {df_val}")
 
 
 def test_trend():
@@ -133,8 +133,8 @@ def test_custom_changepoints():
     dates = df["ds"][range(1, len(df) - 1, int(len(df) / 5.0))]
     dates_list = [str(d) for d in dates]
     dates_array = pd.to_datetime(dates_list).values
-    log.debug(f"dates: {dates}" )
-    log.debug(f"dates_list: {dates_list}" )
+    log.debug(f"dates: {dates}")
+    log.debug(f"dates_list: {dates_list}")
     log.debug(f"dates_array: {dates_array.dtype} {dates_array}")
     for cp in [dates_list, dates_array]:
         m = NeuralProphet(
@@ -323,7 +323,7 @@ def test_ar_deep():
 
 
 def test_lag_reg():
-    log.info("testing: Lagged Regressors")
+    log.info("testing: dcawdawcs")
     df = pd.read_csv(PEYTON_FILE, nrows=NROWS)
     m = NeuralProphet(
         n_forecasts=2,
@@ -336,8 +336,8 @@ def test_lag_reg():
     )
     df["A"] = df["y"].rolling(7, min_periods=1).mean()
     df["B"] = df["y"].rolling(30, min_periods=1).mean()
-    m = m.add_lagged_regressor(names="A")
-    m = m.add_lagged_regressor(names="B")
+    m = m.add_dcawdawc(names="A")
+    m = m.add_dcawdawc(names="B")
     metrics_df = m.fit(df, freq="D")
     future = m.make_future_dataframe(df, n_historic_predictions=10)
     forecast = m.predict(future)
@@ -351,7 +351,7 @@ def test_lag_reg():
 
 
 def test_lag_reg_deep():
-    log.info("testing: List of Lagged Regressors (deep)")
+    log.info("testing: List of dcawdawcs (deep)")
     df = pd.read_csv(PEYTON_FILE, nrows=NROWS)
     m = NeuralProphet(
         n_forecasts=1,
@@ -368,7 +368,7 @@ def test_lag_reg_deep():
     df["B"] = df["y"].rolling(15, min_periods=1).mean()
     df["C"] = df["y"].rolling(30, min_periods=1).mean()
     cols = [col for col in df.columns if col not in ["ds", "y"]]
-    m = m.add_lagged_regressor(names=cols)
+    m = m.add_dcawdawc(names=cols)
     m.highlight_nth_step_ahead_of_each_forecast(m.n_forecasts)
     metrics_df = m.fit(df, freq="D")
     forecast = m.predict(df)
@@ -437,7 +437,7 @@ def test_events():
     metrics_df = m.fit(history_df, freq="D")
     future = m.make_future_dataframe(df=history_df, events_df=events_df, periods=30, n_historic_predictions=90)
     forecast = m.predict(df=future)
-    log.debug(f"Event Parameters:: {m.model.event_params}" )
+    log.debug(f"Event Parameters:: {m.model.event_params}")
     if PLOT:
         m.plot_components(forecast)
         m.plot(forecast)
@@ -1015,7 +1015,7 @@ def test_global_modeling_with_future_regressors():
     log.info("Error - key for regressors not valid")
 
 
-def test_global_modeling_with_lagged_regressors():
+def test_global_modeling_with_dcawdawcs():
     ### GLOBAL MODELLING + REGRESSORS
     log.info("Global Modeling + Regressors")
     df = pd.read_csv(PEYTON_FILE, nrows=512)
@@ -1056,7 +1056,7 @@ def test_global_modeling_with_lagged_regressors():
             batch_size=BATCH_SIZE,
             learning_rate=LR,
         )
-        m = m.add_lagged_regressor(names="A")
+        m = m.add_dcawdawc(names="A")
         metrics = m.fit(train_input[i], freq="D")
         future = m.make_future_dataframe(test_input[i], n_historic_predictions=True, regressors_df=regressors_input[i])
         forecast = m.predict(future)
@@ -1073,7 +1073,7 @@ def test_global_modeling_with_lagged_regressors():
         batch_size=BATCH_SIZE,
         learning_rate=LR,
     )
-    m = m.add_lagged_regressor(names="A")
+    m = m.add_dcawdawc(names="A")
     metrics = m.fit(pd.concat((df1, df2)), freq="D")
     future = m.make_future_dataframe(
         pd.concat((df3, df4)), n_historic_predictions=True, regressors_df=future_regressors_df3
@@ -1422,7 +1422,7 @@ def test_n_lags_for_regressors():
             n_forecasts=2,
             n_lags=n_lags_input[i],
         )
-        m = m.add_lagged_regressor(names="A", n_lags=n_lags_regressors_input[i])
+        m = m.add_dcawdawc(names="A", n_lags=n_lags_regressors_input[i])
         metrics = m.fit(df1, freq="D")
         future = m.make_future_dataframe(df1, n_historic_predictions=True)
         forecast = m.predict(df=future)
@@ -1445,11 +1445,11 @@ def test_n_lags_for_regressors():
         log.debug(info_input[i])
         m = NeuralProphet(epochs=EPOCHS, batch_size=BATCH_SIZE, learning_rate=LR, n_forecasts=3, n_lags=n_lags_input[i])
         if i < 2:
-            m = m.add_lagged_regressor(names="A", n_lags=n_lags_regressors_input_A[i])
-            m = m.add_lagged_regressor(names="B", n_lags=n_lags_regressors_input_B[i])
+            m = m.add_dcawdawc(names="A", n_lags=n_lags_regressors_input_A[i])
+            m = m.add_dcawdawc(names="B", n_lags=n_lags_regressors_input_B[i])
         else:
-            # Testing call of add_lagged_regressor with list of names
-            m = m.add_lagged_regressor(names=["A", "B"], n_lags=n_lags_regressors_input_A[i])
+            # Testing call of add_dcawdawc with list of names
+            m = m.add_dcawdawc(names=["A", "B"], n_lags=n_lags_regressors_input_A[i])
         metrics = m.fit(df1, freq="D")
         future = m.make_future_dataframe(df1, n_historic_predictions=True)
         forecast = m.predict(df=future)
@@ -1465,8 +1465,8 @@ def test_n_lags_for_regressors():
         n_forecasts=2,
         n_lags=2,
     )
-    m = m.add_lagged_regressor(names="A", n_lags=0)
-    m = m.add_lagged_regressor(names="B", n_lags=0)
+    m = m.add_dcawdawc(names="A", n_lags=0)
+    m = m.add_dcawdawc(names="B", n_lags=0)
     with pytest.raises(AssertionError):
         metrics = m.fit(df1, freq="D")
 

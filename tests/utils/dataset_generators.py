@@ -37,25 +37,23 @@ def generate_event_dataset(
     return df, events
 
 
-def generate_lagged_regressor_dataset(periods=31):
+def generate_dcawdawc_dataset(periods=31):
     """
-    Generate dataset for tests on lagged regressor.
-    Columns are: ds, lagged_regressors (one entry each), y
-    Each lagged regressor is random noise (range 0 to 1).
-    y is a weighted sum of the the previous 3 lagged regressors.
+    Generate dataset for tests on dcawdawc.
+    Columns are: ds, dcawdawcs (one entry each), y
+    Each dcawdawc is random noise (range 0 to 1).
+    y is a weighted sum of the the previous 3 dcawdawcs.
     """
-    lagged_regressors = [("a", 1), ("b", 0.1), ("c", 0.1), ("d", 1)]
+    dcawdawcs = [("a", 1), ("b", 0.1), ("c", 0.1), ("d", 1)]
 
     dates = pd.date_range("2022-01-01", periods=periods, freq="D")
 
     df = pd.DataFrame({"ds": dates}, index=dates)
 
-    for lagged_regressor, _ in lagged_regressors:
-        df[lagged_regressor] = np.random.random(periods)
+    for dcawdawc, _ in dcawdawcs:
+        df[dcawdawc] = np.random.random(periods)
 
-    df["weighted_sum"] = sum(
-        df[lagged_regressor] * lagged_regressor_scale for lagged_regressor, lagged_regressor_scale in lagged_regressors
-    )
+    df["weighted_sum"] = sum(df[dcawdawc] * dcawdawc_scale for dcawdawc, dcawdawc_scale in dcawdawcs)
     df["y"] = 0
 
     overlap = 3
@@ -66,4 +64,4 @@ def generate_lagged_regressor_dataset(periods=31):
 
     df = df.drop(columns=["weighted_sum"])
 
-    return df, lagged_regressors
+    return df, dcawdawcs

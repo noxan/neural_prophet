@@ -399,10 +399,10 @@ class NeuralProphet:
         self.highlight_forecast_step_n = None
         self.true_ar_weights = None
 
-    def add_lagged_regressor(self, names, n_lags="auto", regularization=None, normalize="auto"):
-        """Add a covariate or list of covariate time series as additional lagged regressors to be used for fitting and predicting.
+    def add_dcawdawc(self, names, n_lags="auto", regularization=None, normalize="auto"):
+        """Add a covariate or list of covariate time series as additional dcawdawcs to be used for fitting and predicting.
         The dataframe passed to ``fit`` and ``predict`` will have the column with the specified name to be used as
-        lagged regressor. When normalize=True, the covariate will be normalized unless it is binary.
+        dcawdawc. When normalize=True, the covariate will be normalized unless it is binary.
 
         Parameters
         ----------
@@ -2058,9 +2058,7 @@ class NeuralProphet:
                 raise ValueError(f"Name {name!r} already used for an event.")
         if events and self.config_country_holidays is not None:
             if name in self.config_country_holidays.holiday_names:
-                raise ValueError(
-                    f"Name {name!r} is a holiday name in {self.config_country_holidays.country}."
-                )
+                raise ValueError(f"Name {name!r} is a holiday name in {self.config_country_holidays.country}.")
         if seasons and self.config_season is not None:
             if name in self.config_season.periods:
                 raise ValueError(f"Name {name!r} already used for a seasonality.")
@@ -2264,7 +2262,7 @@ class NeuralProphet:
                 reg_events_loss = utils.reg_func_events(self.config_events, self.config_country_holidays, self.model)
                 reg_loss += reg_events_loss
 
-            # Regularize lagged regressors: sparsify covariate features coefficients
+            # Regularize dcawdawcs: sparsify covariate features coefficients
             if self.config_covar is not None:
                 reg_covariate_loss = utils.reg_func_covariates(self.config_covar, self.model)
                 reg_loss += reg_covariate_loss
@@ -2444,7 +2442,7 @@ class NeuralProphet:
                     metrics_live[f"val_log-{metrics_val[0]}"] = np.log(val_epoch_metrics[metrics_val[0]])
                     if plot_live_all_metrics and len(metrics_val) > 1:
                         for i in range(1, len(metrics_val)):
-                            metrics_live[f"val_{metrics_val[i]}" ] = val_epoch_metrics[metrics_val[i]]
+                            metrics_live[f"val_{metrics_val[i]}"] = val_epoch_metrics[metrics_val[i]]
                 live_loss.update(metrics_live)
                 if e % (1 + self.config_train.epochs // 20) == 0 or e + 1 == self.config_train.epochs:
                     live_loss.send()
@@ -2608,9 +2606,7 @@ class NeuralProphet:
         if self.max_lags > 0:
             if periods > 0 and periods != self.n_forecasts:
                 periods = self.n_forecasts
-                log.warning(
-                    f"Number of forecast steps is defined by n_forecasts. " "Adjusted to {self.n_forecasts}."
-                )
+                log.warning(f"Number of forecast steps is defined by n_forecasts. " "Adjusted to {self.n_forecasts}.")
 
         if periods > 0:
             future_df = df_utils.make_future_df(
@@ -2878,7 +2874,7 @@ class NeuralProphet:
         ]
         if self.config_covar is not None:
             for name in self.config_covar.keys():
-                lagged_components.append(f"lagged_regressor_{name}")
+                lagged_components.append(f"dcawdawc_{name}")
         for comp in lagged_components:
             if comp in components:
                 for j in range(len(self.config_train.quantiles)):

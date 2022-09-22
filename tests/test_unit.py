@@ -45,7 +45,7 @@ def test_impute_missing():
         df_na = df.copy(deep=True)
     to_fill = pd.isna(df_na["y"])
     # TODO fix debugging printout error
-    log.debug(f"sum(to_fill): {sum(to_fill.values)}" )
+    log.debug(f"sum(to_fill): {sum(to_fill.values)}")
     # df_filled, remaining_na = df_utils.fill_small_linear_large_trend(
     #     df.copy(deep=True),
     #     column=name,
@@ -72,7 +72,7 @@ def test_impute_missing():
 def test_time_dataset():
     # manually load any file that stores a time series, for example:
     df_in = pd.read_csv(AIR_FILE, index_col=False, nrows=NROWS)
-    log.debug(f"Infile shape: {df_in.shape}" )
+    log.debug(f"Infile shape: {df_in.shape}")
     n_lags = 3
     n_forecasts = 1
     valid_p = 0.2
@@ -133,7 +133,7 @@ def test_normalize():
     df_norm = df_utils.normalize(df, local_data_params["__df__"])
 
 
-def test_add_lagged_regressors():
+def test_add_dcawdawcs():
     NROWS = 512
     EPOCHS = 3
     BATCH_SIZE = 32
@@ -163,10 +163,10 @@ def test_add_lagged_regressors():
             batch_size=BATCH_SIZE,
             learning_rate=LR,
         )
-        m = m.add_lagged_regressor(names=cols)
+        m = m.add_dcawdawc(names=cols)
         metrics_df = m.fit(df1, freq="D", validation_df=df1[-100:])
         future = m.make_future_dataframe(df1, n_historic_predictions=365)
-        ## Check if the future dataframe contains all the lagged regressors
+        ## Check if the future dataframe contains all the dcawdawcs
         check = any(item in future.columns for item in cols)
         forecast = m.predict(future)
         log.debug(check)
@@ -282,14 +282,14 @@ def test_cv():
             for i in range(valid_fold_num)
         ]
         assert all([x == y for (x, y) in zip(train_folds_samples, train_folds_should)])
-        log.debug(f"total_samples: {total_samples}" )
-        log.debug(f"val_fold_each: {val_fold_each}" )
-        log.debug(f"overlap_each: {overlap_each}" )
-        log.debug(f"val_folds_len: {val_folds_len}" )
-        log.debug(f"val_folds_samples: {val_folds_samples}" )
-        log.debug(f"train_folds_len: {train_folds_len}" )
-        log.debug(f"train_folds_samples: {train_folds_samples}" )
-        log.debug(f"train_folds_should: {train_folds_should}" )
+        log.debug(f"total_samples: {total_samples}")
+        log.debug(f"val_fold_each: {val_fold_each}")
+        log.debug(f"overlap_each: {overlap_each}")
+        log.debug(f"val_folds_len: {val_folds_len}")
+        log.debug(f"val_folds_samples: {val_folds_samples}")
+        log.debug(f"train_folds_len: {train_folds_len}")
+        log.debug(f"train_folds_samples: {train_folds_samples}")
+        log.debug(f"train_folds_should: {train_folds_should}")
 
     len_df = 100
     check_folds(
@@ -350,16 +350,16 @@ def test_cv_for_global_model():
                 for i in range(valid_fold_num)
             ]
             assert all([x == y for (x, y) in zip(train_folds_samples, train_folds_should)])
-            log.debug(f"global_model_cv_type: {global_model_cv_type}" )
-            log.debug(f"df_name: {df_name}" )
-            log.debug(f"total_samples: {total_samples}" )
-            log.debug(f"val_fold_each: {val_fold_each}" )
-            log.debug(f"overlap_each: {overlap_each}" )
-            log.debug(f"val_folds_len: {val_folds_len}" )
-            log.debug(f"val_folds_samples: {val_folds_samples}" )
-            log.debug(f"train_folds_len: {train_folds_len}" )
-            log.debug(f"train_folds_samples: {train_folds_samples}" )
-            log.debug(f"train_folds_should: {train_folds_should}" )
+            log.debug(f"global_model_cv_type: {global_model_cv_type}")
+            log.debug(f"df_name: {df_name}")
+            log.debug(f"total_samples: {total_samples}")
+            log.debug(f"val_fold_each: {val_fold_each}")
+            log.debug(f"overlap_each: {overlap_each}")
+            log.debug(f"val_folds_len: {val_folds_len}")
+            log.debug(f"val_folds_samples: {val_folds_samples}")
+            log.debug(f"train_folds_len: {train_folds_len}")
+            log.debug(f"train_folds_samples: {train_folds_samples}")
+            log.debug(f"train_folds_should: {train_folds_should}")
         return folds
 
     # Test cv for dict with time series with similar time range
@@ -478,7 +478,7 @@ def test_reg_delay():
         (1, 8, 0),
     ]:
         weight = c.get_reg_delay_weight(e, i, reg_start_pct=0.5, reg_full_pct=0.8)
-        log.debug(f"e {e}, i {i}, expected w {w}, got w {weight}" )
+        log.debug(f"e {e}, i {i}, expected w {w}, got w {weight}")
         assert weight == w
 
 
@@ -506,9 +506,9 @@ def test_double_crossvalidation():
     assert train_folds_len2[0] == 85
     assert val_folds_len1[0] == 10
     assert val_folds_len2[0] == 5
-    log.debug(f"train_folds_len1: {train_folds_len1}" )
-    log.debug(f"val_folds_len1: {val_folds_len1}" )
-    log.debug(f"train_folds_len2: {train_folds_len2}" )
+    log.debug(f"train_folds_len1: {train_folds_len1}")
+    log.debug(f"val_folds_len1: {val_folds_len1}")
+    log.debug(f"train_folds_len2: {train_folds_len2}")
     log.debug(f"val_folds_len2: {val_folds_len2} ")
     log.info(f"Test m.double_crossvalidation_split_df")
     m = NeuralProphet(
@@ -537,10 +537,10 @@ def test_double_crossvalidation():
     assert train_folds_len2[0] == 88
     assert val_folds_len1[0] == 12
     assert val_folds_len2[0] == 6
-    log.debug(f"train_folds_len1: {train_folds_len1}" )
-    log.debug(f"val_folds_len1: {val_folds_len1}" )
-    log.debug(f"train_folds_len2: {train_folds_len2}" )
-    log.debug(f"val_folds_len2: {val_folds_len2}" )
+    log.debug(f"train_folds_len1: {train_folds_len1}")
+    log.debug(f"val_folds_len1: {val_folds_len1}")
+    log.debug(f"train_folds_len2: {train_folds_len2}")
+    log.debug(f"val_folds_len2: {val_folds_len2}")
     log.info("Raise not implemented error as double_crossvalidation is not compatible with many time series")
     with pytest.raises(NotImplementedError):
         df = pd.DataFrame({"ds": pd.date_range(start="2017-01-01", periods=len_df), "y": np.arange(len_df)})
@@ -683,7 +683,7 @@ def test_globaltimedataset():
         dataset = m._create_dataset(df_global, predict_mode=False)
         dataset = m._create_dataset(df_global, predict_mode=True)
 
-    # lagged_regressors, future_regressors
+    # dcawdawcs, future_regressors
     df4 = df.copy()
     df4["A"] = np.arange(len(df4))
     df4["B"] = np.arange(len(df4)) * 0.1
@@ -696,7 +696,7 @@ def test_globaltimedataset():
         n_lags=2,
     )
     m4.add_future_regressor("A")
-    m4.add_lagged_regressor("B")
+    m4.add_dcawdawc("B")
     config_normalization = configure.Normalization("auto", False, True, False)
     for m in [m4]:
         df4
@@ -726,7 +726,7 @@ def test_dataloader():
         n_forecasts=2,
     )
     m.add_future_regressor("A")
-    m.add_lagged_regressor("B")
+    m.add_dcawdawc("B")
     config_normalization = configure.Normalization("auto", False, True, False)
     df_global = pd.concat((df1, df2))
     df_global.loc[:, "ds"] = pd.to_datetime(df_global.loc[:, "ds"])
@@ -775,8 +775,8 @@ def test_newer_sample_weight():
     forecast2 = m.predict(df[-10:])
     avg_a1 = np.mean(forecast1["future_regressor_a"])
     avg_a2 = np.mean(forecast2["future_regressor_a"])
-    log.info(f"avg regressor a contribution first samples: {avg_a1}" )
-    log.info(f"avg regressor a contribution last samples: {avg_a2}" )
+    log.info(f"avg regressor a contribution first samples: {avg_a1}")
+    log.info(f"avg regressor a contribution last samples: {avg_a2}")
     # must hold
     assert avg_a1 > 0.1
     assert avg_a2 > 0.1
@@ -784,8 +784,8 @@ def test_newer_sample_weight():
     # this is less strict, as it also depends on trend, but should still hold
     avg_y1 = np.mean(forecast1["yhat1"])
     avg_y2 = np.mean(forecast2["yhat1"])
-    log.info(f"avg yhat first samples: {avg_y1}" )
-    log.info(f"avg yhat last samples: {avg_y2}" )
+    log.info(f"avg yhat first samples: {avg_y1}")
+    log.info(f"avg yhat last samples: {avg_y2}")
     assert avg_y1 > -0.9
     assert avg_y2 > 0.1
 
@@ -822,7 +822,7 @@ def test_make_future():
         n_forecasts=3,
     )
     m = m.add_future_regressor(name="A")
-    m = m.add_lagged_regressor(names="B")
+    m = m.add_dcawdawc(names="B")
     future = m.make_future_dataframe(
         df,
         n_historic_predictions=10,

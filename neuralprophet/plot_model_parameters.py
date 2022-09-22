@@ -181,7 +181,7 @@ def plot_parameters(
                 components.append(
                     {
                         "plot_name": "lagged weights",
-                        "comp_name": f'Lagged Regressor "{name}"',
+                        "comp_name": f'dcawdawc "{name}"',
                         "weights": m.model.get_covar_weights(name).detach().numpy(),
                         "focus": forecast_in_focus,
                     }

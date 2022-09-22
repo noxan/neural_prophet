@@ -94,9 +94,7 @@ def plot(fcst, quantiles, xlabel="ds", ylabel="y", highlight_forecast=None, line
                     go.Scatter(
                         name=f"yhat{highlight_forecast if highlight_forecast else 1} {quantiles[i] * 100}%",
                         x=ds,
-                        y=fcst[
-                            f"yhat{highlight_forecast if highlight_forecast else 1} {quantiles[i] * 100}%"
-                        ],
+                        y=fcst[f"yhat{highlight_forecast if highlight_forecast else 1} {quantiles[i] * 100}%"],
                         mode="lines",
                         line=dict(color="rgba(45, 146, 255, 0.2)", width=1),
                         fillcolor="rgba(45, 146, 255, 0.2)",
@@ -107,9 +105,7 @@ def plot(fcst, quantiles, xlabel="ds", ylabel="y", highlight_forecast=None, line
                     go.Scatter(
                         name=f"yhat{highlight_forecast if highlight_forecast else 1} {quantiles[i] * 100}%",
                         x=ds,
-                        y=fcst[
-                            f"yhat{highlight_forecast if highlight_forecast else 1} {quantiles[i] * 100}%"
-                        ],
+                        y=fcst[f"yhat{highlight_forecast if highlight_forecast else 1} {quantiles[i] * 100}%"],
                         mode="lines",
                         line=dict(color="rgba(45, 146, 255, 0.2)", width=1),
                         fill="tonexty",
@@ -268,8 +264,8 @@ def plot_components(m, fcst, forecast_in_focus=None, one_period_per_season=True,
             if forecast_in_focus is None:
                 components.append(
                     {
-                        "plot_name": f'Lagged Regressor "{name}"',
-                        "comp_name": f"lagged_regressor_{name}",
+                        "plot_name": f'dcawdawc "{name}"',
+                        "comp_name": f"dcawdawc_{name}",
                         "num_overplot": m.n_forecasts,
                         "bar": True,
                     }
@@ -277,8 +273,8 @@ def plot_components(m, fcst, forecast_in_focus=None, one_period_per_season=True,
             else:
                 components.append(
                     {
-                        "plot_name": f'Lagged Regressor "{name}" ({forecast_in_focus})-ahead',
-                        "comp_name": f"lagged_regressor_{name}{forecast_in_focus}",
+                        "plot_name": f'dcawdawc "{name}" ({forecast_in_focus})-ahead',
+                        "comp_name": f"dcawdawc_{name}{forecast_in_focus}",
                     }
                 )
                 # 'add_x': True})
@@ -360,7 +356,7 @@ def plot_components(m, fcst, forecast_in_focus=None, one_period_per_season=True,
             name in ["trend"]
             or ("residuals" in name and "ahead" in name)
             or ("ar" in name and "ahead" in name)
-            or ("lagged_regressor" in name and "ahead" in name)
+            or ("dcawdawc" in name and "ahead" in name)
         ):
             trace_object = get_forecast_component_props(fcst=fcst, **comp)
 
@@ -377,7 +373,7 @@ def plot_components(m, fcst, forecast_in_focus=None, one_period_per_season=True,
                 comp_name = f"season_{comp['comp_name']}"
                 trace_object = get_forecast_component_props(fcst=fcst, comp_name=comp_name, plot_name=comp["plot_name"])
 
-        elif "auto-regression" in name or "lagged regressor" in name or "residuals" in name:
+        elif "auto-regression" in name or "dcawdawc" in name or "residuals" in name:
             trace_object = get_multiforecast_component_props(fcst=fcst, **comp)
             fig.update_layout(barmode="overlay")
 
@@ -385,8 +381,8 @@ def plot_components(m, fcst, forecast_in_focus=None, one_period_per_season=True,
             xaxis = fig["layout"]["xaxis"]
             yaxis = fig["layout"]["yaxis"]
         else:
-            xaxis = fig["layout"][f"xaxis{i + 1}" ]
-            yaxis = fig["layout"][f"yaxis{i + 1}" ]
+            xaxis = fig["layout"][f"xaxis{i + 1}"]
+            yaxis = fig["layout"][f"yaxis{i + 1}"]
 
         xaxis.update(trace_object["xaxis"])
         xaxis.update(**xaxis_args)

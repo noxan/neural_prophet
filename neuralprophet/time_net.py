@@ -155,9 +155,7 @@ class TimeNet(nn.Module):
                 log.error("Multiplicative seasonality requires trend.")
                 raise ValueError
             if self.config_season.mode not in ["additive", "multiplicative"]:
-                log.error(
-                    f"Seasonality Mode {self.config_season.mode} not implemented. Defaulting to 'additive'."
-                )
+                log.error(f"Seasonality Mode {self.config_season.mode} not implemented. Defaulting to 'additive'.")
                 self.config_season.mode = "additive"
             self.season_params = nn.ParameterDict(
                 # dimensions - [no. of quantiles, no. of fourier terms for each seasonality]
@@ -720,7 +718,7 @@ class TimeNet(nn.Module):
             components["ar"] = self.auto_regression(lags=inputs["lags"])
         if self.config_covar is not None and "covariates" in inputs:
             for name, lags in inputs["covariates"].items():
-                components[f"lagged_regressor_{name}"] = self.covariate(lags=lags, name=name)
+                components[f"dcawdawc_{name}"] = self.covariate(lags=lags, name=name)
         if (self.config_events is not None or self.config_holidays is not None) and "events" in inputs:
             if "additive" in inputs["events"].keys():
                 components["events_additive"] = self.scalar_features_effects(
@@ -739,7 +737,7 @@ class TimeNet(nn.Module):
                 else:
                     features = inputs["events"]["multiplicative"]
                     params = self.event_params["multiplicative"]
-                components[f"event_{event}" ] = self.scalar_features_effects(
+                components[f"event_{event}"] = self.scalar_features_effects(
                     features=features, params=params, indices=indices
                 )
         if self.config_regressors is not None and "regressors" in inputs:

@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import torch
-from utils.dataset_generators import generate_event_dataset, generate_holiday_dataset, generate_lagged_regressor_dataset
+from utils.dataset_generators import generate_event_dataset, generate_holiday_dataset, generate_dcawdawc_dataset
 
 from neuralprophet import NeuralProphet, df_utils
 from neuralprophet.utils import reg_func_abs
@@ -118,16 +118,16 @@ def test_regularization_events():
     assert np.mean(to_preserve) > 0.5
 
 
-def test_regularization_lagged_regressor():
+def test_regularization_dcawdawc():
     """
-    Test case for  regularization feature of lagged regressors. Utlizes a
-    synthetic dataset with 4 noise-based lagged regressors (a, b, c, d).
-    The first and last lagged regressors (a, d) are expected to have a weight
-    close to 1. The middle lagged regressors (b, c) meanwhile are expected to
+    Test case for  regularization feature of dcawdawcs. Utlizes a
+    synthetic dataset with 4 noise-based dcawdawcs (a, b, c, d).
+    The first and last dcawdawcs (a, d) are expected to have a weight
+    close to 1. The middle dcawdawcs (b, c) meanwhile are expected to
     have a weight close to 0, due to the regularization. All other model
     components are turned off to avoid side effects.
     """
-    df, lagged_regressors = generate_lagged_regressor_dataset(periods=100)
+    df, dcawdawcs = generate_dcawdawc_dataset(periods=100)
     df = df_utils.check_dataframe(df, check_y=False)
 
     m = NeuralProphet(
@@ -140,24 +140,24 @@ def test_regularization_lagged_regressor():
         growth="off",
         normalize="off",
     )
-    m = m.add_lagged_regressor(
+    m = m.add_dcawdawc(
         n_lags=3,
-        names=[lagged_regressor for lagged_regressor, _ in lagged_regressors],
+        names=[dcawdawc for dcawdawc, _ in dcawdawcs],
         regularization=0.1,
     )
     m.fit(df, freq="D")
 
-    lagged_regressors_config = dict(lagged_regressors)
+    dcawdawcs_config = dict(dcawdawcs)
 
     for name in m.config_covar.keys():
         weights = m.model.get_covar_weights(name).detach().numpy()
         weight_average = np.average(weights)
 
-        lagged_regressor_weight = lagged_regressors_config[name]
+        dcawdawc_weight = dcawdawcs_config[name]
 
-        if lagged_regressor_weight > 0.9:
+        if dcawdawc_weight > 0.9:
             assert weight_average > 0.6
         else:
             assert weight_average < 0.1
 
-        print(name, weight_average, lagged_regressors_config[name])
+        print(name, weight_average, dcawdawcs_config[name])

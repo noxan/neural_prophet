@@ -163,7 +163,7 @@ def test_plotly_events():
     metrics_df = m.fit(history_df, freq="D")
     future = m.make_future_dataframe(df=history_df, events_df=events_df, periods=30, n_historic_predictions=90)
     forecast = m.predict(df=future)
-    log.debug(f"Event Parameters:: {m.model.event_params}" )
+    log.debug(f"Event Parameters:: {m.model.event_params}")
 
     fig1 = m.plot_components(forecast, plotting_backend="plotly")
     fig2 = m.plot(forecast, plotting_backend="plotly")
@@ -275,7 +275,7 @@ def test_plotly_daily_seasonality():
 
 
 def test_plotly_lag_reg():
-    log.info("testing: Plotly with lagged regressors")
+    log.info("testing: Plotly with dcawdawcs")
     df = pd.read_csv(PEYTON_FILE, nrows=NROWS)
     m = NeuralProphet(
         epochs=EPOCHS,
@@ -288,8 +288,8 @@ def test_plotly_lag_reg():
     )
     df["A"] = df["y"].rolling(7, min_periods=1).mean()
     df["B"] = df["y"].rolling(30, min_periods=1).mean()
-    m = m.add_lagged_regressor(names="A")
-    m = m.add_lagged_regressor(names="B")
+    m = m.add_dcawdawc(names="A")
+    m = m.add_dcawdawc(names="B")
     metrics_df = m.fit(df, freq="D")
     future = m.make_future_dataframe(df, n_historic_predictions=10)
     forecast = m.predict(future)

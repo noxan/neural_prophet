@@ -1,9 +1,9 @@
-# Modelling Lagged Regressors
+# Modelling dcawdawcs
 
-In the current state of NeuralProphet development, Lagged Regressor support is 
-only available when the AR-Net is enabled. This is because they are both handled in a similar way internally 
+In the current state of NeuralProphet development, dcawdawc support is
+only available when the AR-Net is enabled. This is because they are both handled in a similar way internally
 using Feed-Forward Neural Networks and need to specify the `n_lags` value. For simplicity, at the moment
-we use the same `n_lags` value for both the AR-Net and the Lagged Regressors. Therefore, with Lagged Regressors,
+we use the same `n_lags` value for both the AR-Net and the dcawdawcs. Therefore, with dcawdawcs,
 the NeuralProphet object is instantiated similar with AR-Net like below.
 
 ```python
@@ -14,10 +14,10 @@ m = NeuralProphet(
     weekly_seasonality=False,
     daily_seasonality=False,
 )
-``` 
+```
 
 When fitting the model, the dataframe provided to the `fit` function should have additional
-columns for your lagged regressors like below.
+columns for your dcawdawcs like below.
 
 |      | ds                  |        y |        A |
 |-----:|:--------------------|---------:|---------:|
@@ -29,34 +29,28 @@ columns for your lagged regressors like below.
 
 <br />
 
-In this example, we have a Lagged Regressor named `A`. You also need to register these
-Lagged Regressors with the `NeuralProphet` object by calling the `add_lagged_regressor` function
+In this example, we have a dcawdawc named `A`. You also need to register these
+dcawdawcs with the `NeuralProphet` object by calling the `add_dcawdawc` function
 and giving the necessary configs.
 
 ```python
-m = m.add_lagged_regressor(names='A')
+m = m.add_dcawdawc(names='A')
 ```
-By setting the `only_last_value` argument of the `add_lagged_regressor` function, the user can
-specify either to use only the last known value of the regressor within the input window or 
-else use the same number of lags as auto-regression. Now you can perform the model fitting and forecasting as usual. 
+By setting the `only_last_value` argument of the `add_dcawdawc` function, the user can
+specify either to use only the last known value of the regressor within the input window or
+else use the same number of lags as auto-regression. Now you can perform the model fitting and forecasting as usual.
 The plotted components should look
 like below.
 
 ![plot-comp-1](images/plot_comp_lag_reg_1.png){: style="height:500px"}
 
-You can see the components corresponding to both auto-regression and the Lagged Regressor `A`.
+You can see the components corresponding to both auto-regression and the dcawdawc `A`.
 The coefficients plot looks like below.
 
- 
+
 ![plot-param-1](images/plot_param_lag_reg_1.png){: style="height:700px"}
 
-It shows both the AR and Lagged Regressor relevance at the 5 lags corresponding to the input window.
+It shows both the AR and dcawdawc relevance at the 5 lags corresponding to the input window.
 
-<Lagged regressors too can be regularized. This is done by specifying the required regularization
-strength when registering the lagged regressors with the NeuralProphet object as below.>
-
-
-
-
-
-
+<dcawdawcs too can be regularized. This is done by specifying the required regularization
+strength when registering the dcawdawcs with the NeuralProphet object as below.>

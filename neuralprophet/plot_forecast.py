@@ -92,7 +92,7 @@ def plot(
                     ls="-",
                     c="#0072B2",
                     alpha=0.2 + 2.0 / (i + 2.5),
-                    label=f"yhat{i + 1}" ,
+                    label=f"yhat{i + 1}",
                 )
 
     if len(quantiles) > 1 and highlight_forecast is None:
@@ -114,16 +114,14 @@ def plot(
                 y = fcst[f"yhat{i + 1}"].values[-(1 + i + steps_from_last)]
                 ax.plot(x, y, "bx")
         else:
-            ax.plot(
-                ds, fcst[f"yhat{highlight_forecast}" ], ls="-", c="b", label=f"yhat{highlight_forecast}"
-            )
+            ax.plot(ds, fcst[f"yhat{highlight_forecast}"], ls="-", c="b", label=f"yhat{highlight_forecast}")
             ax.plot(ds, fcst[f"yhat{highlight_forecast}"], "bx", label=f"yhat{highlight_forecast}")
 
             if len(quantiles) > 1:
                 for i in range(1, len(quantiles)):
                     ax.fill_between(
                         ds,
-                        fcst[f"yhat{highlight_forecast}" ],
+                        fcst[f"yhat{highlight_forecast}"],
                         fcst[f"yhat{highlight_forecast} {quantiles[i] * 100}%"],
                         color="#0072B2",
                         alpha=0.2,
@@ -225,8 +223,8 @@ def plot_components(
             if forecast_in_focus is None:
                 components.append(
                     {
-                        "plot_name": f'Lagged Regressor "{name}"',
-                        "comp_name": f"lagged_regressor_{name}",
+                        "plot_name": f'dcawdawc "{name}"',
+                        "comp_name": f"dcawdawc_{name}",
                         "num_overplot": m.n_forecasts,
                         "bar": True,
                     }
@@ -234,8 +232,8 @@ def plot_components(
             else:
                 components.append(
                     {
-                        "plot_name": f'Lagged Regressor "{name}" ({forecast_in_focus})-ahead',
-                        "comp_name": f"lagged_regressor_{name}{forecast_in_focus}",
+                        "plot_name": f'dcawdawc "{name}" ({forecast_in_focus})-ahead',
+                        "comp_name": f"dcawdawc_{name}{forecast_in_focus}",
                     }
                 )
                 # 'add_x': True})
@@ -306,7 +304,7 @@ def plot_components(
             name in ["trend"]
             or ("residuals" in name and "ahead" in name)
             or ("ar" in name and "ahead" in name)
-            or ("lagged regressor" in name and "ahead" in name)
+            or ("dcawdawc" in name and "ahead" in name)
         ):
             plot_forecast_component(fcst=fcst, ax=ax, **comp)
         elif "event" in name or "future regressor" in name:
@@ -329,7 +327,7 @@ def plot_components(
             else:
                 comp_name = "season_{}".format(comp["comp_name"])
                 plot_forecast_component(fcst=fcst, ax=ax, comp_name=comp_name, plot_name=comp["plot_name"])
-        elif "auto-regression" in name or "lagged regressor" in name or "residuals" in name:
+        elif "auto-regression" in name or "dcawdawc" in name or "residuals" in name:
             plot_multiforecast_component(fcst=fcst, ax=ax, **comp)
 
     fig.tight_layout()

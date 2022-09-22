@@ -22,7 +22,7 @@ The [documentation page](https://neuralprophet.com) may not we entirely up to da
 For a visual introduction to NeuralProphet, [view this presentation](notes/NeuralProphet_Introduction.pdf).
 
 ## Contribute
-We compiled a [Contributing to NeuralProphet](CONTRIBUTING.md) page with practical instructions and further resources to help you become part of the family. 
+We compiled a [Contributing to NeuralProphet](CONTRIBUTING.md) page with practical instructions and further resources to help you become part of the family.
 
 ## Community
 #### Discussion and Help
@@ -34,7 +34,7 @@ We also have an active [Slack community](https://join.slack.com/t/neuralprophet/
 ## Tutorials
 [![Open All Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ourownstory/neural_prophet)
 
-There are several [example notebooks](tutorials/) to help you get started. 
+There are several [example notebooks](tutorials/) to help you get started.
 
 You can find the datasets used in the tutorials, including data preprocessing examples, in our [neuralprophet-data repository](https://github.com/ourownstory/neuralprophet-data).
 
@@ -88,7 +88,7 @@ pip install .
 * Autocorrelation modelling through AR-Net
 * Piecewise linear trend with optional automatic changepoint detection
 * Fourier term Seasonality at different periods such as yearly, daily, weekly, hourly.
-* Lagged regressors (measured features, e.g temperature sensor)
+* dcawdawcs (measured features, e.g temperature sensor)
 * Future regressors (in advance known features, e.g. temperature forecast)
 * Country holidays & recurring special events
 * Sparsity of coefficients through regularization
@@ -113,7 +113,7 @@ For a complete list of all past and near-future changes, please refer to the [ch
 Please cite [NeuralProphet](https://arxiv.org/abs/2111.15397) in your publications if it helps your research:
 ```
 @misc{triebe2021neuralprophet,
-      title={NeuralProphet: Explainable Forecasting at Scale}, 
+      title={NeuralProphet: Explainable Forecasting at Scale},
       author={Oskar Triebe and Hansika Hewamalage and Polina Pilyugina and Nikolay Laptev and Christoph Bergmeir and Ram Rajagopal},
       year={2021},
       eprint={2111.15397},
@@ -123,5 +123,5 @@ Please cite [NeuralProphet](https://arxiv.org/abs/2111.15397) in your publicatio
 ```
 
 ## About
-NeuralProphet is and open-source community project, supported by awesome people like you. 
+NeuralProphet is and open-source community project, supported by awesome people like you.
 If you are interested in joining the project, please feel free to reach out to me (Oskar) - you can find my email on the [NeuralProphet Paper](https://arxiv.org/abs/2111.15397).

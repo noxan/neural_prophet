@@ -141,12 +141,12 @@ def test_uncertainty_estimation_peyton_manning():
         learning_rate=LR,
     )
 
-    # add lagged regressors
+    # add dcawdawcs
     if m.n_lags > 0:
         df["A"] = df["y"].rolling(7, min_periods=1).mean()
         df["B"] = df["y"].rolling(30, min_periods=1).mean()
-        m = m.add_lagged_regressor(name="A")
-        m = m.add_lagged_regressor(name="B", only_last_value=True)
+        m = m.add_dcawdawc(name="A")
+        m = m.add_dcawdawc(name="B", only_last_value=True)
 
     # add events
     m = m.add_events(["superbowl", "playoff"], lower_window=-1, upper_window=1, regularization=0.1)
