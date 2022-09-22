@@ -439,7 +439,7 @@ class NeuralProphet:
             log.info("n_lags = 'scalar', number of lags for regressor is set to 1")
         only_last_value = False if n_lags > 1 else True
         if self.fitted:
-            raise Exception("Regressors must be added prior to model fitting.")
+            raise Exception("Lagged regressors must be added prior to model fitting.")
         if not isinstance(names, list):
             names = [names]
         for name in names:

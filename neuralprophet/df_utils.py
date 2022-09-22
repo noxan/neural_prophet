@@ -213,7 +213,7 @@ def data_params_definition(df, normalize, config_covariates=None, config_future_
     if config_future_regressors is not None:
         for reg in config_future_regressors.keys():
             if reg not in df.columns:
-                raise ValueError(f"Regressor {reg} not found in DataFrame.")
+                raise ValueError(f"Future regressor {reg} not found in DataFrame.")
             data_params[reg] = get_normalization_params(
                 array=df[reg].values,
                 norm_type=config_future_regressors[reg].normalize,
