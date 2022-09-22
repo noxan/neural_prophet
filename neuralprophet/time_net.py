@@ -5,7 +5,7 @@ import torch.nn as nn
 import logging
 from neuralprophet.utils import (
     config_season_to_model_dims,
-    config_regressors_to_model_dims,
+    config_future_regressors_to_model_dims,
     config_events_to_model_dims,
 )
 
@@ -51,7 +51,7 @@ class TimeNet(nn.Module):
         config_trend=None,
         config_season=None,
         config_covar=None,
-        config_regressors=None,
+        config_future_regressors=None,
         config_events=None,
         config_holidays=None,
         n_forecasts=1,
@@ -70,7 +70,7 @@ class TimeNet(nn.Module):
 
             config_covar : OrderedDict
 
-            config_regressors : OrderedDict
+            config_future_regressors : OrderedDict
                 Configs of regressors with mode and index.
             config_events : OrderedDict
 
@@ -232,8 +232,8 @@ class TimeNet(nn.Module):
                 self.covar_nets[covar] = covar_net
 
         ## Regressors
-        self.config_regressors = config_regressors
-        self.regressors_dims = config_regressors_to_model_dims(config_regressors)
+        self.config_future_regressors = config_future_regressors
+        self.regressors_dims = config_future_regressors_to_model_dims(config_future_regressors)
         if self.regressors_dims is not None:
             n_additive_regressor_params = 0
             n_multiplicative_regressor_params = 0
@@ -258,7 +258,7 @@ class TimeNet(nn.Module):
                 }
             )
         else:
-            self.config_regressors = None
+            self.config_future_regressors = None
 
     @property
     def get_trend_deltas(self):
@@ -740,7 +740,7 @@ class TimeNet(nn.Module):
                 components[f"event_{event}"] = self.scalar_features_effects(
                     features=features, params=params, indices=indices
                 )
-        if self.config_regressors is not None and "regressors" in inputs:
+        if self.config_future_regressors is not None and "regressors" in inputs:
             if "additive" in inputs["regressors"].keys():
                 components["future_regressors_additive"] = self.scalar_features_effects(
                     features=inputs["regressors"]["additive"], params=self.regressor_params["additive"]

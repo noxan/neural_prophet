@@ -116,8 +116,8 @@ def get_parameter_components(m, forecast_in_focus, df_name="__df__"):
     # Add Regressors
     additive_future_regressors = []
     multiplicative_future_regressors = []
-    if m.config_regressors is not None:
-        for regressor, configs in m.config_regressors.items():
+    if m.config_future_regressors is not None:
+        for regressor, configs in m.config_future_regressors.items():
             mode = configs.mode
             regressor_param = m.model.get_reg_weights(regressor)
             if mode == "additive":

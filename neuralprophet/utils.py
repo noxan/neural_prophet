@@ -161,13 +161,13 @@ def reg_func_covariates(config_covariates, model):
     return reg_covariate_loss
 
 
-def reg_func_regressors(config_regressors, model):
+def reg_func_regressors(config_future_regressors, model):
     """
     Regularization of regressors coefficients to induce sparsity
 
     Parameters
     ----------
-        config_regressors : OrderedDict
+        config_future_regressors : OrderedDict
             Configurations for user specified regressors
         model : TimeNet
             TimeNet model object
@@ -178,7 +178,7 @@ def reg_func_regressors(config_regressors, model):
             Regularization loss
     """
     reg_regressor_loss = 0.0
-    for regressor, configs in config_regressors.items():
+    for regressor, configs in config_future_regressors.items():
         reg_lambda = configs.reg_lambda
         if reg_lambda is not None:
             weight = model.get_reg_weights(regressor)
@@ -381,13 +381,13 @@ def create_event_names_for_offsets(event_name, offset):
     return offset_name
 
 
-def config_regressors_to_model_dims(config_regressors):
+def config_future_regressors_to_model_dims(config_future_regressors):
     """
     Convert the NeuralProphet user specified regressors configurations to input dims for TimeNet model.
 
     Parameters
     ----------
-        config_regressors : OrderedDict
+        config_future_regressors : OrderedDict
             Configurations for user specified regressors
 
     Returns
@@ -401,14 +401,14 @@ def config_regressors_to_model_dims(config_regressors):
             This dictionaries' keys correspond to individual regressor and values in a dict containing the mode
             and the indices in the input dataframe corresponding to each regressor.
     """
-    if config_regressors is None:
+    if config_future_regressors is None:
         return None
     else:
         additive_regressors = []
         multiplicative_regressors = []
 
-        if config_regressors is not None:
-            for regressor, configs in config_regressors.items():
+        if config_future_regressors is not None:
+            for regressor, configs in config_future_regressors.items():
                 mode = configs.mode
                 if mode == "additive":
                     additive_regressors.append(regressor)
