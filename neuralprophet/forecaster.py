@@ -479,7 +479,7 @@ class NeuralProphet:
                 ``additive`` (default) or ``multiplicative``.
         """
         if self.fitted:
-            raise Exception("Regressors must be added prior to model fitting.")
+            raise Exception("Future regressors must be added prior to model fitting.")
         if regularization is not None:
             if regularization < 0:
                 raise ValueError("regularization must be >= 0")
