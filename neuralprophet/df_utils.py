@@ -177,7 +177,7 @@ def data_params_definition(df, normalize, config_covariates=None, config_future_
     normalize : bool
         data normalization
     config_future_regressors : OrderedDict
-        extra regressors (with known future values) with sub_parameters normalize (bool)
+        Configuration for user specified future regressors.
     config_events : OrderedDict
         user specified events configs
 
@@ -264,7 +264,7 @@ def init_data_params(
         config_covariates : OrderedDict
             extra regressors with sub_parameters
         config_future_regressors : OrderedDict
-            extra regressors (with known future values)
+            Configuration for user specified future regressors.
         config_events : OrderedDict
             user specified events configs
         global_normalization : bool
@@ -949,7 +949,7 @@ def make_future_df(
         events_df : pd.DataFrame
             containing column ``ds`` and ``event``
         config_future_regressors : OrderedDict
-            configuration for user specified regressors,
+            Configuration for user specified future regressors.
         regressors_df : pd.DataFrame
             containing column ``ds`` and one column for each of the external regressors
 

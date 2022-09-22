@@ -226,7 +226,7 @@ def tabularize_univariate_datetime(
         config_covar : configure.Covar
             Configuration for covariates
         config_future_regressors : OrderedDict
-            Configuration for regressors
+            Configuration for user specified future regressors.
         predict_mode : bool
             Chooses the prediction mode
 
@@ -554,7 +554,7 @@ def make_regressors_features(df, config_future_regressors):
         df : pd.DataFrame
             Dataframe with all values including the user specified regressors
         config_future_regressors : OrderedDict
-            User specified regressors config
+            Configuration for user specified future regressors.
 
     Returns
     -------

@@ -71,7 +71,7 @@ class TimeNet(nn.Module):
             config_covar : OrderedDict
 
             config_future_regressors : OrderedDict
-                Configs of regressors with mode and index.
+                Configuration for user specified future regressors.
             config_events : OrderedDict
 
             config_holidays : OrderedDict
