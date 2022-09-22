@@ -1150,7 +1150,7 @@ class NeuralProphet:
 
         Only use if you predict into the *unknown* future.
         New timestamps are added to the historic dataframe, with the 'y' column being NaN, as it remains to be predicted.
-        Further, the given future events and regressors are added to the periods new timestamps.
+        Further, the given future events and future regressors are added to the periods new timestamps.
         The returned dataframe will include historic data needed to additionally produce `n_historic_predictions`,
         for which there are historic observances of the series 'y'.
 
@@ -1163,7 +1163,7 @@ class NeuralProphet:
                 Contains columns ``ds`` and ``event``. The event column contains the name of the event.
             regressor_df : pd.DataFrame
                 Future regressor values corresponding to `periods` steps into future.
-                Contains column ``ds`` and one column for each of the external regressors.
+                Contains column ``ds`` and one column for each of the external future regressors.
             periods : int
                 number of steps to extend the DataFrame into the future
             n_historic_predictions : bool, int
@@ -1176,7 +1176,7 @@ class NeuralProphet:
         -------
             pd.DataFrame
                 input df with ``ds`` extended into future, ``y`` set to None,
-                with future events and regressors added.
+                with future events and future regressors added.
 
         Examples
         --------
