@@ -929,7 +929,14 @@ def split_df(df, n_lags, n_forecasts, valid_p=0.2, inputs_overbleed=True, local_
 
 
 def make_future_df(
-    df_columns, last_date, periods, freq, config_events=None, events_df=None, config_future_regressors=None, regressors_df=None
+    df_columns,
+    last_date,
+    periods,
+    freq,
+    config_events=None,
+    events_df=None,
+    config_future_regressors=None,
+    regressors_df=None,
 ):
     """Extends df periods number steps into future.
 
