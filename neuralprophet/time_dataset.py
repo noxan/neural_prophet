@@ -225,7 +225,7 @@ def tabularize_univariate_datetime(
             Configurations (holiday_names, upper, lower windows, regularization) for country specific holidays
         config_covar : configure.Covar
             Configuration for covariates
-        config_future_regressors : OrderedDict
+        config_future_regressors : configure.FutureRegressor
             Configuration for user specified future regressors.
         predict_mode : bool
             Chooses the prediction mode
@@ -553,7 +553,7 @@ def make_future_regressors_features(df, config_future_regressors):
     ----------
         df : pd.DataFrame
             Dataframe with all values including the user specified regressors
-        config_future_regressors : OrderedDict
+        config_future_regressors : configure.FutureRegressor
             Configuration for user specified future regressors.
 
     Returns

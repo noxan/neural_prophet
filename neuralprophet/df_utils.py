@@ -176,7 +176,7 @@ def data_params_definition(df, normalize, config_covariates=None, config_future_
         extra regressors with sub_parameters
     normalize : bool
         data normalization
-    config_future_regressors : OrderedDict
+    config_future_regressors : configure.FutureRegressor
         Configuration for user specified future regressors.
     config_events : OrderedDict
         user specified events configs
@@ -263,7 +263,7 @@ def init_data_params(
                     ``soft1`` scales the minimum value to 0.1 and the 90th quantile to 0.9
         config_covariates : OrderedDict
             extra regressors with sub_parameters
-        config_future_regressors : OrderedDict
+        config_future_regressors : configure.FutureRegressor
             Configuration for user specified future regressors.
         config_events : OrderedDict
             user specified events configs
@@ -955,7 +955,7 @@ def make_future_df(
             User specified events configs
         events_df : pd.DataFrame
             containing column ``ds`` and ``event``
-        config_future_regressors : OrderedDict
+        config_future_regressors : configure.FutureRegressor
             Configuration for user specified future regressors.
         regressors_df : pd.DataFrame
             containing column ``ds`` and one column for each of the external regressors
