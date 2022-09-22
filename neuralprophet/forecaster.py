@@ -461,7 +461,7 @@ class NeuralProphet:
 
         Note
         ----
-        Future Regressors have to be known for the entire forecast horizon, e.g. ``n_forecasts`` into the future.
+        Future regressors have to be known for the entire forecast horizon, e.g. ``n_forecasts`` into the future.
 
         Parameters
         ----------
