@@ -16,7 +16,7 @@ Links
 - `Read the paper <https://arxiv.org/abs/2111.15397?fbclid=IwAR2vCkHYiy5yuPPjWXpJgAJs-uD5NkH4liORt1ch4a6X_kmpMqagGtXyez4>`_
 - `GitHub repository <https://github.com/ourownstory/neural_prophet>`_
 
-Why NeuralProphet? 
+Why NeuralProphet?
 -------------------
 
 NeuralProphet changes the way time series modelling and forecasting is done:
@@ -33,7 +33,7 @@ NeuralProphet changes the way time series modelling and forecasting is done:
 
 .. code-block:: pycon
 
-   >>> from neuralprophet import NeuralProphet 
+   >>> from neuralprophet import NeuralProphet
    >>> m = NeuralProphet()
    >>> metrics = m.fit(your_df, freq='D')
    >>> forecast = m.predict(your_df)
@@ -68,18 +68,17 @@ Alternatively, you can get the most up to date version by cloning directly from 
    :hidden:
    :maxdepth: 1
 
-
-   Quick Start Guide<quickstart.md>
-   Model Overview<model-overview>
-   Changes from prophet<changes-from-prophet>
-   Trend<trend>
-   Seasonality<seasonality>
-   Auto-regression<auto-regression>
-   Lagged-regression<lagged-regressors>
-   Events<events>
-   Future-regression<future-regressors>
-   Hyperparameter-selection<hyperparameter-selection>
-   Contribution<contribute>
+   Quick Start Guide<1-quickstart.md>
+   Model Overview<2-model-overview.md>
+   Changes from prophet<3-changes-from-prophet.md>
+   Trend<4-trend.md>
+   Seasonality<5-seasonality.md>
+   Auto-regression<6-auto-regression.md>
+   Lagged-regression<7-lagged-regressors.md>
+   Events<8-events.md>
+   Future-regression<9-future-regressors.md>
+   Hyperparameter-selection<10-hyperparameter-selection.md>
+   Contribution<11-contribute.md>
 
 
 Get started with Tutorials
@@ -99,11 +98,11 @@ Get started with Tutorials
    sparse_autoregression_yosemite_temps.nblink
    sub_daily_data_yosemite_temps.nblink
    trend_peyton_manning.nblink
-   
+
 
 .. toctree::
    :maxdepth: 1
-   :caption: Application Tutorials   
+   :caption: Application Tutorials
 
    energy_hospital_load.nblink
    energy_solar_pv.nblink
@@ -124,4 +123,3 @@ Get started with Tutorials
    time_dataset.py <time_dataset>
    time_net.py <time_net>
    utils.py <utils>
-
